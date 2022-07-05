@@ -1,13 +1,13 @@
-export const SideBar = (props) => {
+import { Avatar } from "./top-container/Avatar";
+
+export const SideBar = () => {
     const w3_close = () => undefined;
 
     return (
-        <nav className="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar">
+        <nav className="w3-sidebar w3-collapse w3-black w3-animate-left pr-sidebar" id="mySidebar" >
             <br />
             <div className="w3-container w3-row">
-                <div className="w3-col s4">
-                    <img src="/img/avatar.png" alt="avatar" className="w3-circle w3-margin-right" style={{ width: 46 + "px" }} />
-                </div>
+                <Avatar />
                 <div className="w3-col s8 w3-bar">
                     <span>
                         Welcome, <strong>Aleksandar Georgiev</strong>

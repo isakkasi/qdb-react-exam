@@ -1,13 +1,15 @@
 import { Footer } from "./main/Footer"
 import { Header } from "./main/Header";
 import {AllQuestions} from "./main/AllQuestions"
+import './Main.css'
 
 export const Main = (props) => {
     return (
         <main>
-        <div className="w3-main" id="main">
+        <div className="w3-main pr-main" id="main" >
         
             <Header />
+            
             <AllQuestions />
 
             

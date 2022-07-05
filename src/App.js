@@ -1,5 +1,6 @@
 import './App.css';
 import { Footer } from './components/Footer';
+import { Main } from './components/Main';
 import { SideBar } from './components/SideBar';
 import { TopContainer } from './components/TopContainer';
 
@@ -8,6 +9,9 @@ function App() {
     <div>
       <TopContainer />
       <SideBar />
+
+      <Main />
+
       <Footer />
     </div>
   );
