@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { QuestionRow } from "./all-questions/QuestionRow";
 
-export const AllQuestions = () => {
+export const AllQuestions = (props) => {
     const [question, setQuestion] = useState([]);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export const AllQuestions = () => {
                         </thead>
                         <tbody>
                             {question?.map((x, i) => {
-                                x.no = i+1;
+                                x.no = i + 1;
                                 return <QuestionRow key={x._id} data={x} />;
                             })}
                         </tbody>

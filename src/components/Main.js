@@ -2,8 +2,16 @@ import { Footer } from "./main/Footer"
 import { Header } from "./main/Header";
 import {AllQuestions} from "./main/AllQuestions"
 import './Main.css'
+import { QuestionForm } from "./main/QuestionForm";
+
+import {useState} from 'react'
 
 export const Main = (props) => {
+
+    const [isChange, setChange] = useState();
+
+    
+
     return (
         <main>
         <div className="w3-main pr-main" id="main" >
@@ -12,10 +20,12 @@ export const Main = (props) => {
             
             <AllQuestions />
 
+            <QuestionForm isCreate={true} />
+
             
 <div className="pr-footer">
 
-            <Footer />
+            {/* <Footer /> */}
 </div>
 
             
