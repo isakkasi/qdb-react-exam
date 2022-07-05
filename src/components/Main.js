@@ -13,8 +13,10 @@ export const Main = (props) => {
             <AllQuestions />
 
             
+<div className="pr-footer">
 
-            {/* <Footer /> */}
+            <Footer />
+</div>
 
             
         </div>

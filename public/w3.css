@@ -263,6 +263,10 @@ a {
 .w3-table-all tr {
     border-bottom: 1px solid #ddd;
 }
+.w3-bordered-all td {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
 .w3-striped tbody tr:nth-child(even) {
     background-color: #f1f1f1;
 }

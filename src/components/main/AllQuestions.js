@@ -18,7 +18,7 @@ export const AllQuestions = () => {
             <div className="w3-row-padding" style={{ margin: `0 -16px` }}>
                 <div className="w3-container">
                     <h5>Questions</h5>
-                    <table className="w3-table w3-striped w3-white">
+                    <table className="w3-table w3-striped w3-white w3-hoverable w3-bordered-all">
                         <thead>
                             <tr>
                                 <th>No</th>
