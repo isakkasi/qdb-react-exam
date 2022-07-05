@@ -3,12 +3,12 @@ import { Header } from "./main/Header";
 import {AllQuestions} from "./main/AllQuestions"
 import './Main.css'
 import { QuestionForm } from "./main/QuestionForm";
+import { Login } from "./user/Login";
+import { Register } from "./user/Register";
 
-import {useState} from 'react'
 
 export const Main = (props) => {
 
-    const [isChange, setChange] = useState();
 
     
 
@@ -16,11 +16,16 @@ export const Main = (props) => {
         <main>
         <div className="w3-main pr-main" id="main" >
         
-            <Header />
+            {/* <Header />
             
             <AllQuestions />
 
-            <QuestionForm isCreate={true} />
+            <QuestionForm isCreate={true} /> */}
+
+            {/* <Login /> */}
+            <Register />
+
+
 
             
 <div className="pr-footer">
