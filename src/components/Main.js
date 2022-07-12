@@ -8,6 +8,7 @@ import { QuestionForm } from './main/QuestionForm';
 import { Login } from './user/UserCredentials';
 import { Register } from './user/Register';
 import { UserCredentials } from './user/UserCredentials';
+import { userLogout } from '../services/userServices';
 
 export const Main = (props) => {
     const [credentials, setCredentials] = useState({ register: false, login: false });
@@ -28,6 +29,10 @@ export const Main = (props) => {
         }));
     };
 
+    const logout = () => {
+        userLogout();
+    }
+
     return (
         <main>
             <div className="w3-main pr-main" id="main">
@@ -37,6 +42,9 @@ export const Main = (props) => {
                 </button>
                 <button className="cancel-btn" name="register" onClick={(e) => open(e)}>
                     Register
+                </button>
+                <button className="cancel-btn" name="logout" onClick={logout}>
+                    Logout
                 </button>
 
                 <AllQuestions />

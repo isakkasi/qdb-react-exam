@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Register.css";
-import { userApi } from "../../userServices";
+import { userCreate } from "../../services/userServices";
 
 export const Register = () => {
 
@@ -9,7 +9,7 @@ export const Register = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        await userApi(value);
+        await userCreate(value);
         console.log('Successful');
     };
     

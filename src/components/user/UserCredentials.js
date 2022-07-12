@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { userCreate, userLogin } from '../../services/userServices';
 import { Logo } from '../common/Logo';
 import { TextInput } from '../common/TextInput';
 import './UserCredentials.css';
@@ -8,16 +9,26 @@ export const UserCredentials = ({
     children,
     onClose
 }) => {
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+        try {
+            const user = await lib[e.target.name].post(formData)
+            console.log(user);
+            onClose(func)
+        } catch (error) {
+            throw new Error(error)
+        }
+        
     };
 
     const lib = {
         register: {
             ok: 'Register',
+            post: userCreate,
         },
         login: {
             ok: 'Login',
+            post: userLogin,
         },
     };
 
@@ -52,7 +63,7 @@ export const UserCredentials = ({
                         </button>
                     </header>
 
-                    <form onSubmit={submitHandler}>
+                    <form onSubmit={submitHandler} name={func}>
                         <Logo />
 
                         <TextInput name="username" getValues={getFormData}>Username</TextInput>
