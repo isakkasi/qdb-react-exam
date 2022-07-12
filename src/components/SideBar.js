@@ -13,6 +13,10 @@ export const SideBar = () => {
                         Welcome, <strong>Aleksandar Georgiev</strong>
                     </span>
                     <br />
+                    
+                    <a href="/" className="w3-bar-item w3-button">
+                        <i className="fa fa-angle-right"></i>
+                    </a>
                     <a href="/" className="w3-bar-item w3-button">
                         <i className="fa fa-envelope"></i>
                     </a>
@@ -21,6 +25,9 @@ export const SideBar = () => {
                     </a>
                     <a href="/" className="w3-bar-item w3-button">
                         <i className="fa fa-cog"></i>
+                    </a>
+                    <a href="/" className="w3-bar-item w3-button">
+                        <i className="fa fa-angle-left"></i>
                     </a>
                 </div>
             </div>

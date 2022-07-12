@@ -1,14 +1,19 @@
+import { useState } from 'react';
 
+export const TextInput = ({ name, children, getValues, type }) => {
+    const [value, setValue] = useState('');
 
-export const TextInput = (props) => {
-    
-    
+    const onChangeHandler = (e) => {
+        setValue(prevValue => e.target.value);
+        getValues(name, e.target.value);
+    };
+
     return (
         <div>
-            <label htmlFor={props.name}>
-                <b>{props.children}</b>
+            <label htmlFor={name}>
+                <b>{children}</b>
             </label>
-            <input type="text" name={props.name} id={props.name} />
+            <input type={type || "text"}  name={name} id={name} value={value} onChange={onChangeHandler} />
         </div>
     );
 };
