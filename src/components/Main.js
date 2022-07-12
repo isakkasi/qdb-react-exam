@@ -16,14 +16,14 @@ export const Main = (props) => {
         <main>
         <div className="w3-main pr-main" id="main" >
         
-            {/* <Header />
+            <Header />
             
             <AllQuestions />
 
-            <QuestionForm isCreate={true} /> */}
+            {/* <QuestionForm isCreate={true} /> */} 
 
-            {/* <Login /> */}
-            <Register />
+            <Login />
+            {/* <Register /> */}
 
 
 

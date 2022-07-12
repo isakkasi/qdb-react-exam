@@ -1,3 +1,5 @@
+import { Logo } from "../common/Logo";
+import { TextInput } from "../common/TextInput";
 import "./Login.css";
 
 export const Login = () => {
@@ -6,38 +8,36 @@ export const Login = () => {
     };
 
     return (
-        <div style={{margin: 50+'px'}}>
-            <h2 className="w3-center">Login Form</h2>
+        <div className="overlay">
+            <div className="backdrop"></div>
+            {/* onClick={onClose} */}
+            <div className="modal">
+                <div className="user-container">
+                    <header className="headers">
+                        <h2>
+                            <strong>Login</strong>
+                        </h2>
+                        <button className="btn">{/* onClick={onClose} */}X</button>
+                    </header>
 
-            <form onSubmit={submitHandler}>
-                <div className="imgcontainer">
-                    <img src="https://png.pngitem.com/pimgs/s/117-1177878_square-academic-cap-graduation-ceremony-graduate-university-graduation.png" alt="Avatar" className="avatar" />
+
+                    <form onSubmit={submitHandler}>
+                        <Logo />
+
+                        <TextInput name="username">Username</TextInput>
+                        <TextInput name="password">Password</TextInput>
+
+                        <div className="form-submit">
+                            <button className="save-btn" type="submit">
+                                Login
+                            </button>
+                            <button className="cancel-btn" type="button">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div className="container">
-                    <label htmlFor="username">
-                        <b>Username</b>
-                    </label>
-                    <input type="text" name="username" required />
-
-                    <label htmlFor="password">
-                        <b>Password</b>
-                    </label>
-                    <input type="password" name="password" required />
-
-                    <button type="submit">Login</button>
-                    
-                </div>
-
-                <div className="container" style={{ backgroundColor: "#f1f1f1" }}>
-                    <button type="button" className="cancelbtn">
-                        Cancel
-                    </button>
-                    <span className="psw">
-                        Forgot <a href="/">password?</a>
-                    </span>
-                </div>
-            </form>
+            </div>
         </div>
     );
 };
