@@ -9,7 +9,7 @@ export const AllQuestions = (props) => {
         fetch("http://localhost:5000/question")
             .then((res) => res.json())
             .then((result) => {
-                setQuestion((question) => result);
+                setQuestion(state => result);
             });
     }, []);
 

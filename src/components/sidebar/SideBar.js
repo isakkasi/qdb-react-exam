@@ -1,36 +1,14 @@
-import { Avatar } from "./top-container/Avatar";
+import { CurrentUser } from "./current-user/CurrentUser";
 
-export const SideBar = () => {
+export const SideBar = ({
+    user,
+}) => {
     const w3_close = () => undefined;
 
     return (
         <nav className="w3-sidebar w3-collapse w3-black w3-animate-left pr-sidebar" id="mySidebar" >
             <br />
-            <div className="w3-container w3-row">
-                <Avatar />
-                <div className="w3-col s8 w3-bar">
-                    <span>
-                        Welcome, <strong>Aleksandar Georgiev</strong>
-                    </span>
-                    <br />
-                    
-                    <a href="/" className="w3-bar-item w3-button">
-                        <i className="fa fa-angle-right"></i>
-                    </a>
-                    <a href="/" className="w3-bar-item w3-button">
-                        <i className="fa fa-envelope"></i>
-                    </a>
-                    <a href="/" className="w3-bar-item w3-button">
-                        <i className="fa fa-user"></i>
-                    </a>
-                    <a href="/" className="w3-bar-item w3-button">
-                        <i className="fa fa-cog"></i>
-                    </a>
-                    <a href="/" className="w3-bar-item w3-button">
-                        <i className="fa fa-angle-left"></i>
-                    </a>
-                </div>
-            </div>
+            <CurrentUser user={user}/>
             <hr />
             <div className="w3-container">
                 <h5>

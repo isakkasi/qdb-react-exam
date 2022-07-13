@@ -10,7 +10,9 @@ import { Register } from './user/Register';
 import { UserCredentials } from './user/UserCredentials';
 import { userLogout } from '../services/userServices';
 
-export const Main = (props) => {
+export const Main = ({
+    sendUser,
+}) => {
     const [credentials, setCredentials] = useState({ register: false, login: false });
 
     const onClose = (func) => {
@@ -30,7 +32,9 @@ export const Main = (props) => {
     };
 
     const logout = () => {
-        userLogout();
+        if(userLogout()) {
+            sendUser({})
+        }
     }
 
     return (
@@ -53,12 +57,12 @@ export const Main = (props) => {
 
                 {/* <Login /> */}
                 {credentials.register && (
-                    <UserCredentials func="register" onClose={onClose}>
+                    <UserCredentials func="register" onClose={onClose} sendUser={sendUser}>
                         Register
                     </UserCredentials>
                 )}
                 {credentials.login && (
-                    <UserCredentials func="login" onClose={onClose}>
+                    <UserCredentials func="login" onClose={onClose} sendUser={sendUser}>
                         Login
                     </UserCredentials>
                 )}

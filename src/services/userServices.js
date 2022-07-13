@@ -52,7 +52,9 @@ export const userLogout = async () => {
         localStorage.removeItem('username');
         localStorage.removeItem('userId');
         console.log('Successful logout');
+        return true;
     } catch (error) {
         console.log(error);
+        return false;
     }
 };

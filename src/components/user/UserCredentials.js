@@ -7,18 +7,19 @@ import './UserCredentials.css';
 export const UserCredentials = ({
     func,
     children,
-    onClose
+    onClose,
+    sendUser
 }) => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const user = await lib[e.target.name].post(formData)
+            const user = await lib[e.target.name].post(formData);
             console.log(user);
-            onClose(func)
+            onClose(func);
+            sendUser(user);
         } catch (error) {
-            throw new Error(error)
+            throw new Error(error);
         }
-        
     };
 
     const lib = {
@@ -32,21 +33,19 @@ export const UserCredentials = ({
         },
     };
 
-    const [formData, setFormData] = useState({})
-    
+    const [formData, setFormData] = useState({});
+
     useEffect(() => {
         console.log(formData);
-    }, [formData])
-    
+    }, [formData]);
+
     const getFormData = (field, value) => {
-        
-        setFormData(state => ({
+        setFormData((state) => ({
             ...state,
             [field]: value,
-        }))
+        }));
         console.log(formData);
-    }
-
+    };
 
     return (
         <div className="overlay">
@@ -66,9 +65,17 @@ export const UserCredentials = ({
                     <form onSubmit={submitHandler} name={func}>
                         <Logo />
 
-                        <TextInput name="username" getValues={getFormData}>Username</TextInput>
-                        <TextInput name="password" type="password" getValues={getFormData}>Password</TextInput>
-                        {func === 'register' ? <TextInput name="repeatPass" type="password" getValues={getFormData}>Repeat password</TextInput> : null}
+                        <TextInput name="username" getValues={getFormData}>
+                            Username
+                        </TextInput>
+                        <TextInput name="password" type="password" getValues={getFormData}>
+                            Password
+                        </TextInput>
+                        {func === 'register' ? (
+                            <TextInput name="repeatPass" type="password" getValues={getFormData}>
+                                Repeat password
+                            </TextInput>
+                        ) : null}
 
                         <div className="form-submit">
                             <button className="save-btn" type="submit">

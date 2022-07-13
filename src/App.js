@@ -1,22 +1,33 @@
+import { useState } from 'react';
 import './App.css';
 import { Footer } from './components/Footer';
 import { Main } from './components/Main';
-import { SideBar } from './components/SideBar';
+import { SideBar } from './components/sidebar/SideBar';
 import { TopContainer } from './components/TopContainer';
 
 function App() {
+    let username = localStorage.getItem('username');
+    let userId = localStorage.getItem('userId');
+    let token = localStorage.getItem('token');
 
-  
-  return (
-    <div>
-      <TopContainer />
-      <SideBar />
+    const [user, setUser] = useState({ username, userId, token });
 
-      <Main />
+    console.log(user);
 
-      {/* <Footer /> */}
-    </div>
-  );
+    const sendUser = (user) => {
+        setUser((state) => user);
+    };
+
+    return (
+        <div>
+            <TopContainer />
+            <SideBar user={user} />
+
+            <Main sendUser={sendUser} />
+
+            {/* <Footer /> */}
+        </div>
+    );
 }
 
 export default App;
