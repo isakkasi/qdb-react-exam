@@ -1,4 +1,4 @@
-export const Header = () => {
+export const Title = () => {
     return (
         <header className="w3-container" style={{ paddingTop: 22 + "px" }}>
             <h5>

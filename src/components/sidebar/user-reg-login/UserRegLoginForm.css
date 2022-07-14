@@ -3,10 +3,11 @@ body {
 }
 form {
     border: 3px solid #f1f1f1;
+    padding: 8px;
 }
 
-input[type="text"],
-input[type="password"] {
+input[type='text'],
+input[type='password'] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -100,7 +101,7 @@ span.psw {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 50;
 }
 
 .backdrop {
@@ -115,16 +116,19 @@ span.psw {
 
 .modal {
     width: 45rem;
-    position: absolute;
+    position: fixed;
     max-height: 90vh;
     margin: auto;
     border-radius: 20px;
     background-color: white;
     padding: 1rem;
     box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
-    z-index: 30;
+    z-index: 50;
     margin-top: 50px;
+    color: black;
+    text-align: left;
 }
+
 
 @media (min-width: 930px) {
     .modal {
@@ -155,4 +159,3 @@ span.psw {
     width: 30px;
     height: 30px;
 }
-

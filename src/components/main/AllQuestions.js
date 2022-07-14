@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { QuestionRow } from "./all-questions/QuestionRow";
+import { QuestionRow } from './all-questions/QuestionRow';
+import * as questionServices from '../../services/questionServices';
 
 export const AllQuestions = (props) => {
     const [question, setQuestion] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/question")
-            .then((res) => res.json())
-            .then((result) => {
-                setQuestion(state => result);
-            });
+        questionServices.getAll().then((result) => {
+            setQuestion((state) => result);
+        });
     }, []);
 
     return (
         <div className="w3-panel">
-            <div className="w3-row-padding" style={{ margin: `0 -16px` }}>
+            <div className="w3-row-padding" >
                 <div className="w3-container">
-                    <h5>Questions</h5>
+                    <h2>Questions</h2>
                     <table className="w3-table w3-striped w3-white w3-hoverable w3-bordered-all">
                         <thead>
                             <tr>

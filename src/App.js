@@ -3,7 +3,7 @@ import './App.css';
 import { Footer } from './components/Footer';
 import { Main } from './components/Main';
 import { SideBar } from './components/sidebar/SideBar';
-import { TopContainer } from './components/TopContainer';
+import { Header as Header } from './components/Header';
 
 function App() {
     let username = localStorage.getItem('username');
@@ -20,12 +20,14 @@ function App() {
 
     return (
         <div>
-            <TopContainer />
-            <SideBar user={user} />
+            <Header />
+            
+            <div className="middle">
+                <SideBar user={user} />
+                <Main sendUser={sendUser} />
+            </div>
 
-            <Main sendUser={sendUser} />
-
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 }

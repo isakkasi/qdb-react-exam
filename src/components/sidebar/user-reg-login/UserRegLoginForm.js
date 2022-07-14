@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
-import { userCreate, userLogin } from '../../services/userServices';
-import { Logo } from '../common/Logo';
-import { TextInput } from '../common/TextInput';
-import './UserCredentials.css';
+import { userCreate, userLogin } from '../../../services/userServices';
+import { Logo } from '../../common/Logo';
+import { TextInput } from '../../common/TextInput';
+import './UserRegLoginForm.css';
 
-export const UserCredentials = ({
-    func,
-    children,
-    onClose,
-    sendUser
-}) => {
+export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {

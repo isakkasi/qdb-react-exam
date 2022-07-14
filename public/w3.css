@@ -2,6 +2,11 @@
 html {
     box-sizing: border-box;
 }
+* {
+    margin: 0;
+    padding: 0;
+}
+
 *,
 *:before,
 *:after {
@@ -492,7 +497,9 @@ a {
     display: block;
     outline: 0;
 }
-
+.user-menu {
+    padding: 4px 8px;
+}
 .w3-bar .w3-dropdown-hover,
 .w3-bar .w3-dropdown-click {
     position: static;

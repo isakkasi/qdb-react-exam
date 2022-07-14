@@ -1,74 +1,21 @@
-import { useState } from 'react';
-
 import { Footer } from './main/Footer';
-import { Header } from './main/Header';
+import { Title } from './main/Title';
 import { AllQuestions } from './main/AllQuestions';
 import './Main.css';
-import { QuestionForm } from './main/QuestionForm';
-import { Login } from './user/UserCredentials';
-import { Register } from './user/Register';
-import { UserCredentials } from './user/UserCredentials';
-import { userLogout } from '../services/userServices';
 
-export const Main = ({
-    sendUser,
-}) => {
-    const [credentials, setCredentials] = useState({ register: false, login: false });
-
-    const onClose = (func) => {
-        console.log('Close: ' + func);
-        setCredentials((state) => ({
-            ...state,
-            [func]: false,
-        }));
-    };
-
-    const open = (e) => {
-        console.log(e.target.name);
-        setCredentials((state) => ({
-            ...state,
-            [e.target.name]: true,
-        }));
-    };
-
-    const logout = () => {
-        if(userLogout()) {
-            sendUser({})
-        }
-    }
-
+export const Main = () => {
     return (
-        <main>
-            <div className="w3-main pr-main" id="main">
-                <Header />
-                <button className="save-btn" name="login" onClick={(e) => open(e)}>
-                    Login
-                </button>
-                <button className="cancel-btn" name="register" onClick={(e) => open(e)}>
-                    Register
-                </button>
-                <button className="cancel-btn" name="logout" onClick={logout}>
-                    Logout
-                </button>
+        <main className="main">
+        <section className="card users-container">
+
+            <div className="w3-main" id="main">
+                <Title />
 
                 <AllQuestions />
 
-                {/* <QuestionForm isCreate={true} /> */}
-
-                {/* <Login /> */}
-                {credentials.register && (
-                    <UserCredentials func="register" onClose={onClose} sendUser={sendUser}>
-                        Register
-                    </UserCredentials>
-                )}
-                {credentials.login && (
-                    <UserCredentials func="login" onClose={onClose} sendUser={sendUser}>
-                        Login
-                    </UserCredentials>
-                )}
-
                 <div className="pr-footer">{/* <Footer /> */}</div>
             </div>
+        </section>
         </main>
     );
 };

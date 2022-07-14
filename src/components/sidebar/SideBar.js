@@ -1,3 +1,5 @@
+
+import "./SideBar.css"
 import { CurrentUser } from "./current-user/CurrentUser";
 
 export const SideBar = ({
@@ -6,7 +8,8 @@ export const SideBar = ({
     const w3_close = () => undefined;
 
     return (
-        <nav className="w3-sidebar w3-collapse w3-black w3-animate-left pr-sidebar" id="mySidebar" >
+        // <nav className="w3-sidebar w3-collapse w3-black w3-animate-left pr-sidebar" id="mySidebar" >
+        <nav className="sidebar w3-black pr-sidebar" id="mySidebar" >
             <br />
             <CurrentUser user={user}/>
             <hr />
