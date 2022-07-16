@@ -1,0 +1,16 @@
+.error {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    height: 100%;
+    text-align: center;
+    padding-top: 6rem;
+    /* background-color: #757575; */
+    color: #787878;
+}
+
+.title {
+    font-size: 12em;
+}
+
+.subTitle {
+    font-size: 6rem;
+}

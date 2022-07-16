@@ -1,14 +1,12 @@
-.pr-sidebar {
-    z-index: 3;
-    
-}
-
 .sidebar {
-    height: 100%;
+    z-index: 3;
+    height: calc(100vh - 5rem);
     width: 12rem;
     margin-top: 2rem;
     background-color: #fff;
-    position: fixed !important;
+    position: fixed;
     z-index: 1;
     overflow: auto;
+    color: #fff;
+    background-color: #000;
 }

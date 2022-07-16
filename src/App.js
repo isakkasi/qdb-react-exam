@@ -1,29 +1,28 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
+import styles from './App.module.css';
 import { Footer } from './components/footer/Footer';
 import { Main } from './components/main/Main';
 import { SideBar } from './components/sidebar/SideBar';
 import { Header } from './components/header/Header';
+import { NotFound } from './components/404/NotFound';
 
 function App() {
-   
-
     return (
         <div>
             <Header />
 
-            <div className="middle">
+            <div className={styles.middle}>
                 <BrowserRouter>
-                
-                <SideBar />
-
-                    <Routes>
-                        <Route path="/" element={<Main />}>
+                    <SideBar />
+                    <div className={styles.container}>
+                        <Routes>
+                            <Route path="/" element={<Main />} />
                             {/* <Route path='/questions/' element={<Questions />} /> */}
-                        </Route>
-                    </Routes>
+                            <Route path="/*" element={<NotFound />} />
+                            {/* </Route> */}
+                        </Routes>
+                    </div>
                 </BrowserRouter>
-                
             </div>
 
             <Footer />

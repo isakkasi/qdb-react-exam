@@ -1,13 +1,15 @@
 import { CurrentUser } from './current-user/CurrentUser';
+import { NavLink } from 'react-router-dom'
 
-import './SideBar.css';
+import styles from './SideBar.module.css';
 
 export const SideBar = () => {
-    const w3_close = () => undefined;
+
+    let activeClass = 'w3-bar-item w3-button w3-padding w3-blue'
+    let inactiveClass = 'w3-bar-item w3-button w3-padding';
 
     return (
-        // <nav className="w3-sidebar w3-collapse w3-black w3-animate-left pr-sidebar" id="mySidebar" >
-        <nav className="sidebar w3-black pr-sidebar" id="mySidebar">
+        <nav className={styles.sidebar} id="mySidebar">
             <br />
             <CurrentUser />
             <hr />
@@ -17,41 +19,32 @@ export const SideBar = () => {
                 </h5>
             </div>
             <div className="w3-bar-block">
-                <a href="/" className="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onClick={w3_close} title="close menu">
-                    <i className="fa fa-remove fa-fw"></i>&nbsp; Close Menu
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding w3-blue">
-                    <i className="fa fa-users fa-fw"></i>&nbsp; Overview
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
-                    <i className="fa fa-eye fa-fw"></i>&nbsp; Views
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
-                    <i className="fa fa-users fa-fw"></i>&nbsp; Traffic
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
-                    <i className="fa fa-bullseye fa-fw"></i>&nbsp; Geo
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
-                    <i className="fa fa-diamond fa-fw"></i>&nbsp; Orders
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
-                    <i className="fa fa-bell fa-fw"></i>&nbsp; News
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
-                    <i className="fa fa-bank fa-fw"></i>&nbsp; General
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
-                    <i className="fa fa-history fa-fw"></i>&nbsp; History
-                </a>
-                <a href="/" className="w3-bar-item w3-button w3-padding">
+                <NavLink to="/" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                    <i className="fa fa-dashboard fa-fw"></i>&nbsp; Dashboard
+                </NavLink>
+                <NavLink to="/questions" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                    <i className="fa-solid fa-question fa-fw"></i>&nbsp; Questions
+                </NavLink>
+                <NavLink to="/exams" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                    <i className="fa fa-graduation-cap fa-fw"></i>&nbsp; Exams
+                </NavLink>
+                <NavLink to="/configuration" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                    <i className="fa fa-pen fa-fw"></i>&nbsp; Configuration
+                </NavLink>
+                <NavLink to="/reports" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                    <i className="fa fa-diamond fa-fw"></i>&nbsp; Reports
+                </NavLink>
+                <NavLink to="/tutorial" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                    <i className="fa fa-bell fa-fw"></i>&nbsp; Tutorial
+                </NavLink>
+                <NavLink to="/about" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                    <i className="fa fa-bank fa-fw"></i>&nbsp; About
+                </NavLink>
+                <NavLink to="/settings" className={({isActive}) => isActive ? activeClass : inactiveClass }>
                     <i className="fa fa-cog fa-fw"></i>&nbsp; Settings
-                </a>
-                <br />
-                <br />
+                </NavLink>
+                
             </div>
         </nav>
     );
 };
-
-// <div className="w3-overlay w3-hide-large w3-animate-opacity" onClick={w3_close} style={{ cursor: "pointer" }} title="close side menu" id="myOverlay"></div>
