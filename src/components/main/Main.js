@@ -1,6 +1,5 @@
-import { Footer } from './main/Footer';
-import { Title } from './main/Title';
-import { AllQuestions } from './main/AllQuestions';
+import { Title } from './Title';
+import { AllQuestions } from './AllQuestions';
 import './Main.css';
 
 export const Main = () => {

@@ -1,10 +1,26 @@
-import { useEffect, useState } from 'react';
-import { userCreate, userLogin } from '../../../services/userServices';
+import { useState } from 'react';
+
+import userService from '../../../services/userService';
+
 import { Logo } from '../../common/Logo';
 import { TextInput } from '../../common/TextInput';
+
 import './UserRegLoginForm.css';
 
 export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
+    const [formData, setFormData] = useState({});
+
+    const lib = {
+        register: {
+            ok: 'Register',
+            post: userService.userCreate,
+        },
+        login: {
+            ok: 'Login',
+            post: userService.userLogin,
+        },
+    };
+
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -17,29 +33,11 @@ export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
         }
     };
 
-    const lib = {
-        register: {
-            ok: 'Register',
-            post: userCreate,
-        },
-        login: {
-            ok: 'Login',
-            post: userLogin,
-        },
-    };
-
-    const [formData, setFormData] = useState({});
-
-    useEffect(() => {
-        console.log(formData);
-    }, [formData]);
-
     const getFormData = (field, value) => {
         setFormData((state) => ({
             ...state,
             [field]: value,
         }));
-        console.log(formData);
     };
 
     return (

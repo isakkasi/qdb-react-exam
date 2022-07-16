@@ -1,17 +1,15 @@
+import { CurrentUser } from './current-user/CurrentUser';
 
-import "./SideBar.css"
-import { CurrentUser } from "./current-user/CurrentUser";
+import './SideBar.css';
 
-export const SideBar = ({
-    user,
-}) => {
+export const SideBar = () => {
     const w3_close = () => undefined;
 
     return (
         // <nav className="w3-sidebar w3-collapse w3-black w3-animate-left pr-sidebar" id="mySidebar" >
-        <nav className="sidebar w3-black pr-sidebar" id="mySidebar" >
+        <nav className="sidebar w3-black pr-sidebar" id="mySidebar">
             <br />
-            <CurrentUser user={user}/>
+            <CurrentUser />
             <hr />
             <div className="w3-container">
                 <h5>

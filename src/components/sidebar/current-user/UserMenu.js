@@ -1,14 +1,28 @@
-import { useState } from 'react';
-import * as userServices from '../../../services/userServices';
+import { useEffect, useState } from 'react';
+
+import userService from '../../../services/userService';
 import { UserRegLoginForm } from '../user-reg-login/UserRegLoginForm';
 
 import './CurrentUser.css';
 
-export const UserMenu = ({ sendUser }) => {
+export const UserMenu = ({ getUser }) => {
     const [credentials, setCredentials] = useState({ register: false, login: false });
 
+    let username = localStorage.getItem('username');
+    let userId = localStorage.getItem('userId');
+    let token = localStorage.getItem('token');
+
+    const [user, setUser] = useState({ username, userId, token });
+
+    const sendUser = (user) => {
+        setUser((state) => user);
+    };
+
+    useEffect(() => {
+        getUser(user);
+    }, [getUser, user]);
+
     const onClose = (func) => {
-        console.log('Close: ' + func);
         setCredentials((state) => ({
             ...state,
             [func]: false,
@@ -17,16 +31,15 @@ export const UserMenu = ({ sendUser }) => {
 
     const open = (e) => {
         e.preventDefault();
-        console.log(e.target.name);
         setCredentials((state) => ({
             ...state,
-            [e.target.name]: true,
+            [e.currentTarget.name]: true,
         }));
     };
 
     const logout = (e) => {
         e.preventDefault();
-        if (userServices.userLogout()) {
+        if (userService.userLogout()) {
             sendUser({});
         }
     };

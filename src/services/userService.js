@@ -1,4 +1,4 @@
-export const userCreate = async (data) => {
+const userCreate = async (data) => {
     console.log(data);
     const url = 'http://localhost:5000/user/register';
     const options = {
@@ -13,7 +13,7 @@ export const userCreate = async (data) => {
     return res.json();
 };
 
-export const userLogin = async (data) => {
+const userLogin = async (data) => {
     const url = 'http://localhost:5000/user/login';
     const options = {
         method: 'post',
@@ -36,7 +36,7 @@ export const userLogin = async (data) => {
     }
 };
 
-export const userLogout = async () => {
+const userLogout = async () => {
     let token = localStorage.getItem('token');
     const url = 'http://localhost:5000/user/logout';
     const options = {
@@ -58,3 +58,7 @@ export const userLogout = async () => {
         return false;
     }
 };
+
+const userService = {userCreate, userLogin, userLogout}
+
+export default userService;
