@@ -1,21 +1,46 @@
-import { Title } from './Title';
+import { useState, useEffect } from 'react';
+
+import { Title } from '../common/Title';
+import { AddQuestionBtn } from './AddQuestionBtn';
 import { AllQuestions } from './AllQuestions';
-import './Main.css';
+import { QuestionForm } from './QuestionForm';
+import styles from './Questions.module.css';
 
-export const Main = () => {
+export const Questions = () => {
+
+    const [addState, setAddState] = useState(false)
+    const [newQuestion, setNewQuestion] = useState({})
+
+    const getIsOpen = () => {
+        console.log(addState);
+        setAddState(state => !state)
+    }
+
+    useEffect(()=> {
+        console.log(addState);
+    }, [addState])
+
+    const addRow = (question) => {
+        setNewQuestion(state => question)
+    }
+
     return (
-        <main className="main">
-        <section className="card users-container">
+        // <main className="main">
+        <section className={styles.card}>
+            <div>
+                <Title icon='fa-solid fa-circle-question'>Questions</Title>
 
-            <div className="w3-main" id="main">
-                <Title />
+                <AllQuestions newQuestion={newQuestion}/>
+                <br />
 
-                <AllQuestions />
+                <AddQuestionBtn getIsOpen={getIsOpen}/>
 
-                <div className="pr-footer">{/* <Footer /> */}</div>
+                {addState && <QuestionForm getIsOpen={getIsOpen} addRow={addRow}/>}
+
+
             </div>
         </section>
-        </main>
+        // </main>
     );
 };
 /*   <Boxes />

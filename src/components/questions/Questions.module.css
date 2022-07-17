@@ -1,0 +1,65 @@
+
+
+.pr-footer {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    padding-right: 200px;
+}
+
+.main {
+    margin: 3rem auto;
+    position: fixed;
+    margin-left: 12rem;
+    /* width: 100%; */
+    margin-right: 10px;
+    min-height: calc(95vh - 8rem);
+}
+
+.card {
+    width: 100%;
+    /* background-color: #eef; */
+    /* border: 3px solid red; */
+    border-radius: 5px;
+    /* box-shadow: 1px 2px 5px #ccc; */
+  }
+  
+  .users-container {
+    width: 100%;
+  }
+  
+  button {
+    /* background-color: #04aa6d; */
+    border-radius: 8px;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+  .addBtn {
+    margin-left: 1rem;
+    padding: 10px;
+    width: 8em;
+    height: 3em;
+    margin-right: 20px;
+    background-color: rgb(81, 194, 123);
+    padding: 5px;
+    /* color: white; */
+    color: black;
+    opacity: 0.7;
+    /* width: 3rem;
+    border-radius: 3rem;
+    font-size: 1rem;
+    padding: 0; */
+    
+  }
+
+
+button:hover {
+    opacity: 0.9;
+    box-shadow: 1px 2px 8px black;
+}

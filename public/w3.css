@@ -197,22 +197,22 @@ html {
     overflow-x: hidden;
 }
 h1 {
-    font-size: 36px;
+    font-size: 2.5rem;
 }
 h2 {
-    font-size: 30px;
+    font-size: 2rem;
 }
 h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 h4 {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 h5 {
-    font-size: 18px;
+    font-size: 1.1rem;
 }
 h6 {
-    font-size: 16px;
+    font-size: 1rem;
 }
 .w3-serif {
     font-family: serif;

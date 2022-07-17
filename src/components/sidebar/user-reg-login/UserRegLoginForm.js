@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
 import userService from '../../../services/userService';
+import { FormOverlay } from '../../common/FormOverlay';
 
 import { Logo } from '../../common/Logo';
-import { TextInput } from '../../common/TextInput';
+import { TextInput } from '../../common/Inputs';
 
-import './UserRegLoginForm.css';
+import styles from './UserRegLoginForm.module.css';
 
 export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
     const [formData, setFormData] = useState({});
@@ -41,46 +42,31 @@ export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
     };
 
     return (
-        <div className="overlay">
-            <div className="backdrop" onClick={() => onClose(func)}></div>
+        <FormOverlay onClose={onClose} func={func}>
+            <form onSubmit={submitHandler} name={func}>
+                <Logo />
 
-            <div className="modal">
-                <div className="user-container">
-                    <header className="headers">
-                        <h2>
-                            <strong>{children}</strong>
-                        </h2>
-                        <button className="btn" onClick={() => onClose(func)}>
-                            X
-                        </button>
-                    </header>
+                <TextInput name="username" getValues={getFormData}>
+                    Username
+                </TextInput>
+                <TextInput name="password" type="password" getValues={getFormData}>
+                    Password
+                </TextInput>
+                {func === 'register' ? (
+                    <TextInput name="repeatPass" type="password" getValues={getFormData}>
+                        Repeat password
+                    </TextInput>
+                ) : null}
 
-                    <form onSubmit={submitHandler} name={func}>
-                        <Logo />
-
-                        <TextInput name="username" getValues={getFormData}>
-                            Username
-                        </TextInput>
-                        <TextInput name="password" type="password" getValues={getFormData}>
-                            Password
-                        </TextInput>
-                        {func === 'register' ? (
-                            <TextInput name="repeatPass" type="password" getValues={getFormData}>
-                                Repeat password
-                            </TextInput>
-                        ) : null}
-
-                        <div className="form-submit">
-                            <button className="save-btn" type="submit">
-                                {lib[func].ok}
-                            </button>
-                            <button className="cancel-btn" type="button" onClick={() => onClose(func)}>
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
+                <div className={styles['form-submit']}>
+                    <button className={styles['save-btn']} type="submit">
+                        {lib[func].ok}
+                    </button>
+                    <button className={styles['cancel-btn']} type="button" onClick={() => onClose(func)}>
+                        Cancel
+                    </button>
                 </div>
-            </div>
-        </div>
+            </form>
+        </FormOverlay>
     );
 };

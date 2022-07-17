@@ -31,11 +31,17 @@ export const UserMenu = ({ getUser }) => {
 
     const open = (e) => {
         e.preventDefault();
-        setCredentials((state) => ({
-            ...state,
-            [e.currentTarget.name]: true,
-        }));
+        let target = e.currentTarget.name;
+
+        setCredentials((state) => {
+            return {
+                ...state,
+                [target]: true,
+            };
+        });
     };
+
+    useEffect(() => {}, [credentials]);
 
     const logout = (e) => {
         e.preventDefault();

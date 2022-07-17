@@ -1,0 +1,12 @@
+.avatar {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+.img-container {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    /* height: 100em;
+    width: 100em; */
+}
