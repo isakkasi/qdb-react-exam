@@ -1,3 +1,93 @@
 .textInput {
     font-size: 1rem;
 }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+form {
+    border: 3px solid #f1f1f1;
+    padding: 8px;
+}
+
+input[type='text'],
+input[type='date'],
+input[type='number'],
+input[type='password'] {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    /* background-color: #04aa6d; */
+    border-radius: 8px;
+    /* color: white; */
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.9;
+    box-shadow: 1px 2px 8px black;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    width: 5em;
+    height: 3em;
+    margin-right: 20px;
+    padding: 5px;
+    color: white;
+    opacity: 0.7;
+}
+
+.save-btn {
+    width: 5em;
+    height: 3em;
+    margin-right: 20px;
+    background-color: rgb(81, 194, 123);
+    padding: 5px;
+    color: white;
+    opacity: 0.7;
+}
+
+.form-submit {
+    background-color: #f1f1f1;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+}
+
+
+
+
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+

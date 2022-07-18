@@ -3,7 +3,7 @@ import styles from './Header.module.css'
 export const Header = (props) => {
    
     return (
-        <div className={`w3-bar w3-top w3-black w3-large ${styles.header}`} >
+        <div className={`w3-bar w3-top w3-large ${styles.header}`} >
             {/* <button className="w3-bar-item w3-button">
                 <i className="fa fa-bars"></i> &nbsp;Menu
             </button> */}

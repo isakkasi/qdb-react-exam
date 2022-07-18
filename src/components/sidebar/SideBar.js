@@ -29,16 +29,16 @@ export const SideBar = () => {
                     <i className="fa fa-graduation-cap fa-fw"></i>&nbsp; Exams
                 </NavLink>
                 <NavLink to="/configuration" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-pen fa-fw"></i>&nbsp; Configuration
+                    <i className="fa fa-screwdriver-wrench fa-fw"></i>&nbsp; Configuration
                 </NavLink>
                 <NavLink to="/reports" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-diamond fa-fw"></i>&nbsp; Reports
+                    <i className="fa fa-chart-line fa-fw"></i>&nbsp; Reports
                 </NavLink>
                 <NavLink to="/tutorial" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-bell fa-fw"></i>&nbsp; Tutorial
+                    <i className="fa fa-book fa-fw"></i>&nbsp; Tutorial
                 </NavLink>
                 <NavLink to="/about" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-bank fa-fw"></i>&nbsp; About
+                    <i className="fa fa-info fa-fw"></i>&nbsp; About
                 </NavLink>
                 <NavLink to="/settings" className={({isActive}) => isActive ? activeClass : inactiveClass }>
                     <i className="fa fa-cog fa-fw"></i>&nbsp; Settings

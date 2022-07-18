@@ -1,0 +1,17 @@
+.addBtn {
+    margin-left: 1rem;
+    padding: 10px;
+    width: 8em;
+    height: 3em;
+    margin-right: 20px;
+    background-color: rgb(81, 194, 123);
+    padding: 5px;
+    /* color: white; */
+    color: black;
+    opacity: 0.7;
+    /* width: 3rem;
+    border-radius: 3rem;
+    font-size: 1rem;
+    padding: 0; */
+    
+  }

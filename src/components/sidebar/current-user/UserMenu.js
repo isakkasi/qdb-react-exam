@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import userService from '../../../services/userService';
+import Tooltip from '../../common/Tooltip';
 import { UserRegLoginForm } from '../user-reg-login/UserRegLoginForm';
 
 import './CurrentUser.css';
@@ -63,13 +64,13 @@ export const UserMenu = ({ getUser }) => {
             </a>
             <div>
                 <a href="/" className="user-menu-btn" name="login" onClick={(e) => open(e)}>
-                    <i className="fa fa-angle-right"></i>
+                    <i className="fa fa-right-to-bracket"></i>
                 </a>
                 <a href="/" className="user-menu-btn" name="register" onClick={(e) => open(e)}>
-                    Reg
+                    <i className="fa fa-arrows-to-dot fa-fw"></i>
                 </a>
                 <a href="/" className="user-menu-btn" name="logout" onClick={logout}>
-                    <i className="fa fa-angle-left"></i>
+                    <i className="fa fa-right-from-bracket"></i>
                 </a>
             </div>
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { NewItemBtn } from '../common/NewItemBtn';
 
 import { Title } from '../common/Title';
 import { AddQuestionBtn } from './AddQuestionBtn';
@@ -33,7 +34,7 @@ export const Questions = () => {
                 <AllQuestions newQuestion={newQuestion}/>
                 <br />
 
-                <AddQuestionBtn getIsOpen={getIsOpen}/>
+                <NewItemBtn onClick={getIsOpen}> Add question </NewItemBtn>
 
                 {addState && <QuestionForm getIsOpen={getIsOpen} addRow={addRow}/>}
 

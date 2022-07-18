@@ -1,0 +1,27 @@
+.panel {
+    padding: 0 18px;
+    /* display: none; */
+    background-color: #ddffdd;
+    overflow: hidden;
+    margin: 0px 10px 5px 10px;
+    width: calc(100% - 20px);
+}
+
+.title {
+    font-weight: 400;
+    font-size: 1.2rem;
+    display: flex;
+    background-color: lightgreen;
+    margin: 30px 10px 5px 10px;
+    width: calc(100% - 20px);
+}
+
+.arrows {
+    font-weight: 400;
+    font-size: 1.2rem;
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    width: 10%;
+    text-align: right;
+}
