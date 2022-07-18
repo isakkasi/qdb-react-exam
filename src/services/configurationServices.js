@@ -36,4 +36,19 @@ export const getAllAta = async () => {
     }
     const res = await fetch(url, options);
     return res.json();
-} 
+}
+
+export const createAta = async (data) => {
+    const url = baseUrl + 'ata/';
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': localStorage.getItem('token'),
+        },
+        body: JSON.stringify(data),
+    };
+
+    const res = await fetch(url, options);
+    return res.json();
+};

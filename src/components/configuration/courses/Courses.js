@@ -19,7 +19,7 @@ export const Courses = () => {
 
     const getNewCourse = (course) => {
         if (course) {
-            courses.push(course);
+            setCourses(state => [...state, course]);
         }
     };
 
