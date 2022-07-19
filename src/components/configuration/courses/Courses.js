@@ -6,12 +6,12 @@ import { AddCourseForm } from './AddCourseForm';
 import * as configurationServices from '../../../services/configurationServices';
 import { DetailsButtons } from '../../common/DetailsButtons';
 
-// import styles from './Courses.module.css'
+import styles from './Courses.module.css';
 
 export const Courses = () => {
     const [formOpen, setFormOpen] = useState(false);
     const [courses, setCourses] = useState([]);
-    const [details, setDetails] = useState({id: null, display: false});
+    const [details, setDetails] = useState({ id: null, display: false });
 
     useEffect(() => {
         configurationServices.getAllCourses().then((result) => setCourses(result));
@@ -21,9 +21,25 @@ export const Courses = () => {
         setFormOpen((state) => !state);
     };
 
-    const getNewCourse = (course) => {
-        if (course) {
-            setCourses((state) => [...state, course]);
+    const getNewCourse = (course, func) => {
+        if (func === 'edit') {
+            console.log(func);
+            setCourses((state) => {
+                return state.map((x) => {
+                    if (course._id === x._id) {
+                        console.log(x);
+                        console.log(course);
+                        return course;
+                    } else {
+                        return x;
+                    }
+                });
+            });
+            console.log(courses);
+        } else if (func === 'add' || func === 'addSimilar') {
+            if (course) {
+                setCourses((state) => [...state, course]);
+            }
         }
     };
 
@@ -31,9 +47,9 @@ export const Courses = () => {
         setDetails((state) => ({
             id: rowId,
             display: !state.display,
-    }));
+        }));
 
-        console.log(e.target.key);
+        // console.log(e.target.key);
     };
 
     let table = courses.map((x) => {
@@ -47,44 +63,68 @@ export const Courses = () => {
 
         return (
             <>
-
-            <tr key={x._id} onClick={(e) => selectHandler(e, x._id)}>
-                <td> {x.internalRef} </td>
-                <td> {x.title} </td>
-                <td>{x.location}</td>
-                <td>{x.students}</td>
-                <td>{start && start.toLocaleString('en-GB', options)}</td>
-                <td>{end && end.toLocaleString('en-GB', options)}</td>
-            </tr>
-            {details.id === x._id && details.display &&
-            <tr>
-            <td></td>
-                <td colSpan={3} className='w3-right'>
-                <DetailsButtons />
-                </td>
-
-            </tr>}
+                <tr key={x._id} onClick={(e) => selectHandler(e, x._id)} className={details.id === x._id && details.display ? styles.active : 'dummy'}>
+                    <td>
+                        <div className={styles.center}> {x.internalRef} </div>{' '}
+                    </td>
+                    <td> {x.title} </td>
+                    <td>{x.location}</td>
+                    <td>
+                        {' '}
+                        <div className={styles.center}> {x.students}</div>
+                    </td>
+                    <td>
+                        {' '}
+                        <div className={styles.center}> {start && start.toLocaleString('en-GB', options)}</div>
+                    </td>
+                    <td>
+                        {' '}
+                        <div className={styles.center}> {end && end.toLocaleString('en-GB', options)}</div>
+                    </td>
+                    {/* <td>{x._id}</td> */}
+                </tr>
+                {details.id === x._id && details.display && (
+                    <tr className={styles.noBorder} key={x._id + 'd'}>
+                        <td colSpan={6} className={styles.details}>
+                            <div className={styles.right}>
+                                <DetailsButtons data={x} getNewCourse={getNewCourse} />
+                            </div>
+                        </td>
+                        {/* <td>{x._id + 'd'}</td> */}
+                    </tr>
+                )}
             </>
         );
     });
 
     return (
         <div>
-            <table className="w3-table">
+            <table className={styles.table}>
                 <thead>
                     <tr>
-                        <th>IntId</th>
+                        <th>
+                            {' '}
+                            <div className={styles.center}> IntId</div>
+                        </th>
                         <th>Title</th>
                         <th>Location</th>
-                        <th>Students qty</th>
-                        <th>Start</th>
-                        <th>End</th>
+                        <th>
+                            {' '}
+                            <div className={styles.center}>Students qty</div>
+                        </th>
+                        <th>
+                            <div className={styles.center}>Start</div>
+                        </th>
+                        <th>
+                            {' '}
+                            <div className={styles.center}> End</div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>{table}</tbody>
             </table>
             <NewItemBtn onClick={addNewCourse}>Add Course</NewItemBtn>
-            {formOpen && <AddCourseForm onClose={addNewCourse} getNewCourse={getNewCourse} />}
+            {formOpen && <AddCourseForm onClose={addNewCourse} getNewCourse={getNewCourse} func="add" />}
         </div>
     );
 };

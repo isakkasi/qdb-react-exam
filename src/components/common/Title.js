@@ -1,10 +1,12 @@
+import styles from './Title.module.css'
+
 export const Title = ({
     icon,
     children,
 }) => {
     return (
-        <header className="w3-container" style={{ paddingTop: '22px'}}>
-            <h5 style={{fontSize: '2rem' }}>
+        <header className={styles.title} >
+            <h5>
                 <b>
                     <i className={icon}></i> {children}
                 </b>

@@ -1,5 +1,6 @@
 .detBtns {
     display: inline-flex;
+    /* text-align: right; */
     /* width: 8rem; */
     /* background-color: red; */
 }
@@ -10,4 +11,20 @@
     padding: 0;
     background-color: transparent;
     padding: 8px 10px;
+}
+
+.details {
+    color: green;
+}
+
+.addSimilar {
+    color: blue;
+}
+
+.edit {
+    color: orange;
+}
+
+.delete {
+    color: red;
 }

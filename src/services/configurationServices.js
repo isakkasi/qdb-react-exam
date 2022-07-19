@@ -27,6 +27,22 @@ export const createCourse = async (data) => {
     return res.json();
 };
 
+export const editCourse = async (data) => {
+    const url = baseUrl + `course/${data._id}`;
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': localStorage.getItem('token'),
+        },
+        body: JSON.stringify(data),
+    };
+
+    const res = await fetch(url, options);
+    console.log(`Successful edit of course._id ${data._id}`);
+    return res.json();
+}
+
 export const getAllAta = async () => {
     const url = baseUrl + 'ata/'
     const options = {
