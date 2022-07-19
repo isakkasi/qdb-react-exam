@@ -1,6 +1,19 @@
+.main {
+    display: grid;
+    grid-template-columns: 12rem auto;
+}
+.gridHeader {
+    grid-area: 1 / 1 / span 1 / span 2;
+    background-color: red;
+}
+.gridFooter {
+    grid-area: 3 / 1 / span 1 / span 2;
+    background-color: blue;
+}
+
 .middle {
-    display: flex;
-    height: calc(100vh - 3rem);
+    /* display: flex; */
+    min-height: calc(100vh - 3rem);
     background-color: white;
 }
 
@@ -9,11 +22,11 @@
 
     border: 2px solid #adadad;
     border-radius: 10px;
-    position: fixed;
-    width: calc(100% - 13rem);
-    height: calc(100vh - 6rem);
-    margin-left: 12.5rem;
+    /* position: fixed; */
+    width: calc(100% - 1rem);
+    min-height: calc(100vh - 7rem - 1px);
+    margin-left: 0.5rem;
     margin-right: 0.5rem;
-    margin-top: 2.5rem;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
 }

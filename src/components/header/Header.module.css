@@ -2,4 +2,16 @@
     display: block;
     height: 2rem;
     background-color: #111827;
+    font-size: 1.25rem;
+    color: white;
+    padding-top: 5px;
+    top: 0;
+}
+.title {
+    float: right;
+    padding: 4px 16px;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0;
 }

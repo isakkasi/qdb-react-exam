@@ -2,7 +2,7 @@
     padding: 0 18px;
     /* display: none; */
     background-color: #ddffdd;
-    overflow: hidden;
+    overflow: auto;
     margin: 0px 10px 5px 10px;
     width: calc(100% - 20px);
 }

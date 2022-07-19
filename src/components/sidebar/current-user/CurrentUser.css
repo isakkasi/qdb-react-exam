@@ -4,7 +4,7 @@
     border: none;
     display: inline-block;
     vertical-align: middle;
-    overflow: hidden;
+    overflow: auto;
     text-decoration: none;
     color: inherit;
     background-color: inherit;
