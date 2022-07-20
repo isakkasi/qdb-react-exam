@@ -43,6 +43,20 @@ export const editCourse = async (data) => {
     return res.json();
 }
 
+export const deleteCourse = async (data) => {
+    const url = baseUrl + `course/${data._id}`;
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': localStorage.getItem('token'),
+        },
+    };
+
+    const res = await fetch(url, options);
+    console.log(`Successful delete of course._id ${data._id}`);
+    return res.json();
+}
+
 export const getAllAta = async () => {
     const url = baseUrl + 'ata/'
     const options = {

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { AddCourseForm } from '../configuration/courses/AddCourseForm';
-import { Details } from './Details';
+import { Delete } from './Delete';
 import styles from './DetailsButtons.module.css';
 
 export const DetailsButtons = ({
-    getNewCourse,
+    returnResult,
     data
 }) => {
     const [detailsOpen, setDetailsOpen] = useState(false);
@@ -49,9 +49,9 @@ export const DetailsButtons = ({
             </button>
             {/* {detailsOpen && <Details data={data} onClose={onClose}/>} */}
             {detailsOpen && <AddCourseForm data={data} func="details" onClose={onClose}/>}
-            {addOpen && <AddCourseForm data={data} func="addSimilar" onClose={onClose} getNewCourse={getNewCourse} />}
-            {editOpen && <AddCourseForm data={data} func="edit" onClose={onClose} getNewCourse={getNewCourse} />}
-            {/* {deleteOpen && <Details data={data} onClose={onClose}/>} */}
+            {addOpen && <AddCourseForm data={data} func="addSimilar" onClose={onClose} returnResult={returnResult} />}
+            {editOpen && <AddCourseForm data={data} func="edit" onClose={onClose} returnResult={returnResult} />}
+            {deleteOpen && <Delete data={data} func="delete" onClose={onClose} returnResult={returnResult} />}
         </div>
     );
 };

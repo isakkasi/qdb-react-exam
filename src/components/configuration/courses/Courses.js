@@ -21,7 +21,7 @@ export const Courses = () => {
         setFormOpen((state) => !state);
     };
 
-    const getNewCourse = (course, func) => {
+    const returnResult = (course, func) => {
         if (func === 'edit') {
             console.log(func);
             setCourses((state) => {
@@ -40,6 +40,10 @@ export const Courses = () => {
             if (course) {
                 setCourses((state) => [...state, course]);
             }
+        } else if (func === 'delete') {
+            if (course) {
+                setCourses(state => state.filter(x => x._id !== course._id))
+            }
         }
     };
 
@@ -49,7 +53,7 @@ export const Courses = () => {
             display: !state.display,
         }));
 
-        // console.log(e.target.key);
+        // console.log(courses);
     };
 
     let table = courses.map((x) => {
@@ -87,7 +91,7 @@ export const Courses = () => {
                     <tr className={styles.noBorder} key={x._id + 'd'}>
                         <td colSpan={6} className={styles.details}>
                             <div className={styles.right}>
-                                <DetailsButtons data={x} getNewCourse={getNewCourse} />
+                                <DetailsButtons data={x} returnResult={returnResult} />
                             </div>
                         </td>
                         {/* <td>{x._id + 'd'}</td> */}
@@ -124,7 +128,7 @@ export const Courses = () => {
                 <tbody>{table}</tbody>
             </table>
             <NewItemBtn onClick={addNewCourse}>Add Course</NewItemBtn>
-            {formOpen && <AddCourseForm onClose={addNewCourse} getNewCourse={getNewCourse} func="add" />}
+            {formOpen && <AddCourseForm onClose={addNewCourse} returnResult={returnResult} func="add" />}
         </div>
     );
 };

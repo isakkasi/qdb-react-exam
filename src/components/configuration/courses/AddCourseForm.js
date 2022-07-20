@@ -10,7 +10,7 @@ import styles from './AddCourseForm.module.css';
 
 export const AddCourseForm = ({
     onClose,
-    getNewCourse,
+    returnResult,
     data,
     func
 }) => {
@@ -30,8 +30,8 @@ export const AddCourseForm = ({
             let course;
             if (func === 'edit') {
                 course = await configurationServices.editCourse({...formData, lastUpdatedBy: localStorage.getItem('userId')});
-                // getNewCourse(course, 'edit')
-                getNewCourse({...formData, _id: data._id}, 'edit');
+                // returnResult(course, 'edit')
+                returnResult({...formData, _id: data._id}, 'edit');
                 // console.log(course);
                 // console.log(formData);
             } else if (func === 'add' || func === 'addSimilar') {
@@ -39,7 +39,7 @@ export const AddCourseForm = ({
                     delete formData._id;
                 }
                 course = await configurationServices.createCourse({...formData, createdBy: localStorage.getItem('userId')});
-                getNewCourse(course, 'add')
+                returnResult(course, 'add')
             }
             onClose();
         } catch (error) {
