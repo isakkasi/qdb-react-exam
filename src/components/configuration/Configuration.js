@@ -1,10 +1,10 @@
 import { Title } from '../common/Title';
-import appStyles from '../../App.module.css';
-import styles from './Configuration.module.css';
 import { Card } from './cards/Card';
 import { Courses } from './courses/Courses';
 import { Ata } from './ata/Ata';
 import { Types } from './types/Types';
+
+import appStyles from '../../App.module.css';
 
 export const Configuration = () => {
     return (
@@ -17,18 +17,12 @@ export const Configuration = () => {
                 </Card>
 
                 <Card title="ATA">
-                    <Ata  />
+                    <Ata />
                 </Card>
 
-                <Card title="Types" >
+                <Card title="Types">
                     <Types />
                 </Card>
-
-                <div className={styles.gridContainer}>
-                    <div className={styles.gridItem}></div>
-                    <div className={styles.gridItem}></div>
-                    <div className={styles.gridItem}></div>
-                </div>
             </div>
         </section>
     );

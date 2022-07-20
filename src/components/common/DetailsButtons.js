@@ -1,12 +1,18 @@
 import { useState } from 'react';
-import { AddCourseForm } from '../configuration/courses/AddCourseForm';
 import { Delete } from './Delete';
 import styles from './DetailsButtons.module.css';
 
 export const DetailsButtons = ({
     returnResult,
-    data
+    data,
+    Form,
+    itemType,
 }) => {
+    // const Form = children;
+    
+
+
+
     const [detailsOpen, setDetailsOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
@@ -48,10 +54,10 @@ export const DetailsButtons = ({
                 <i className="fa-solid fa-trash-can"></i>
             </button>
             {/* {detailsOpen && <Details data={data} onClose={onClose}/>} */}
-            {detailsOpen && <AddCourseForm data={data} func="details" onClose={onClose}/>}
-            {addOpen && <AddCourseForm data={data} func="addSimilar" onClose={onClose} returnResult={returnResult} />}
-            {editOpen && <AddCourseForm data={data} func="edit" onClose={onClose} returnResult={returnResult} />}
-            {deleteOpen && <Delete data={data} func="delete" onClose={onClose} returnResult={returnResult} />}
+            {detailsOpen && <Form data={data} func="details" onClose={onClose}/>}
+            {addOpen && <Form data={data} func="addSimilar" onClose={onClose} returnResult={returnResult} />}
+            {editOpen && <Form data={data} func="edit" onClose={onClose} returnResult={returnResult} />}
+            {deleteOpen && <Delete data={data} func="delete" onClose={onClose} returnResult={returnResult} itemType={itemType}/>}
         </div>
     );
 };

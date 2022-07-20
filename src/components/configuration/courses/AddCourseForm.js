@@ -16,13 +16,13 @@ export const AddCourseForm = ({
 }) => {
     const [formData, setFormData] = useState(data || {});
     const disabled = func === 'details';
-    console.log(disabled);
 
     let functionTitle = func.charAt(0).toUpperCase() + func.slice(1);
 
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            // Parse to number for proper database storage
             setFormData((state) => ({
                 ...state,
                 students: Number(state.students),

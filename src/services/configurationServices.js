@@ -1,3 +1,4 @@
+
 const baseUrl = 'http://localhost:5000/';
 
 export const getAllCourses = async () => {
@@ -82,3 +83,33 @@ export const createAta = async (data) => {
     const res = await fetch(url, options);
     return res.json();
 };
+
+export const editAta = async (data) => {
+    const url = baseUrl + `ata/${data._id}`;
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': localStorage.getItem('token'),
+        },
+        body: JSON.stringify(data),
+    };
+
+    const res = await fetch(url, options);
+    console.log(`Successful edit of ata._id ${data._id}`);
+    return res.json();
+}
+
+export const deleteAta = async (data) => {
+    const url = baseUrl + `ata/${data._id}`;
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': localStorage.getItem('token'),
+        },
+    };
+
+    const res = await fetch(url, options);
+    console.log(`Successful delete of ata._id ${data._id}`);
+    return res.json();
+}
