@@ -7,15 +7,20 @@ import * as configurationServices from '../../../services/configurationServices'
 import { DetailsButtons } from '../../common/DetailsButtons';
 
 import styles from './Courses.module.css';
+import dateParser from '../../../utils/dateParser';
 
 export const Courses = () => {
     const [formOpen, setFormOpen] = useState(false);
     const [courses, setCourses] = useState([]);
     const [details, setDetails] = useState({ id: null, display: false });
+    // const [pagination, setPagination] = useState({count: 0, page: 1})
+
+    // const perPage = 10;
 
     useEffect(() => {
         configurationServices.getAllCourses().then((result) => setCourses(result));
-    }, []);
+        // setPagination(state => ({...state, count: courses.length}))
+    }, [courses.length]);
 
     const addNewCourse = () => {
         setFormOpen((state) => !state);
@@ -47,6 +52,17 @@ export const Courses = () => {
         }
     };
 
+    // const pageLinks = (count, perPage) => {
+    //     const links = [];
+    //     let i = 1;
+    //     while (count > 0) {
+    //         links.push(i);
+    //         i++;
+    //         count -= perPage
+    //     }
+    //     return links;
+    // }
+
     const selectHandler = (e, rowId) => {
         setDetails((state) => ({
             id: rowId,
@@ -57,13 +73,6 @@ export const Courses = () => {
     };
 
     let table = courses.map((x) => {
-        let start = x.start ? new Date(x.start) : undefined;
-        let end = x.end ? new Date(x.end) : undefined;
-        let options = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-        };
 
         return (
             <>
@@ -79,11 +88,11 @@ export const Courses = () => {
                     </td>
                     <td>
                         {' '}
-                        <div className={styles.center}> {start && start.toLocaleString('en-GB', options)}</div>
+                        <div className={styles.center}> {dateParser.toShort(x.start)}</div>
                     </td>
                     <td>
                         {' '}
-                        <div className={styles.center}> {end && end.toLocaleString('en-GB', options)}</div>
+                        <div className={styles.center}> {dateParser.toShort(x.end)}</div>
                     </td>
                     {/* <td>{x._id}</td> */}
                 </tr>
@@ -127,6 +136,7 @@ export const Courses = () => {
                 </thead>
                 <tbody>{table}</tbody>
             </table>
+            {/* {pageLinks(courses.length, perPage).map(x => <button> &nbsp; {x} &nbsp; </button> )} */}
             <NewItemBtn onClick={addNewCourse}>Add Course</NewItemBtn>
             {formOpen && <AddCourseForm onClose={addNewCourse} returnResult={returnResult} func="add" />}
         </div>
