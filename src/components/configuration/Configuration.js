@@ -20,9 +20,9 @@ export const Configuration = () => {
                     <Ata />
                 </Card>
 
-                <Card title="Types">
+                {/* <Card title="Types">
                     <Types />
-                </Card>
+                </Card> */}
             </div>
         </section>
     );
