@@ -6,7 +6,7 @@ export const TextInput = ({ name, children, getValues, type, inValue, disabled }
     const [value, setValue] = useState(inValue || '');
 
     const onChangeHandler = (e) => {
-        setValue(prevValue => e.target.value);
+        setValue(e.target.value);
         getValues(name, e.target.value);
     };
     // console.log(styles);

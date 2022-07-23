@@ -7,7 +7,7 @@ export const Card = ({ title, children }) => {
 
     const isActiveHandler = (e) => {
         setIsActive((state) => !state);
-        console.log('clicked ' + isActive);
+        // console.log('clicked ' + isActive);
     };
 
     return (

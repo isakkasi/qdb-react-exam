@@ -1,6 +1,8 @@
 import { FormOverlay } from '../common/FormOverlay';
 
 import * as configurationServices from '../../services/configurationServices';
+import * as questionServices from '../../services/questionServices';
+
 
 import styles from './Delete.module.css';
 
@@ -15,9 +17,13 @@ export const Delete = ({
     let type = itemType.charAt(0).toUpperCase() + itemType.slice(1);
     let disabled = localStorage.getItem('userId') !== data.createdBy;
 
+    // console.log(data);
+
     let action = {
         course: configurationServices.deleteCourse,
-        ata: configurationServices.deleteAta
+        ata: configurationServices.deleteAta,
+        question: questionServices.del
+
     }
 
     //This shall be removed when user limitations are applied
@@ -51,7 +57,7 @@ export const Delete = ({
             <form onSubmit={submitHandler}>
                 <h2 className={styles.centered}>{functionTitle} {type}</h2>
 
-                <h3>Are you sure you want to delete {itemType} "{data.title}"?</h3>
+                <h3>Are you sure you want to delete {itemType} "{data.question}"?</h3>
 
                 <div className={styles['form-submit']}>
                     {!disabled && (

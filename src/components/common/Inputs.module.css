@@ -13,6 +13,7 @@ form {
 input[type='text'],
 input[type='date'],
 input[type='number'],
+input[type='radio'],
 input[type='password'] {
     width: 100%;
     padding: 8px 20px;

@@ -20,7 +20,8 @@ export const Courses = () => {
     // const perPage = 10;
 
     useEffect(() => {
-        configurationServices.getAllCourses().then((result) => setCourses(result));
+        configurationServices.getAllCourses()
+            .then((result) => setCourses(result));
         // setPagination(state => ({...state, count: courses.length}))
     }, []);
 
