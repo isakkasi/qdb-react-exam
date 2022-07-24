@@ -1,5 +1,5 @@
-import { DetailsButtons } from '../../../common/DetailsButtons';
-import { AddQuestionForm } from '../../AddQuestionForm';
+import { DetailsButtons } from '../../common/DetailsButtons';
+import { AddQuestionForm } from '../question-form/QuestionForm';
 import styles from './Card.module.css';
 
 export const Card = ({ question, returnResult }) => {

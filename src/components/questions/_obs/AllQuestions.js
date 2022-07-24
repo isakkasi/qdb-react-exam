@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { QuestionRow } from './all-questions/QuestionRow';
-import * as questionServices from '../../services/questionServices';
+import * as questionServices from '../../../services/questionServices';
 
 export const AllQuestions = ({ newQuestion }) => {
     const [questions, setQuestions] = useState([]);

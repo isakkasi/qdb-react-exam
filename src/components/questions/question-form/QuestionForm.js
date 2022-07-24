@@ -1,24 +1,24 @@
 import { useState } from 'react';
 
-import { FormOverlay } from '../common/FormOverlay';
-import { TextInput } from '../common/Inputs';
-import { Logo } from '../common/Logo';
+import { FormOverlay } from '../../common/FormOverlay';
+import { TextInput } from '../../common/Inputs';
+import { Logo } from '../../common/Logo';
 
-import * as questionServices from '../../services/questionServices';
+import * as questionServices from '../../../services/questionServices';
 
-import styles from './AddQuestionForm.module.css';
+import styles from './QuestionForm.module.css';
 
 export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
-    const [formData, setFormData] = useState(data || {
-        question: '',
-        ansA: '',
-        ansB: '',
-        ansC: '',
-        correctAns: '',
-        level: '',
-    
-    });
-    const [isCorrect, setIsCorrect] = useState('');
+    const [formData, setFormData] = useState(
+        data || {
+            question: '',
+            ansA: '',
+            ansB: '',
+            ansC: '',
+            correctAns: '',
+            level: '',
+        }
+    );
 
     const disabled = func === 'details';
 
@@ -38,10 +38,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
             let question;
             if (func === 'edit') {
                 question = await questionServices.edit(formData);
-                // returnResult(course, 'edit')
                 returnResult({ ...formData, _id: data._id }, 'edit');
-                // console.log(course);
-                // console.log(formData);
             } else if (func === 'add' || func === 'addSimilar') {
                 if (formData._id) {
                     delete formData._id;
@@ -58,49 +55,13 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
     const getFormData = (field, value) => {
         setFormData((state) => {
             console.log(state);
-            
-                return {
-                    ...state,
-                    [field]: value,
-                };
-            })
-       
-    };
 
-    const radioOnChangeA = (e) => {
-        console.log('A');
-        setFormData(state => ({
+            return {
                 ...state,
-                ansA: {
-                    ...state.ansA,
-                    isCorrect:  true,
-                }
-        })
-        )
-        
-    }
-    const radioOnChangeB = (e) => {
-        console.log('B');
-        setFormData(state => ({
-            ...state,
-            ansB: {
-                isCorrect: true,
-            }
-            }
-    
-    ))
-    }
-    const radioOnChangeC = (e) => {
-        console.log('C');
-        setFormData(state => ({
-            ...state,
-            ansC: {
-                ...state.ansC,
-                isCorrect:  true,
-            }
-    })
-    )
-    }
+                [field]: value,
+            };
+        });
+    };
 
     return (
         <FormOverlay onClose={onClose}>
@@ -117,19 +78,35 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                     <TextInput name="ansA" getValues={getFormData} inValue={formData.ansA} disabled={disabled}>
                         AnsA
                     </TextInput>
-                   <input type="radio" name='correctAns' checked={formData.correctAns === 'ansA'} value={formData.correctAns} onChange={(e) => getFormData('correctAns', 'ansA')}/>
+                    <input
+                        type="radio"
+                        name="correctAns"
+                        checked={formData.correctAns === 'ansA'}
+                        value={formData.correctAns}
+                        onChange={(e) => getFormData('correctAns', 'ansA')}
+                    />
 
                     <TextInput name="ansB" getValues={getFormData} inValue={formData.ansB} disabled={disabled}>
                         AnsB
                     </TextInput>
-                   <input type="radio" name='correctAns' checked={formData.correctAns === 'ansB'} value={formData.correctAns} onChange={(e) => getFormData('correctAns', 'ansB')}/>
-                    
+                    <input
+                        type="radio"
+                        name="correctAns"
+                        checked={formData.correctAns === 'ansB'}
+                        value={formData.correctAns}
+                        onChange={(e) => getFormData('correctAns', 'ansB')}
+                    />
 
                     <TextInput name="ansC" getValues={getFormData} inValue={formData.ansC} disabled={disabled}>
                         AnsC
                     </TextInput>
-                   <input type="radio" name='correctAns' checked={formData.correctAns === 'ansC'} value={formData.correctAns} onChange={(e) => getFormData('correctAns', 'ansC')}/>
-                    
+                    <input
+                        type="radio"
+                        name="correctAns"
+                        checked={formData.correctAns === 'ansC'}
+                        value={formData.correctAns}
+                        onChange={(e) => getFormData('correctAns', 'ansC')}
+                    />
 
                     {/* <div></div> */}
 

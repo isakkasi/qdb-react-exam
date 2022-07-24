@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { AddQuestionForm } from './AddQuestionForm';
+import { AddQuestionForm } from './question-form/QuestionForm';
 import { NewItemBtn } from '../common/NewItemBtn';
 import { Title } from '../common/Title';
 
@@ -8,7 +8,7 @@ import * as questionServices from '../../services/questionServices';
 import { returnResult } from './functions/returnResult';
 
 import styles from './Questions.module.css';
-import { Card } from './question-form/Card/Card';
+import { Card } from './card/Card';
 
 export const Questions = () => {
     const [questions, setQuestions] = useState([]);

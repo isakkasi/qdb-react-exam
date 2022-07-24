@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import * as questionServices from '../../services/questionServices';
-import { FormOverlay } from '../common/FormOverlay';
+import * as questionServices from '../../../services/questionServices';
+import { FormOverlay } from '../../common/FormOverlay';
 
 import styles from './QuestionForm.module.css';
 
