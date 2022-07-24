@@ -69,6 +69,17 @@ export const getAllAta = async () => {
     return res.json();
 }
 
+export const getAtaById = async (id) => {
+    const url = baseUrl + `ata/${id}`
+    const options = {
+        headers: {
+            'X-Authorization': localStorage.getItem('token')
+        }
+    }
+    const res = await fetch(url, options);
+    return res.json();
+}
+
 export const createAta = async (data) => {
     const url = baseUrl + 'ata/';
     const options = {

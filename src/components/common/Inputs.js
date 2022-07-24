@@ -9,7 +9,6 @@ export const TextInput = ({ name, children, getValues, type, inValue, disabled }
         setValue(e.target.value);
         getValues(name, e.target.value);
     };
-    // console.log(styles);
 
     return (
         <div className={styles.textInput}>
