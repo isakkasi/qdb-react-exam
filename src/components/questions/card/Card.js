@@ -20,6 +20,7 @@ export const Card = ({ question, returnResult }) => {
             </div>
             <div className={styles.service}>
                 <h3 className={styles.level}>Level: {question.level}</h3>
+                <h3 className={styles.ata}>ATA: {question.ata?.ata}</h3>
                 <DetailsButtons 
                     data={question}
                     returnResult={returnResult}
