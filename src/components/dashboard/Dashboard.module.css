@@ -1,0 +1,18 @@
+
+
+
+
+
+
+
+.boxes {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 1rem;
+    color: blue;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+
+}
+
+
