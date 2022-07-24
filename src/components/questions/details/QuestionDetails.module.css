@@ -1,0 +1,28 @@
+
+.container {
+    display: block;
+    margin: 1rem;
+    padding: 1rem;
+
+}
+.title {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+
+}
+.question {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.question > p {
+    line-height: 1.5rem;
+}
+
+.answer {
+    padding-left: 1rem;
+}
+.correct {
+    color: red
+}

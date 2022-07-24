@@ -7,6 +7,13 @@ export const getAll = async () => {
     return res.json();
 };
 
+export const getById = async (id) => {
+    const url = `${baseUrl}/${id}`;
+    const options = {};
+    const res = await fetch(url, options);
+    return res.json();
+}
+
 export const create = async (data) => {
     data.author = localStorage.getItem('userId');
     const url = baseUrl;
@@ -54,5 +61,26 @@ export const del = async (data) => {
 
     const res = await fetch(url, options);
     console.log(`Successful delete of question._id ${data._id}`);
+    return res.json();
+};
+
+export const getAllComments = async (id) => {
+    const url = `${baseUrl}/${id}/comments`;
+    const options = {};
+    const res = await fetch(url, options);
+    return res.json();
+};
+
+export const createComment = async (data, id) => {
+    const url = `${baseUrl}/${id}/comments`;
+    const options = {
+        method: 'post',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': localStorage.getItem('token'),
+        },
+        body: JSON.stringify(data),
+    };
+    const res = await fetch(url, options);
     return res.json();
 };

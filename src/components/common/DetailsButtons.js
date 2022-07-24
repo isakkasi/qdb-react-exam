@@ -6,6 +6,7 @@ export const DetailsButtons = ({
     returnResult,
     data,
     Form,
+    Details,
     itemType,
 }) => {
     // const Form = children;
@@ -33,6 +34,7 @@ export const DetailsButtons = ({
     };
 
     const onClose = () => {
+        // console.log('Closing atempt ...');
         setDetailsOpen((state) => false);
         setAddOpen((state) => false);
         setEditOpen((state) => false);
@@ -54,7 +56,7 @@ export const DetailsButtons = ({
                 <i className="fa-solid fa-trash-can"></i>
             </button>
             {/* {detailsOpen && <Details data={data} onClose={onClose}/>} */}
-            {detailsOpen && <Form data={data} func="details" onClose={onClose}/>}
+            {detailsOpen && <Details data={data} func="details" onClose={onClose}/>}
             {addOpen && <Form data={data} func="addSimilar" onClose={onClose} returnResult={returnResult} />}
             {editOpen && <Form data={data} func="edit" onClose={onClose} returnResult={returnResult} />}
             {deleteOpen && <Delete data={data} func="delete" onClose={onClose} returnResult={returnResult} itemType={itemType}/>}

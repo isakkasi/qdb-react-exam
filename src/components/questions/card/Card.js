@@ -1,4 +1,5 @@
 import { DetailsButtons } from '../../common/DetailsButtons';
+import { QuestionDetails } from '../details/QuestionDetails';
 import { AddQuestionForm } from '../question-form/QuestionForm';
 import styles from './Card.module.css';
 
@@ -25,6 +26,7 @@ export const Card = ({ question, returnResult }) => {
                     data={question}
                     returnResult={returnResult}
                     Form={AddQuestionForm}
+                    Details={QuestionDetails}
                     itemType="question"
                 />
             </div>
