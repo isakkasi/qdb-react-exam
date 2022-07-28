@@ -1,6 +1,6 @@
 
 // const baseUrl = 'http://localhost:5000/';
-const baseUrl = 'api.buzoo.org';
+const baseUrl = 'http://api.buzoo.org/';
 
 export const getAllCourses = async () => {
     const url = baseUrl + 'course/';
