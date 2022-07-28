@@ -1,6 +1,9 @@
+const baseUrl = 'api.buzoo.org';
+
+
 const userCreate = async (data) => {
     console.log(data);
-    const url = 'http://localhost:5000/user/register';
+    const url = `${baseUrl}/user/register`;
     const options = {
         method: 'post',
         headers: {
@@ -14,7 +17,7 @@ const userCreate = async (data) => {
 };
 
 const userLogin = async (data) => {
-    const url = 'http://localhost:5000/user/login';
+    const url = `${baseUrl}/user/login`;
     const options = {
         method: 'post',
         headers: {
@@ -38,7 +41,7 @@ const userLogin = async (data) => {
 
 const userLogout = async () => {
     let token = localStorage.getItem('token');
-    const url = 'http://localhost:5000/user/logout';
+    const url = `${baseUrl}/user/logout`;
     const options = {
         method: 'get',
         headers: {
