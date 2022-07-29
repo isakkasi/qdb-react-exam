@@ -1,7 +1,7 @@
 
 
 // const baseUrl = 'http://localhost:5000/dashboard'
-const baseUrl = 'api.buzoo.org/dashboard';
+const baseUrl = 'http://api.buzoo.org/dashboard';
 
 
 export const getInfo = async () => {

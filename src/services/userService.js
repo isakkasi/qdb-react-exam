@@ -1,4 +1,4 @@
-const baseUrl = 'api.buzoo.org';
+const baseUrl = 'http://api.buzoo.org';
 
 
 const userCreate = async (data) => {
