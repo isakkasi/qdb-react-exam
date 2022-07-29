@@ -1,127 +1,22 @@
+import * as request from './utils/requester';
 
-// const baseUrl = 'http://localhost:5000/';
-const baseUrl = 'http://api.buzoo.org/';
 
-export const getAllCourses = async () => {
-    const url = baseUrl + 'course/';
-    const options = {
-        headers: {
-            'X-Authorization': localStorage.getItem('token'),
-        },
-    };
+//Course
+export const getAllCourses = () => request.get('/course') 
 
-    const res = await fetch(url, options);
-    return res.json();
-};
+export const createCourse = (data) => request.post('/course', data)
 
-export const createCourse = async (data) => {
-    const url = baseUrl + 'course/';
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': localStorage.getItem('token'),
-        },
-        body: JSON.stringify(data),
-    };
+export const editCourse = (data) => request.put(`/course/${data._id}`, data)
 
-    const res = await fetch(url, options);
-    return res.json();
-};
+export const deleteCourse = (data) => request.del(`/course/${data._id}`)
 
-export const editCourse = async (data) => {
-    const url = baseUrl + `course/${data._id}`;
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': localStorage.getItem('token'),
-        },
-        body: JSON.stringify(data),
-    };
+//ATA
+export const getAllAta = () => request.get('/ata')
 
-    const res = await fetch(url, options);
-    console.log(`Successful edit of course._id ${data._id}`);
-    return res.json();
-}
+export const getAtaById = async (id) => request.get(`/ata/${id}`)
 
-export const deleteCourse = async (data) => {
-    const url = baseUrl + `course/${data._id}`;
-    const options = {
-        method: 'DELETE',
-        headers: {
-            'X-Authorization': localStorage.getItem('token'),
-        },
-    };
+export const createAta = async (data) => request.post('/ata', data)
 
-    const res = await fetch(url, options);
-    console.log(`Successful delete of course._id ${data._id}`);
-    return res.json();
-}
+export const editAta = async (data) => request.put(`/ata/${data._id}`, data)
 
-export const getAllAta = async () => {
-    const url = baseUrl + 'ata/'
-    const options = {
-        headers: {
-            'X-Authorization': localStorage.getItem('token')
-        }
-    }
-    const res = await fetch(url, options);
-    return res.json();
-}
-
-export const getAtaById = async (id) => {
-    const url = baseUrl + `ata/${id}`
-    const options = {
-        headers: {
-            'X-Authorization': localStorage.getItem('token')
-        }
-    }
-    const res = await fetch(url, options);
-    return res.json();
-}
-
-export const createAta = async (data) => {
-    const url = baseUrl + 'ata/';
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': localStorage.getItem('token'),
-        },
-        body: JSON.stringify(data),
-    };
-
-    const res = await fetch(url, options);
-    return res.json();
-};
-
-export const editAta = async (data) => {
-    const url = baseUrl + `ata/${data._id}`;
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': localStorage.getItem('token'),
-        },
-        body: JSON.stringify(data),
-    };
-
-    const res = await fetch(url, options);
-    console.log(`Successful edit of ata._id ${data._id}`);
-    return res.json();
-}
-
-export const deleteAta = async (data) => {
-    const url = baseUrl + `ata/${data._id}`;
-    const options = {
-        method: 'DELETE',
-        headers: {
-            'X-Authorization': localStorage.getItem('token'),
-        },
-    };
-
-    const res = await fetch(url, options);
-    console.log(`Successful delete of ata._id ${data._id}`);
-    return res.json();
-}
+export const deleteAta = async (data) => request.del(`/ata/${data._id}`)

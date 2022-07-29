@@ -7,12 +7,14 @@ import { Box } from './box/Box';
 import { Title } from '../common/Title';
 
 import appStyles from '../../App.module.css';
+import { get } from '../../services/utils/requester';
 
 export const Dashboard = () => {
     const [info, setInfo] = useState({});
 
     useEffect(() => {
-        dashboardServices.getInfo().then((result) => setInfo(result));
+        dashboardServices.getInfo()
+            .then((result) => setInfo(result));
     }, []);
 
     let questions = {

@@ -16,9 +16,9 @@ export const AddCourseForm = ({
 }) => {
     const [formData, setFormData] = useState(data || {});
     const disabled = func === 'details';
-
+    
     let functionTitle = func.charAt(0).toUpperCase() + func.slice(1);
-
+    
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -30,6 +30,7 @@ export const AddCourseForm = ({
             let course;
             if (func === 'edit') {
                 course = await configurationServices.editCourse({...formData, lastUpdatedBy: localStorage.getItem('userId')});
+                console.log(formData);
                 // returnResult(course, 'edit')
                 returnResult({...formData, _id: data._id}, 'edit');
                 // console.log(course);
@@ -39,6 +40,7 @@ export const AddCourseForm = ({
                     delete formData._id;
                 }
                 course = await configurationServices.createCourse({...formData, createdBy: localStorage.getItem('userId')});
+                console.log('Submit');
                 returnResult(course, 'add')
             }
             onClose();

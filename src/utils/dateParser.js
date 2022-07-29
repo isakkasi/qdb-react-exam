@@ -1,6 +1,6 @@
 const toShort = (longDate) => {
     if(longDate){
-        console.log(longDate);
+        // console.log(longDate);
         let shortDate = longDate ? new Date(longDate) : undefined;
         let options = {
             year: 'numeric',

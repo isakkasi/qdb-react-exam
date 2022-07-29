@@ -1,5 +1,4 @@
-const baseUrl = 'http://api.buzoo.org';
-
+import {baseUrl} from '../config/api'
 
 const userCreate = async (data) => {
     console.log(data);
