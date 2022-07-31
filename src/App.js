@@ -13,8 +13,25 @@ import { Tutorial } from './components/tutorial/Tutorial';
 import { About } from './components/about/About';
 import { Settings } from './components/settings/Settings';
 
+import {AuthContext} from './contexts/AuthContext'
+import { useLocalStorage } from './hooks/useLocalStorage';
+import { UserSettings } from './components/settings/users/UserSettings';
+
 function App() {
+    const [auth, setAuth] = useLocalStorage('auth', {})
+
+    const userLogin = (authData) => {
+        setAuth(authData)
+    }
+
+    const userLogout = () => {
+        setAuth({})
+    }
+
     return (
+        <AuthContext.Provider value={{auth, userLogin, userLogout}}>
+
+
         <div className={styles.main}>
             <div className={styles.gridHeader}>
             {/* <h3>Header</h3> */}
@@ -39,6 +56,7 @@ function App() {
                             <Route path="/tutorial/" element={<Tutorial />} />
                             <Route path="/about/" element={<About />} />
                             <Route path="/settings/" element={<Settings />} />
+                                <Route path="/settings/users" element={<UserSettings />} />
                             <Route path="/*" element={<NotFound />} />
                         </Routes>
                     </div>
@@ -49,6 +67,7 @@ function App() {
                 <Footer />
             </div>
         </div>
+        </AuthContext.Provider>
     );
 }
 

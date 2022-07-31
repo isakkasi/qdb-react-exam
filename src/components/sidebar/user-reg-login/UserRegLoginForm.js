@@ -7,9 +7,12 @@ import { Logo } from '../../common/Logo';
 import { TextInput } from '../../common/Inputs';
 
 import styles from './UserRegLoginForm.module.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
     const [formData, setFormData] = useState({});
+    const {userLogin} = useContext(AuthContext)
 
     const lib = {
         register: {
@@ -28,6 +31,7 @@ export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
             const user = await lib[e.target.name].post(formData);
             console.log(user);
             onClose(func);
+            userLogin(user)
             sendUser(user);
         } catch (error) {
             throw new Error(error);
