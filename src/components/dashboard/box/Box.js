@@ -4,7 +4,7 @@ import styles from './Box.module.css';
 
 export const Box = ({options} ) => {
     return (
-        <Link to="options?.link">
+        <Link to={options?.link}>
         <div  className={`${styles.box}`}>
             <div className={`${styles.container} ${styles[options?.color || '']}`}>
                 <div className={styles.left}>

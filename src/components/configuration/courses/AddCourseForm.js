@@ -31,10 +31,7 @@ export const AddCourseForm = ({
             if (func === 'edit') {
                 course = await configurationServices.editCourse({...formData, lastUpdatedBy: localStorage.getItem('userId')});
                 console.log(formData);
-                // returnResult(course, 'edit')
                 returnResult({...formData, _id: data._id}, 'edit');
-                // console.log(course);
-                // console.log(formData);
             } else if (func === 'add' || func === 'addSimilar') {
                 if(formData._id){
                     delete formData._id;

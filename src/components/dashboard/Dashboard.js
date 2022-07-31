@@ -7,7 +7,6 @@ import { Box } from './box/Box';
 import { Title } from '../common/Title';
 
 import appStyles from '../../App.module.css';
-import { get } from '../../services/utils/requester';
 
 export const Dashboard = () => {
     const [info, setInfo] = useState({});
