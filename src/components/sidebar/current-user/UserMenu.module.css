@@ -1,0 +1,32 @@
+.relative {
+    position: relative;
+    min-height: 7rem;
+}
+
+.userMenuBtn {
+    /* background-color: red; */
+    /* padding: 16px 10px 4px; */
+    bottom: 5px;
+    font-size: 0.75rem;
+    
+    margin-top: 30px;
+    padding: 4px 8px;
+    text-decoration: none;
+
+    border: 1px solid white;
+    border-radius: 5px;
+    /* display: inline-block;
+    vertical-align: middle;
+    overflow: auto;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap; */
+
+}
+
+.userMenuBtn:visited {
+    color: white;
+}

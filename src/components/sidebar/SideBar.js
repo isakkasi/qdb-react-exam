@@ -1,11 +1,14 @@
 import { CurrentUser } from './current-user/CurrentUser';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 import styles from './SideBar.module.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const SideBar = () => {
+    const { auth } = useContext(AuthContext);
 
-    let activeClass = 'w3-bar-item w3-button w3-padding w3-blue'
+    let activeClass = 'w3-bar-item w3-button w3-padding w3-blue';
     let inactiveClass = 'w3-bar-item w3-button w3-padding';
 
     return (
@@ -19,31 +22,41 @@ export const SideBar = () => {
                 </h5>
             </div>
             <div className="w3-bar-block">
-                <NavLink to="/" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                <NavLink to="/" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
                     <i className="fa fa-dashboard fa-fw"></i>&nbsp; Dashboard
                 </NavLink>
-                <NavLink to="/questions" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa-solid fa-question fa-fw"></i>&nbsp; Questions
-                </NavLink>
-                <NavLink to="/exams" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-graduation-cap fa-fw"></i>&nbsp; Exams
-                </NavLink>
-                <NavLink to="/configuration" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-screwdriver-wrench fa-fw"></i>&nbsp; Configuration
-                </NavLink>
-                <NavLink to="/reports" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-chart-line fa-fw"></i>&nbsp; Reports
-                </NavLink>
-                <NavLink to="/tutorial" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+
+                {auth.accessToken ? (
+                    <>
+                        <NavLink to="/questions" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+                            <i className="fa-solid fa-question fa-fw"></i>&nbsp; Questions
+                        </NavLink>
+
+                        <NavLink to="/exams" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+                            <i className="fa fa-graduation-cap fa-fw"></i>&nbsp; Exams
+                        </NavLink>
+
+                        <NavLink to="/configuration" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+                            <i className="fa fa-screwdriver-wrench fa-fw"></i>&nbsp; Configuration
+                        </NavLink>
+                        <NavLink to="/reports" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+                            <i className="fa fa-chart-line fa-fw"></i>&nbsp; Reports
+                        </NavLink>
+                    </>
+                ) : null}
+
+                <NavLink to="/tutorial" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
                     <i className="fa fa-book fa-fw"></i>&nbsp; Tutorial
                 </NavLink>
-                <NavLink to="/about" className={({isActive}) => isActive ? activeClass : inactiveClass }>
+                <NavLink to="/about" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
                     <i className="fa fa-info fa-fw"></i>&nbsp; About
                 </NavLink>
-                <NavLink to="/settings" className={({isActive}) => isActive ? activeClass : inactiveClass }>
-                    <i className="fa fa-cog fa-fw"></i>&nbsp; Settings
-                </NavLink>
-                
+
+                {auth.accessToken && auth.role === 'Admin' ? (
+                    <NavLink to="/settings" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+                        <i className="fa fa-cog fa-fw"></i>&nbsp; Settings
+                    </NavLink>
+                ) : null}
             </div>
         </nav>
     );

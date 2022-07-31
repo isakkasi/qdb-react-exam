@@ -1,4 +1,4 @@
-import {baseUrl} from '../config/api'
+import { baseUrl } from '../config/api';
 
 const userCreate = async (data) => {
     console.log(data);
@@ -29,9 +29,6 @@ const userLogin = async (data) => {
         let res = await fetch(url, options);
         let user = await res.json();
 
-        localStorage.setItem('token', user.accessToken);
-        localStorage.setItem('username', user.username);
-        localStorage.setItem('userId', user._id);
         return user;
     } catch (error) {
         return error;
@@ -50,9 +47,6 @@ const userLogout = async () => {
     };
     try {
         await fetch(url, options);
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        localStorage.removeItem('userId');
         console.log('Successful logout');
         return true;
     } catch (error) {
@@ -61,6 +55,6 @@ const userLogout = async () => {
     }
 };
 
-const userService = {userCreate, userLogin, userLogout}
+const userService = { userCreate, userLogin, userLogout };
 
 export default userService;

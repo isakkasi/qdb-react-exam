@@ -10,9 +10,9 @@ import styles from './UserRegLoginForm.module.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 
-export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
+export const UserRegLoginForm = ({ func, children, onClose }) => {
     const [formData, setFormData] = useState({});
-    const {userLogin} = useContext(AuthContext)
+    const { userLogin } = useContext(AuthContext);
 
     const lib = {
         register: {
@@ -27,12 +27,14 @@ export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        if(func === 'register' && formData.password !== formData.repeatPass) {
+            throw new Error('Password and Repeat Password should match')
+        }
         try {
-            const user = await lib[e.target.name].post(formData);
+            const user = await lib[e.target.name].post({ ...formData, role: 'User' });
             console.log(user);
+            userLogin(user);
             onClose(func);
-            userLogin(user)
-            sendUser(user);
         } catch (error) {
             throw new Error(error);
         }
@@ -56,11 +58,11 @@ export const UserRegLoginForm = ({ func, children, onClose, sendUser }) => {
                 <TextInput name="password" type="password" getValues={getFormData}>
                     Password
                 </TextInput>
-                {func === 'register' ? (
+                {func === 'register' && (
                     <TextInput name="repeatPass" type="password" getValues={getFormData}>
                         Repeat password
                     </TextInput>
-                ) : null}
+                )}
 
                 <div className={styles['form-submit']}>
                     <button className={styles['save-btn']} type="submit">

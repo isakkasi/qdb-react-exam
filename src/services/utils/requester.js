@@ -6,7 +6,7 @@ export const requester = async (method, url, data) => {
     options.method = method;
     options.headers = {
         'content-type': 'application/json',
-        'X-Authorization': localStorage.getItem('token'),
+        'X-Authorization': JSON.parse(localStorage.getItem('auth')).accessToken,
     };
     if (data) {
         options.body = JSON.stringify(data);
