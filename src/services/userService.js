@@ -1,4 +1,5 @@
 import { baseUrl } from '../config/api';
+import * as request from './utils/requester';
 
 const userCreate = async (data) => {
     console.log(data);
@@ -36,7 +37,7 @@ const userLogin = async (data) => {
 };
 
 const userLogout = async () => {
-    let token = localStorage.getItem('token');
+    let token = localStorage.getItem('auth').accessToken;
     const url = `${baseUrl}/user/logout`;
     const options = {
         method: 'get',
@@ -55,6 +56,8 @@ const userLogout = async () => {
     }
 };
 
-const userService = { userCreate, userLogin, userLogout };
+const getRoleConfig = async (role) => request.get(`/user/role/${role}`)
+
+const userService = { userCreate, userLogin, userLogout, getRoleConfig };
 
 export default userService;

@@ -1,6 +1,6 @@
 .card {
     display: grid;
-    grid-template-columns: 90% 10%;
+    grid-template-columns: 85% 15%;
     gap: none;
     border: 1px solid grey;
     border-radius: 1rem;

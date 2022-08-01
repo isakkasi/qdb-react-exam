@@ -8,6 +8,7 @@ export const Reports = () => {
             <div>
                 <Title icon='fa fa-chart-line fa-fw'>Reports</Title>
 
+                <p>Planned functionality. Not subject to SoftUni project defense.</p>
                 
 
 

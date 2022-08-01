@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 import { DetailsButtons } from '../../common/DetailsButtons';
 import { QuestionDetails } from '../details/QuestionDetails';
 import { AddQuestionForm } from '../question-form/QuestionForm';
@@ -5,7 +7,11 @@ import styles from './Card.module.css';
 
 export const Card = ({ question, returnResult }) => {
 
-    const red = [
+    const {auth} = useContext(AuthContext)
+
+    const red = auth.role === 'User' ?
+    ['', '', '']
+    : [
         question.correctAns === 'ansA' ? styles.red : '',
         question.correctAns === 'ansB' ? styles.red : '',
         question.correctAns === 'ansC' ? styles.red : ''

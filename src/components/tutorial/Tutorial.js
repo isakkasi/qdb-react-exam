@@ -8,7 +8,9 @@ export const Tutorial = () => {
             <div>
                 <Title icon='fa fa-book fa-fw'>Tutorial</Title>
 
-                
+                <p>
+                    Static page! To be completed when all functionalities are ready. Not subject to SoftUni project defense.
+                </p>
 
 
             </div>

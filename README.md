@@ -10,14 +10,21 @@ This application is designed to service an EASA Part 147 Aircraft Maintenance Tr
 # Functionalities
 
 ## Authorization and Authentication
-The user has access the to platform only after successful login. Guests may only see the Dashboard page, where only general information for the Application and database is available
+The user has access the to platform only after successful login. Guests may only see the Dashboard page, where only general information for the Application and database is available. In addition, the Guests has access to the Tutorial and About pages.
+
+The users has roles which provide additional control over the access privileges in the app.
+    - Admin - has full access
+    - User - cannot see the correct answers (CSS not applied)       //To do: fix the security issue with the request 
+    - Examiner - Questions (CRUD), Exams (CRUD), Configuration (CRUx), Settings (no access)
+    - Instructor - Questions (CRUx), Exams (xxxx), Configuration (CRUx), Settings (no access)
+    - Invigilator - Questions (xxxx), Exams (CRUD), Configuration (xxxx), Settings (no access)
 
 ## Building a question database
-The main function of the app is to store the questions for the exams. The authorized user is able to add, edit and delete questions from the database. Option for "create similar question" is also available (all data from the selected question is loaded in the create form).
+The main function of the app is to store the questions for the exams. The authorized user (roles Examiner, Instructor and Admin) is able to add, edit and delete questions from the database. Option for "create similar question" is also available (all data from the selected question is loaded in the create form).
 
 ## Generating exams
-The authorized user may generate an exam based on specific parameters i.e. which ATA chapters to be included, how many questions to be added for each ATA chapter, etc. After the exam is created, the user may download exam papers, blank answer sheets and master copy of correct answers. The details for each exam are stored in the database.
+The authorized user (roles Examiner and Invigilator) may generate an exam based on specific parameters i.e. which ATA chapters to be included, how many questions to be added for each ATA chapter, etc. After the exam is created, the user may download exam papers, blank answer sheets and master copy of correct answers. The details for each exam are stored in the database.
 
 ## Configuration
-The authorized user may configure the data needed for the questions and the exams (add ATA chapters, create courses, etc.)
+The authorized user (roles Examiner and Admin) may configure the data needed for the questions and the exams (add ATA chapters, create courses, etc.)
 
