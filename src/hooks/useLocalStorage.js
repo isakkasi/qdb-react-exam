@@ -9,11 +9,10 @@ export const useLocalStorage = (key, defaultValue) => {
 
     const setLocalStorageValue = (newValue) => {
         
+        localStorage.removeItem(key)
         localStorage.setItem(key, JSON.stringify(newValue));
         
         setValue(newValue);
-        // if(newValue.username){
-        // }
     };
 
     return [

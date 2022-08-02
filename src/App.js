@@ -24,23 +24,20 @@ import { RoleContext } from './contexts/RoleContext';
 function App() {
     const [auth, setAuth] = useLocalStorage('auth', {});
     const [roleConfig, setRoleConfig] = useState({
-        question: {create: false, del: false},
-        exam: {create: false, del: false},
-        configuration: {create: false, del: false},
-        settings: {create: false, del: false},
-
+        question: { create: false, del: false },
+        exam: { create: false, del: false },
+        configuration: { create: false, del: false },
+        settings: { create: false, del: false },
     });
 
     useEffect(() => {
         if (auth.role) {
-            userService.getRoleConfig(auth.role)
-                .then((result) => setRoleConfig(state => result));
+            userService.getRoleConfig(auth.role).then((result) => setRoleConfig((state) => result));
         }
     }, [auth.role]);
 
-    const userLogin = (authData, role) => {
-        setAuth(state => authData);
-        
+    const userLogin = (authData) => {
+        setAuth(authData);
     };
 
     const userLogout = () => {
@@ -55,30 +52,29 @@ function App() {
                     <Header />
                 </div>
 
-
                 {/* <div className={styles.middle}> */}
-                <RoleContext.Provider value={{roleConfig}}>
-                <BrowserRouter>
-                    <div>
-                        {/* <h3>Sidebar</h3> */}
-                        <SideBar />
-                    </div>
-                    <div className={styles.container}>
-                        {/* <h3>Main</h3> */}
-                        <Routes>
-                            <Route path="/" element={<Dashboard />} />
-                            <Route path="/questions/" element={<Questions />} />
-                            <Route path="/exams/" element={<Exams />} />
-                            <Route path="/configuration/" element={<Configuration />} />
-                            <Route path="/reports/" element={<Reports />} />
-                            <Route path="/tutorial/" element={<Tutorial />} />
-                            <Route path="/about/" element={<About />} />
-                            <Route path="/settings/" element={<Settings />} />
-                            <Route path="/settings/users" element={<UserSettings />} />
-                            <Route path="/*" element={<NotFound />} />
-                        </Routes>
-                    </div>
-                </BrowserRouter>
+                <RoleContext.Provider value={{ roleConfig }}>
+                    <BrowserRouter>
+                        <div>
+                            {/* <h3>Sidebar</h3> */}
+                            <SideBar />
+                        </div>
+                        <div className={styles.container}>
+                            {/* <h3>Main</h3> */}
+                            <Routes>
+                                <Route path="/" element={<Dashboard />} />
+                                <Route path="/questions/" element={<Questions />} />
+                                <Route path="/exams/" element={<Exams />} />
+                                <Route path="/configuration/" element={<Configuration />} />
+                                <Route path="/reports/" element={<Reports />} />
+                                <Route path="/tutorial/" element={<Tutorial />} />
+                                <Route path="/about/" element={<About />} />
+                                <Route path="/settings/" element={<Settings />} />
+                                <Route path="/settings/users" element={<UserSettings />} />
+                                <Route path="/*" element={<NotFound />} />
+                            </Routes>
+                        </div>
+                    </BrowserRouter>
                 </RoleContext.Provider>
                 {/* </div> */}
                 <div className={styles.gridFooter}>
