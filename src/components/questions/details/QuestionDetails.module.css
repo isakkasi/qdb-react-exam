@@ -82,3 +82,14 @@
     background-color: #ff6060;
     cursor: pointer;
 }
+
+.history {
+    border: 1px solid black;
+    padding: 10px;
+    line-height: 1.5rem;
+
+}
+
+.create {
+    color: green;
+}

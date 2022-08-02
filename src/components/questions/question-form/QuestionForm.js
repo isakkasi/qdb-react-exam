@@ -9,8 +9,11 @@ import * as configurationServices from '../../../services/configurationServices'
 
 import styles from './QuestionForm.module.css';
 import { useEffect } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
+    const {auth} = useContext(AuthContext)
     const [formData, setFormData] = useState(
         data || {
             question: '',
@@ -20,6 +23,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
             correctAns: '',
             level: '',
             ata: '',
+            author: auth._id,
         }
     );
     const [ata, setAta] = useState([])
@@ -37,7 +41,6 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(formData);
         try {
             // Parse to number for proper database storage
             setFormData((state) => ({
@@ -52,7 +55,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                 if (formData._id) {
                     delete formData._id;
                 }
-                question = await questionServices.create({ ...formData, author: localStorage.getItem('userId') });
+                question = await questionServices.create({...formData, author: auth._id});
                 returnResult(question, 'add');
             }
             onClose();
@@ -84,12 +87,13 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                         <label htmlFor="ata">
                             ATA
                             <select
-                            for="ata"
-                            name="ata"
-                            className={styles.select}
-                            onChange={(e) => getFormData('ata', e.target.value)}
+                                htmlFor="ata"
+                                name="ata"
+                                className={styles.select}
+                                value={formData.ata._id}
+                                onChange={(e) => getFormData('ata', e.target.value)}
                             >
-                                {ata.map(x => (
+                                {[{_id: 0, ata: '', title: 'Select ATA ...'}, ...ata].map(x => (
                                 <option key={x._id} value={x._id}>{x.ata} {x.title}</option>
 
                                 ))}

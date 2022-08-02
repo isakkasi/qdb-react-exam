@@ -1,0 +1,45 @@
+.card {
+    display: grid;
+    grid-template-columns: 85% 15%;
+    gap: none;
+    border: 1px solid grey;
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #ddffdd;
+    box-shadow: 0 0 10px 4px #d0d0d0 ;
+}
+
+.question {
+    font-weight: 600;
+    padding-left: 10px;
+    margin-bottom: 0.5rem;
+}
+.level {
+    font-weight: 600;
+    padding-left: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.ata {
+    padding-left: 10px;
+    margin-bottom: 0.5rem;
+}
+.answer {
+    margin-top: 0.5rem;
+}
+.main {
+    grid-area: 1 / 1 / span 1 / span 1;
+    /* background-color: aqua; */
+    display: inline-block;
+    /* width: 85%; */
+}
+.service {
+    text-align: center;
+    grid-area: 1 / 2 / span 1 / span 1;
+    padding-left: 1rem;
+    border-left: 3px dashed #333333;
+}
+.red {
+    color: red;
+}
