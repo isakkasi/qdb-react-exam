@@ -72,3 +72,13 @@
 .correct {
     color: red
 }
+.deleteBtn {
+    font-size: 0.75rem;
+    margin-right: 1rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    padding:  0 6px;
+    background-color: #ff6060;
+    cursor: pointer;
+}

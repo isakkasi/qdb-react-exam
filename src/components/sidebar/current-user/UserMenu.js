@@ -5,15 +5,18 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import styles from './UserMenu.module.css'
 
 import userService from '../../../services/userService';
-import Tooltip from '../../common/Tooltip';
+// import Tooltip from '../../common/Tooltip';
 import { UserRegLoginForm } from '../user-reg-login/UserRegLoginForm';
 
 import './CurrentUser.css';
+import { useNavigate } from 'react-router-dom';
 
 export const UserMenu = () => {
     const { auth, userLogout } = useContext(AuthContext);
 
     const [credentials, setCredentials] = useState({ register: false, login: false });
+
+    const navigate = useNavigate()
 
     const onClose = (func) => {
         setCredentials((state) => ({
@@ -38,9 +41,13 @@ export const UserMenu = () => {
 
     const logout = (e) => {
         e.preventDefault();
-        if (userService.userLogout()) {
+        console.log('Logout');
+        if (userService.userLogout(auth.accessToken)) {
             userLogout();
+            navigate('/')
         }
+
+
     };
 
     return (
@@ -79,13 +86,3 @@ export const UserMenu = () => {
         </div>
     );
 };
-
-// <a href="/" className="user-menu-btn">
-//     <i className="fa fa-envelope"></i>
-// </a>
-// <a href="/" className="user-menu-btn">
-//     <i className="fa fa-user"></i>
-// </a>
-// <a href="/" className="user-menu-btn">
-//     <i className="fa fa-cog"></i>
-// </a>

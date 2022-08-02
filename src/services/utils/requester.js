@@ -16,7 +16,12 @@ export const requester = async (method, url, data) => {
 
     try {
         let res = await fetch(baseUrl + url, options);
-        return res.json();
+        if(res.ok){
+            return res.json();
+
+        } else {
+            throw new Error ({message: 'Bad request'})
+        }
     } catch (error) {
         return error;
     }

@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { useEffect, useState } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 import * as questionServices from '../../../services/questionServices';
 
@@ -9,6 +11,8 @@ import { FormOverlay } from '../../common/FormOverlay';
 import styles from './QuestionDetails.module.css';
 
 export const QuestionDetails = ({ data, onClose, func }) => {
+    const {auth} = useContext(AuthContext)
+
     const [question, setQuestion] = useState({});
     const [comments, setComments] = useState([]);
     const [input, setInput] = useState('');
@@ -19,19 +23,22 @@ export const QuestionDetails = ({ data, onClose, func }) => {
 
     useEffect(() => {
         if (question._id) {
-            questionServices.getAllComments(question._id).then((result) => setComments(result));
+            questionServices.getAllComments(question._id)
+                .then((result) => setComments(state => result || []));
         }
     }, [question._id]);
 
+    console.log(comments);
+
     const commentSubmitHandler = (e) => {
         e.preventDefault();
-        questionServices.createComment({ comment: input, author: localStorage.getItem('userId') }, question._id).then(() => {
+        questionServices.createComment({ comment: input, author: auth._id }, question._id).then(() => {
             setComments((state) => [
                 ...state,
                 {
                     comment: input,
                     author: {
-                        username: localStorage.getItem('username'),
+                        username: auth.username,
                     },
                 },
             ]);
@@ -43,6 +50,17 @@ export const QuestionDetails = ({ data, onClose, func }) => {
     const commentChangeHandler = (e) => {
         setInput(e.target.value);
     };
+
+    const delCommentHandler =(e, id) => {
+        questionServices.deleteComment(id)
+            .then(() => setComments(state => state.filter(x => x._id !== id)))
+
+        
+    }
+
+    if(auth.role === 'User'){
+        styles.correct = '';
+    }
 
     return (
         <FormOverlay onClose={onClose}>
@@ -65,6 +83,8 @@ export const QuestionDetails = ({ data, onClose, func }) => {
                     <div className={styles.general}>
                         <div style={{ textAlign: 'right' }}>General</div>
                         <table className={styles.table}>
+                        <tbody>
+
                             <tr>
                                 <td>Created by: </td>
                                 <td>{question.author?.username}</td>
@@ -77,11 +97,14 @@ export const QuestionDetails = ({ data, onClose, func }) => {
                                 <td>Last updated on: </td>
                                 <td>{dateParser.toShort(question.updatedAt)}</td>
                             </tr>
+                        </tbody>
                         </table>
                     </div>
                     <div className={styles.stats}>
                     <div style={{ textAlign: 'right' }}>Stats</div>
                     <table className={styles.table}>
+                    <tbody>
+                        
                             <tr>
                                 <td>Used in exams: </td>
                                 <td>[no data available]</td>
@@ -94,12 +117,14 @@ export const QuestionDetails = ({ data, onClose, func }) => {
                                 <td>Status</td>
                                 <td>active || on hold</td>
                             </tr>
+                    </tbody>
                         </table>
                     </div>
                     <div className={styles.comments}>
                     <div style={{ textAlign: 'right' }}>Comments</div>
                         {comments.map((x) => (
                             <div key={x._id} className={styles.single}>
+                                {x.author.username === auth.username && <span className={styles.deleteBtn} onClick={(e) => delCommentHandler(e, x._id)}>x</span>}
                                 <span className={styles.author}>{x.author?.username}: </span>
                                 {x.comment}
                             </div>

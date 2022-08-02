@@ -9,10 +9,12 @@ import { TextInput } from '../../common/Inputs';
 import styles from './UserRegLoginForm.module.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { RoleContext } from '../../../contexts/RoleContext';
 
 export const UserRegLoginForm = ({ func, children, onClose }) => {
     const [formData, setFormData] = useState({});
     const { userLogin } = useContext(AuthContext);
+    const { } = useContext(RoleContext)
 
     const lib = {
         register: {
@@ -32,6 +34,8 @@ export const UserRegLoginForm = ({ func, children, onClose }) => {
         }
         try {
             const user = await lib[e.target.name].post({ ...formData, role: 'User' });
+            const userDetails = await userService.getUserDetails(user._id)
+            user.role = userDetails.role
             console.log(user);
             userLogin(user);
             onClose(func);

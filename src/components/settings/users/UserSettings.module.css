@@ -1,0 +1,11 @@
+.form {
+    margin: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2 1fr);
+}
+
+.select {
+    height: 2rem;
+    width: 20rem;
+
+}

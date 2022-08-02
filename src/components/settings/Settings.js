@@ -3,6 +3,8 @@ import appStyles from '../../App.module.css'
 
 import {Link} from 'react-router-dom'
 
+import styles from './Settings.module.css'
+
 
 
 export const Settings = () => {
@@ -12,7 +14,11 @@ export const Settings = () => {
             <div>
                 <Title icon='fa fa-cog fa-fw'>Settings</Title>
 
-                <Link to='/settings/users'>Users</Link>
+                <div className={styles.controls}>
+                <Link to='/settings/users' className={styles.link}>Users</Link>
+
+                </div>
+
 
 
             </div>

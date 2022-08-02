@@ -36,8 +36,8 @@ const userLogin = async (data) => {
     }
 };
 
-const userLogout = async () => {
-    let token = localStorage.getItem('auth').accessToken;
+const userLogout = async (token) => {
+    // let token = localStorage.getItem('auth').accessToken;
     const url = `${baseUrl}/user/logout`;
     const options = {
         method: 'get',
@@ -57,7 +57,8 @@ const userLogout = async () => {
 };
 
 const getRoleConfig = async (role) => request.get(`/user/role/${role}`)
+const getUserDetails = async (userId) => request.get(`/user/details/${userId}`)
 
-const userService = { userCreate, userLogin, userLogout, getRoleConfig };
+const userService = { userCreate, userLogin, userLogout, getRoleConfig, getUserDetails };
 
 export default userService;

@@ -38,8 +38,9 @@ function App() {
         }
     }, [auth.role]);
 
-    const userLogin = (authData) => {
-        setAuth(authData);
+    const userLogin = (authData, role) => {
+        setAuth(state => authData);
+        
     };
 
     const userLogout = () => {
