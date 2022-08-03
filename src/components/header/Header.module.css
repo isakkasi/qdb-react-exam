@@ -15,3 +15,11 @@
     display: block;
     outline: 0;
 }
+.rates {
+    font-size: 0.75rem;
+}
+
+.flag {
+    aspect-ratio: initial;
+    height: 1rem;
+}
