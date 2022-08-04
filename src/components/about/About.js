@@ -22,7 +22,7 @@ export const About = () => {
 
                 <h4 className={styles.h4}>Thanks for the design and CSS:</h4>
                 <p className={styles.p}>Mihail Valkov @ SoftUni</p>
-                <p className={styles.p}>W3 Team</p>
+                <p className={styles.p}>W3S</p>
                 </article>
 
 

@@ -29,8 +29,8 @@ export const DetailsButtons = ({ returnResult, data, Form, Details, itemType }) 
         default:
             break;
     }
-    console.log(itemType);
-    console.log(roleAccess);
+    // console.log(itemType);
+    // console.log(roleAccess);
 
     const clickHandlerDetails = (e) => {
         setDetailsOpen((state) => !state);
