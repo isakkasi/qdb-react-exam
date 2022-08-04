@@ -9,3 +9,18 @@
     width: 20rem;
 
 }
+
+.face {
+    border-radius: 50%;
+    margin-top: 16px;
+    width: 16rem;
+    border: 3px solid black;
+    margin-bottom: 4px;
+}
+.centered {
+    text-align: center;
+}
+.h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}

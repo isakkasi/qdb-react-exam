@@ -35,7 +35,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
 
     const disabled = func === 'details';
 
-    console.log(formData);
+    // console.log(formData);
 
     let functionTitle = func.charAt(0).toUpperCase() + func.slice(1);
 
