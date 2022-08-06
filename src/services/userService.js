@@ -56,8 +56,12 @@ const userLogout = async (token) => {
     }
 };
 
-const getRoleConfig = async (role) => request.get(`/user/role/${role}`)
-const getUserDetails = async (userId) => request.get(`/user/details/${userId}`)
+const getRoleConfig = async (role) => request.get(`/user/role/${role}`);
+const getUserDetails = async (userId) => {
+    if (userId) {
+        return request.get(`/user/details/${userId}`);
+    }
+};
 
 const userService = { userCreate, userLogin, userLogout, getRoleConfig, getUserDetails };
 

@@ -18,7 +18,7 @@ export const CurrentUser = () => {
 
     return (
         <div className="w3-container w3-row">
-            <Avatar avatar={userDetails.avatar}/>
+            <Avatar avatar={userDetails?.avatar || '/avatar.png'}/>
             <div className="w3-col s8 w3-bar w3-center">
                 {auth?.username
                 ?   <span>

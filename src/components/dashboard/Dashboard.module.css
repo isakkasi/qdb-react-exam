@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 .boxes {
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -12,7 +5,31 @@
     color: blue;
     padding: 1rem 1rem;
     margin-bottom: 1rem;
-
+}
+.main {
+    position: relative;
+    height: 90vh;
+    /* background-color: pink; */
+}
+.lowerSection {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
-
+.seedBtn {
+    background-color: #ffdddd;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 14px 20px;
+    /* margin: 8px 0; */
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    width: fit-content;
+}
+.seedBtn:hover {
+    opacity: 0.9;
+    box-shadow: 1px 2px 8px black;
+    
+}

@@ -50,7 +50,8 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
             let question;
             if (func === 'edit') {
                 question = await questionServices.edit(formData);
-                returnResult({ ...formData, _id: data._id }, 'edit');
+                // returnResult({ ...formData, _id: data._id }, 'edit');
+                returnResult({ ...question, _id: data._id }, 'edit');
             } else if (func === 'add' || func === 'addSimilar') {
                 if (formData._id) {
                     delete formData._id;
@@ -66,7 +67,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
 
     const getFormData = (field, value) => {
         setFormData((state) => {
-            console.log(state);
+            // console.log(state);
 
             return {
                 ...state,

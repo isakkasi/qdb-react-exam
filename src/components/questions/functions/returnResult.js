@@ -1,12 +1,12 @@
-export const returnResult = (setState, course, func) => {
+export const returnResult = (setState, item, func) => {
     if (func === 'edit') {
         console.log(func);
         setState((state) => {
             return state.map((x) => {
-                if (course._id === x._id) {
+                if (item._id === x._id) {
                     console.log(x);
-                    console.log(course);
-                    return course;
+                    console.log(item);
+                    return item;
                 } else {
                     return x;
                 }
@@ -14,12 +14,12 @@ export const returnResult = (setState, course, func) => {
         });
         // console.log(courses);
     } else if (func === 'add' || func === 'addSimilar') {
-        if (course) {
-            setState((state) => [...state, course]);
+        if (item) {
+            setState((state) => [item, ...state]);
         }
     } else if (func === 'delete') {
-        if (course) {
-            setState(state => state.filter(x => x._id !== course._id))
+        if (item) {
+            setState(state => state.filter(x => x._id !== item._id))
         }
     }
 };

@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 
 import * as dashboardServices from '../../services/dashboardServices';
 
+import appStyles from '../../App.module.css';
 import styles from './Dashboard.module.css';
 import { Box } from './box/Box';
 import { Title } from '../common/Title';
+import { seed } from '../../services/seedService';
 
-import appStyles from '../../App.module.css';
 
 export const Dashboard = () => {
     const [info, setInfo] = useState({});
@@ -38,7 +39,16 @@ export const Dashboard = () => {
         link: '/configuration',
     };
 
+    const seedHandler = (e) => {
+        e.preventDefault();
+        // console.log(e.target.name);
+        // console.log('Seed request');
+        seed().then(() => console.log('Data seeded'))
+    }
+
     return (
+        <main className={styles.main}>
+
         <section className={appStyles.card}>
             <div>
                 <Title icon="fa fa-dashboard fa-fw">Dashboard</Title>
@@ -56,5 +66,9 @@ export const Dashboard = () => {
                 </div>
             </div>
         </section>
+        <section className={styles.lowerSection}>
+            <button className={styles.seedBtn} onClick={seedHandler}>Seed</button>
+        </section>
+        </main>
     );
 };
