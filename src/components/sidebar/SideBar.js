@@ -8,20 +8,20 @@ import { AuthContext } from '../../contexts/AuthContext';
 export const SideBar = () => {
     const { auth } = useContext(AuthContext);
 
-    let activeClass = 'w3-bar-item w3-button w3-padding w3-blue';
-    let inactiveClass = 'w3-bar-item w3-button w3-padding';
+    let activeClass = `${styles.linkBtn} ${styles.blue}`;
+    let inactiveClass = styles.linkBtn;
 
     return (
         <nav className={styles.sidebar} id="mySidebar">
             <br />
             <CurrentUser />
             <hr />
-            <div className="w3-container">
+            <div className={styles.container}>
                 <h5>
                     <strong>Menu</strong>
                 </h5>
             </div>
-            <div className="w3-bar-block">
+            <div className={styles.navLinks}>
                 <NavLink to="/" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
                     <i className="fa fa-dashboard fa-fw"></i>&nbsp; Dashboard
                 </NavLink>

@@ -10,10 +10,9 @@ export const AddQuestionBtn = ({
     }
 
     return (
-        <div className='w3-right'>
+        <div className={styles.right}>
 
         <button className={styles.addBtn} onClick={addHandler}>
-            {/* <strong>+</strong> */}
             <strong>New Question</strong>
         </button>
         </div>

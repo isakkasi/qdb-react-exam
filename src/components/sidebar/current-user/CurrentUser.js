@@ -7,6 +7,8 @@ import userService from '../../../services/userService';
 import { Avatar } from './Avatar';
 import { UserMenu } from './UserMenu';
 
+import styles from './CurrentUser.module.css'
+
 export const CurrentUser = () => {
     const {auth} = useContext(AuthContext)
     const [userDetails, setUserDetails] = useState({})
@@ -17,9 +19,9 @@ export const CurrentUser = () => {
     }, [auth._id])
 
     return (
-        <div className="w3-container w3-row">
+        <div className={styles.container}>
             <Avatar avatar={userDetails?.avatar || '/avatar.png'}/>
-            <div className="w3-col s8 w3-bar w3-center">
+            <div className={styles.user}>
                 {auth?.username
                 ?   <span>
                         Welcome, <strong>{auth.username} <br /></strong>

@@ -5,10 +5,8 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import styles from './UserMenu.module.css'
 
 import userService from '../../../services/userService';
-// import Tooltip from '../../common/Tooltip';
 import { UserRegLoginForm } from '../user-reg-login/UserRegLoginForm';
 
-import './CurrentUser.css';
 import { useNavigate } from 'react-router-dom';
 
 export const UserMenu = () => {
@@ -51,7 +49,7 @@ export const UserMenu = () => {
     };
 
     return (
-        <div className="w3-center">
+        <div className={styles.center}>
             <div className={styles.relative}>
                 {auth.accessToken ? (
                     <a href="/" className={styles.userMenuBtn} name="logout" onClick={logout}>

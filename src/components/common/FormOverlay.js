@@ -9,7 +9,7 @@ export const FormOverlay = ({ children, onClose, func }) => {
                 <div className={styles['user-container']}>
                     <header className={styles.headers}>
                         <div className={styles.close}>
-                            <div className="w3-right">
+                            <div className={styles.right}>
                                 <button className={styles.btn} onClick={() => onClose(func)}>
                                     X
                                 </button>

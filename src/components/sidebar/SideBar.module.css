@@ -10,3 +10,46 @@
     color: #fff;
     background-color: #111827;
 }
+
+.navLinks {
+    width: 100%;
+    text-align: left;
+    padding: 8px 16px;
+}
+
+.linkBtn {
+    width: 100%;
+    display: block;
+    padding: 8px 16px;
+    text-align: left;
+    border: none;
+    white-space: normal;
+    float: none;
+    outline: 0;
+    border: none;
+    display: inline-block;
+    /* vertical-align: middle; */
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.container {
+    padding: 0.01em 16px;
+}
+
+.container:before,
+.container:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.blue {
+    color: #fff;
+    background-color: #2196f3;
+}
+
