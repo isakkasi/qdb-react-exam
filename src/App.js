@@ -62,6 +62,7 @@ function App() {
                         <div className={styles.container}>
                             {/* <h3>Main</h3> */}
                             <Routes>
+                                <Route path="/profile" element={<UserSettings userProfileId={auth._id}/>} />
                                 <Route path="/" element={<Dashboard />} />
                                 <Route path="/questions/" element={<Questions />} />
                                 <Route path="/exams/" element={<Exams />} />

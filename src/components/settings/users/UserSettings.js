@@ -5,10 +5,10 @@ import * as request from '../../../services/utils/requester';
 
 import styles from './UserSettings.module.css';
 
-export const UserSettings = () => {
+export const UserSettings = ({ userProfileId }) => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState('');
+    const [selectedUser, setSelectedUser] = useState(userProfileId || '1');
     const defaultUserData = {
         fullName: '',
         avatar: '',
@@ -22,19 +22,30 @@ export const UserSettings = () => {
     const roleOptions = ['User', 'Examiner', 'Instructor', 'Invigilator', 'Admin'];
 
     useEffect(() => {
-        request.get('/user/list')
-        .then((result) => setUsers([{ _id: 1, username: 'Select user' }, ...result]));
+        request.get('/user/list').then((result) => setUsers([{ _id: 1, username: 'Select user' }, ...result]));
     }, []);
+
+    useEffect(() => {
+        if (selectedUser && selectedUser !== '1') {
+            request
+                .get(`/user/details/${selectedUser}`)
+                .then((result) => setUserData((state) => result))
+                .catch((err) => setUserData((state) => defaultUserData));
+        } else {
+            setUserData((state) => defaultUserData);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedUser]); 
 
     const selectUserHandler = (e) => {
         const userId = e.target.value;
         setSelectedUser((state) => userId || state);
-        if (userId && userId !== '1') {
-            request.get(`/user/details/${userId}`)
-            .then((result) => setUserData((state) => (result ? result : defaultUserData)));
-        } else {
-            setUserData(state => defaultUserData)
-        }
+        // if (userId && userId !== '1') {
+        //     request.get(`/user/details/${userId}`)
+        //     .then((result) => setUserData((state) => (result ? result : defaultUserData)));
+        // } else {
+        //     setUserData(state => defaultUserData)
+        // }
     };
 
     const changeDataHandler = (e) => {
@@ -49,35 +60,40 @@ export const UserSettings = () => {
         request.put(`/user/details/${selectedUser}`, userData).then(() => navigate('/settings'));
     };
 
+    // console.log(users.filter(x => x._id === "62eed98324c6575a3a753911")[0].username);
+    // console.log(userProfileId);
+
     return (
         <form className={styles.form} onSubmit={onSubmitHandler}>
             <div>
-            <div className={styles.centered}>
-            <h2 className={styles.h2}>{userData.fullName}</h2>
-                <img className={styles.face} src={userData.avatar || '/avatar.png'} alt="avatar" />
-
-            </div>
-                <select name="userId" id="userId" onChange={selectUserHandler} className={styles.select}>
-                    {users.map((x) => (
-                        <option key={x._id} value={x._id}>
-                            {x.username}
+                <div className={styles.centered}>
+                    <h2 className={styles.h2}>{userData.fullName}</h2>
+                    <img className={styles.face} src={userData.avatar || '/avatar.png'} alt="avatar" />
+                </div>
+                <select name="userId" id="userId" onChange={selectUserHandler} className={styles.select} disabled={!!userProfileId}>
+                    {userProfileId && users.length ? (
+                        <option key={userProfileId} value={userProfileId}>
+                            {users.filter((x) => x._id === userProfileId)[0].username || ''}
                         </option>
-                    ))}
+                    ) : (
+                        users.map((x) => (
+                            <option key={x._id} value={x._id}>
+                                {x.username}
+                            </option>
+                        ))
+                    )}
                 </select>
-
-
             </div>
             <div>
                 <label htmlFor="avatar-url">
-                        Avatar
-                <input type="text" id='avatar-url' name="avatar" value={userData.avatar} onChange={changeDataHandler} />
+                    Avatar
+                    <input type="text" id="avatar-url" name="avatar" value={userData.avatar} onChange={changeDataHandler} />
                 </label>
-                
-                
+
                 <input type="text" name="fullName" value={userData.fullName} onChange={changeDataHandler} />
                 <input type="text" name="email" value={userData.email} onChange={changeDataHandler} />
             </div>
-            <select name="role" id="role" value={userData.role} onChange={changeDataHandler}>
+            <select name="role" id="role" value={userData.role} onChange={changeDataHandler} disabled={!!userProfileId}>
                 {roleOptions.map((x, i) => (
                     <option key={i} value={x}>
                         {x}

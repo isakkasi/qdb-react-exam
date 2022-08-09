@@ -12,7 +12,10 @@
     width: 46px;
     border: 1px solid white;
     margin-bottom: 4px;
+    cursor: pointer;
+
 }
 .role {
     margin-top: 20px;
+    color: white;
 }
