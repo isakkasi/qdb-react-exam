@@ -34,8 +34,8 @@ export const UserSettings = ({ userProfileId }) => {
         } else {
             setUserData((state) => defaultUserData);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedUser]); 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedUser]);
 
     const selectUserHandler = (e) => {
         const userId = e.target.value;
@@ -65,44 +65,77 @@ export const UserSettings = ({ userProfileId }) => {
 
     return (
         <form className={styles.form} onSubmit={onSubmitHandler}>
-            <div>
-                <div className={styles.centered}>
+            <div className={styles.centered}>
+                <div>
                     <h2 className={styles.h2}>{userData.fullName}</h2>
                     <img className={styles.face} src={userData.avatar || '/avatar.png'} alt="avatar" />
                 </div>
-                <select name="userId" id="userId" onChange={selectUserHandler} className={styles.select} disabled={!!userProfileId}>
-                    {userProfileId && users.length ? (
-                        <option key={userProfileId} value={userProfileId}>
-                            {users.filter((x) => x._id === userProfileId)[0].username || ''}
-                        </option>
-                    ) : (
-                        users.map((x) => (
-                            <option key={x._id} value={x._id}>
-                                {x.username}
+                <label htmlFor="userId">
+                    Username
+                    <select name="userId" id="userId" onChange={selectUserHandler} className={styles.textInput} disabled={!!userProfileId}>
+                        {userProfileId && users.length ? (
+                            <option key={userProfileId} value={userProfileId}>
+                                {users.filter((x) => x._id === userProfileId)[0].username || ''}
                             </option>
-                        ))
-                    )}
-                </select>
-            </div>
-            <div>
-                <label htmlFor="avatar-url">
-                    Avatar
-                    <input type="text" id="avatar-url" name="avatar" value={userData.avatar} onChange={changeDataHandler} />
+                        ) : (
+                            users.map((x) => (
+                                <option key={x._id} value={x._id}>
+                                    {x.username}
+                                </option>
+                            ))
+                        )}
+                    </select>
                 </label>
-
-                <input type="text" name="fullName" value={userData.fullName} onChange={changeDataHandler} />
-                <input type="text" name="email" value={userData.email} onChange={changeDataHandler} />
             </div>
-            <select name="role" id="role" value={userData.role} onChange={changeDataHandler} disabled={!!userProfileId}>
-                {roleOptions.map((x, i) => (
-                    <option key={i} value={x}>
-                        {x}
-                    </option>
-                ))}
-            </select>
-            <input type="date" name="dateOfBirth" value={userData.dateOfBirth} onChange={changeDataHandler} />
-            <input type="text" name="placeOfBirth" value={userData.placeOfBirth} onChange={changeDataHandler} />
-            <input type="submit" value="Send" />
+
+            <div className={styles.container}>
+                <div>
+                    <label htmlFor="avatar-url">
+                        Avatar
+                        <input type="text" className={styles.textInput} id="avatar-url" name="avatar" value={userData.avatar} onChange={changeDataHandler} />
+                    </label>
+                </div>
+                <div>
+                    <label htmlFor="name">
+                        Full name
+                        <input id='name' type="text" className={styles.textInput} name="fullName" value={userData.fullName} onChange={changeDataHandler} />
+                    </label>
+                </div>
+                <div>
+                    <label htmlFor="email">
+                        Email
+                        <input id='email' type="text" className={styles.textInput} name="email" value={userData.email} onChange={changeDataHandler} />
+                    </label>
+                </div>
+                <div>
+                <label htmlFor="role">
+                    Role
+                    <select className={styles.textInput} name="role" id="role" value={userData.role} onChange={changeDataHandler} disabled={!!userProfileId}>
+                        {roleOptions.map((x, i) => (
+                            <option key={i} value={x}>
+                                {x}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                </div>
+                <div>
+                <label htmlFor="DoB">
+                    Date of Birth
+                    <input id='DoB' type="date" className={styles.textInput} name="dateOfBirth" value={userData.dateOfBirth} onChange={changeDataHandler} />
+                </label>
+                </div>
+                <div>
+                <label htmlFor="PoB">
+                    Place of Birth
+                    <input id='PoB' type="text" className={styles.textInput} name="placeOfBirth" value={userData.placeOfBirth} onChange={changeDataHandler} />
+                </label>
+                </div>
+            </div>
+            <div className={styles.centered}>
+                <input type="submit" value="Update" className={styles.submitBtn} />
+            </div>
+            <div className={styles.right}></div>
             {/* {JSON.stringify(userData)} */}
         </form>
     );

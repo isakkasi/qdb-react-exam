@@ -10,11 +10,11 @@ form {
     padding: 8px;
 } */
 
-input[type='text'],
-input[type='date'],
-input[type='number'],
+.textInput input[type='text'],
+.textInput input[type='date'],
+.textInput input[type='number'],
 /* input[type='radio'], */
-input[type='password'] {
+.textInput input[type='password'] {
     width: 100%;
     padding: 8px 20px;
     margin: 4px 0;
@@ -24,21 +24,21 @@ input[type='password'] {
     box-sizing: border-box;
 }
 
-button {
+/* button { */
     /* background-color: #04aa6d; */
-    border-radius: 8px;
+    /* border-radius: 8px; */
     /* color: white; */
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
+    /* padding: 14px 20px; */
+    /* margin: 8px 0; */
+    /* border: none; */
+    /* cursor: pointer; */
+    /* width: 100%; */
+/* } */
 
-button:hover {
+/* button:hover {
     opacity: 0.9;
     box-shadow: 1px 2px 8px black;
-}
+} */
 
 .cancel-btn {
     background-color: #f44336;
