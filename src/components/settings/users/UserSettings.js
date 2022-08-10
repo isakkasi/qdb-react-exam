@@ -16,6 +16,7 @@ export const UserSettings = ({ userProfileId }) => {
         role: '',
         dateOfBirth: '',
         placeOfBirth: '',
+        error: '',
     };
     const [userData, setUserData] = useState(defaultUserData);
 
@@ -49,9 +50,32 @@ export const UserSettings = ({ userProfileId }) => {
     };
 
     const changeDataHandler = (e) => {
+        let error;
+        switch (e.target.name) {
+            case 'email':
+                if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)) {
+                    error = '';
+                } else {
+                    error = 'Enter valid email';
+                }
+                break;
+
+            case 'dateOfBirth':
+                let date = new Date(e.target.value);
+                if (date.getFullYear() < 2023) {
+                    error = '';
+                } else {
+                    error = 'You need to be born to use the app';
+                }
+                break;
+
+            default:
+                break;
+        }
         setUserData((state) => ({
             ...state,
             [e.target.name]: e.target.value,
+            error,
         }));
     };
 
@@ -86,6 +110,7 @@ export const UserSettings = ({ userProfileId }) => {
                         )}
                     </select>
                 </label>
+                <div className={styles.error}>{userData.error && <span>{userData.error}</span>}</div>
             </div>
 
             <div className={styles.container}>
@@ -98,38 +123,52 @@ export const UserSettings = ({ userProfileId }) => {
                 <div>
                     <label htmlFor="name">
                         Full name
-                        <input id='name' type="text" className={styles.textInput} name="fullName" value={userData.fullName} onChange={changeDataHandler} />
+                        <input id="name" type="text" className={styles.textInput} name="fullName" value={userData.fullName} onChange={changeDataHandler} />
                     </label>
                 </div>
                 <div>
                     <label htmlFor="email">
                         Email
-                        <input id='email' type="text" className={styles.textInput} name="email" value={userData.email} onChange={changeDataHandler} />
+                        <input id="email" type="email" className={styles.textInput} name="email" value={userData.email} onChange={changeDataHandler} />
                     </label>
                 </div>
                 <div>
-                <label htmlFor="role">
-                    Role
-                    <select className={styles.textInput} name="role" id="role" value={userData.role} onChange={changeDataHandler} disabled={!!userProfileId}>
-                        {roleOptions.map((x, i) => (
-                            <option key={i} value={x}>
-                                {x}
-                            </option>
-                        ))}
-                    </select>
-                </label>
+                    <label htmlFor="role">
+                        Role
+                        <select
+                            className={styles.textInput}
+                            name="role"
+                            id="role"
+                            value={userData.role}
+                            onChange={changeDataHandler}
+                            disabled={!!userProfileId}
+                        >
+                            {roleOptions.map((x, i) => (
+                                <option key={i} value={x}>
+                                    {x}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
                 </div>
                 <div>
-                <label htmlFor="DoB">
-                    Date of Birth
-                    <input id='DoB' type="date" className={styles.textInput} name="dateOfBirth" value={userData.dateOfBirth} onChange={changeDataHandler} />
-                </label>
+                    <label htmlFor="DoB">
+                        Date of Birth
+                        <input id="DoB" type="date" className={styles.textInput} name="dateOfBirth" value={userData.dateOfBirth} onChange={changeDataHandler} />
+                    </label>
                 </div>
                 <div>
-                <label htmlFor="PoB">
-                    Place of Birth
-                    <input id='PoB' type="text" className={styles.textInput} name="placeOfBirth" value={userData.placeOfBirth} onChange={changeDataHandler} />
-                </label>
+                    <label htmlFor="PoB">
+                        Place of Birth
+                        <input
+                            id="PoB"
+                            type="text"
+                            className={styles.textInput}
+                            name="placeOfBirth"
+                            value={userData.placeOfBirth}
+                            onChange={changeDataHandler}
+                        />
+                    </label>
                 </div>
             </div>
             <div className={styles.centered}>

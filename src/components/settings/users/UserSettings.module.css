@@ -6,17 +6,16 @@
 
 .label {
     display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  text-align: right;
-  width: 400px;
-  line-height: 26px;
-  margin-bottom: 10px;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 400px;
+    line-height: 26px;
+    margin-bottom: 10px;
 }
 .select {
     height: 2rem;
     width: 20rem;
-
 }
 .container {
     text-align: right;
@@ -34,7 +33,7 @@
 }
 .centered {
     text-align: center;
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
 }
 .h2 {
     font-size: 3rem;
@@ -54,13 +53,13 @@
     box-sizing: border-box;
 
     height: 2.5rem;
-  flex: 0 0 200px;
-  margin-left: 10px;
+    flex: 0 0 200px;
+    margin-left: 10px;
 }
 
 .textInput:disabled {
     background-color: grey;
-    color: white
+    color: white;
 }
 
 .submitBtn {
@@ -81,4 +80,10 @@
 
 .right {
     text-align: right;
+}
+
+.error {
+    color: red;
+    height: 2rem;
+    margin-top: 1rem;
 }

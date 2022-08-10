@@ -50,7 +50,7 @@ export const UserRegLoginForm = ({ func, children, onClose }) => {
                         .getUserDetails(user._id)
                         .then((userDetails) => {
                             user.role = userDetails?.role || '';
-                            console.log(user);
+                            // console.log(user);
                             userLogin(user);
                             onClose(func);
                         })
