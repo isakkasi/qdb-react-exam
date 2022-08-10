@@ -74,9 +74,12 @@ export const Dashboard = () => {
                 </div>
             </section>
             <section className={styles.lowerSection}>
+            {!info.users &&
+
                 <button className={styles.seedBtn} onClick={seedHandler}>
                     Seed
                 </button>
+            }
             </section>
         </main>
     );

@@ -23,8 +23,8 @@ export const Exams = () => {
     return (
         <div>
             <Title icon="fa fa-graduation-cap fa-fw">Exams</Title>
-
-            <NewItemBtn onClick={addNew}>Add Exam</NewItemBtn>
+            Planned functionality. Not subject to SoftUni project defense.
+            {/* <NewItemBtn onClick={addNew}>Add Exam</NewItemBtn> */}
             {formOpen && 
                 <AddExamForm
                     onClose={onClose}
