@@ -20,6 +20,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import userService from './services/userService';
 import { RoleContext } from './contexts/RoleContext';
+import { RoleGuard } from './components/common/guards/RoleGuard';
+import { AuthGuard } from './components/common/guards/AuthGuard';
 
 function App() {
     const [auth, setAuth] = useLocalStorage('auth', {});
@@ -62,16 +64,22 @@ function App() {
                         <div className={styles.container}>
                             {/* <h3>Main</h3> */}
                             <Routes>
-                                <Route path="/profile" element={<UserSettings userProfileId={auth._id}/>} />
                                 <Route path="/" element={<Dashboard />} />
-                                <Route path="/questions/" element={<Questions />} />
-                                <Route path="/exams/" element={<Exams />} />
-                                <Route path="/configuration/" element={<Configuration />} />
-                                <Route path="/reports/" element={<Reports />} />
                                 <Route path="/tutorial/" element={<Tutorial />} />
                                 <Route path="/about/" element={<About />} />
-                                <Route path="/settings/" element={<Settings />} />
-                                <Route path="/settings/users" element={<UserSettings />} />
+                                <Route element={<AuthGuard />}>
+                                    <Route path="/profile" element={<UserSettings userProfileId={auth._id} />} />
+                                    <Route path="/questions/" element={<Questions />} />
+                                    <Route path="/exams/" element={<Exams />} />
+                                    <Route path="/configuration/" element={<Configuration />} />
+                                    <Route path="/reports/" element={<Reports />} />
+
+                                    <Route element={<RoleGuard role="Admin" />}>
+                                        <Route path="/settings/" element={<Settings />} />
+                                    </Route>
+
+                                    <Route path="/settings/users" element={<UserSettings />} />
+                                </Route>
                                 <Route path="/*" element={<NotFound />} />
                             </Routes>
                         </div>
