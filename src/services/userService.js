@@ -2,7 +2,7 @@ import { baseUrl } from '../config/api';
 import * as request from './utils/requester';
 
 const userCreate = async (data) => {
-    console.log(data);
+    // console.log(data);
     const url = `${baseUrl}/user/register`;
     const options = {
         method: 'post',
@@ -11,9 +11,12 @@ const userCreate = async (data) => {
         },
         body: JSON.stringify(data),
     };
-
-    let res = await fetch(url, options);
-    return res.json();
+    try {
+        let res = await fetch(url, options);
+        return res.json();
+    } catch (err) {
+        throw new Error(err);
+    }
 };
 
 const userLogin = async (data) => {
@@ -28,11 +31,9 @@ const userLogin = async (data) => {
 
     try {
         let res = await fetch(url, options);
-        let user = await res.json();
-
-        return user;
-    } catch (error) {
-        return error;
+        return res.json();
+    } catch (err) {
+        throw new Error(err);
     }
 };
 

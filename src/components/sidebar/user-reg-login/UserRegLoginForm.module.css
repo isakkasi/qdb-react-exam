@@ -54,6 +54,7 @@ button:hover {
 }
 
 .form-submit {
+    position: relative;
     background-color: #f1f1f1;
     margin-top: 10px;
     display: flex;
@@ -61,9 +62,12 @@ button:hover {
     font-size: 1rem;
 }
 
-
-
-
+.error {
+    position: absolute;
+    color: red;
+    left: 1rem;
+    top: 1rem;
+}
 
 .container {
     padding: 16px;
@@ -84,4 +88,3 @@ span.psw {
         width: 100%;
     }
 }
-
