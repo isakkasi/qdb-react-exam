@@ -24,6 +24,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
             level: '',
             ata: '',
             author: auth._id,
+            error: '',
         }
     );
     const [ata, setAta] = useState([])
@@ -41,6 +42,9 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        if(formData.error !== '') {
+            return;
+        }
         try {
             // Parse to number for proper database storage
             setFormData((state) => ({
@@ -66,12 +70,22 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
     };
 
     const getFormData = (field, value) => {
+        let error;
+        if(field === 'question') {
+            let end = value[value.length-1]
+            if (end === '.' || end === ':' || end === '?') {
+                error = '';
+            } else {
+                error = 'The question shall end with: [.] or [:] or [?]'
+            }
+        }
         setFormData((state) => {
             // console.log(state);
 
             return {
                 ...state,
                 [field]: value,
+                error,
             };
         });
     };
@@ -172,6 +186,8 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                 
 
                 <div className={styles['form-submit']}>
+                <div className={styles.error}>{formData.error && <span>Error: {formData.error}</span>}</div>
+
                     {!disabled && (
                         <button className={styles['save-btn']} type="submit">
                             {functionTitle}

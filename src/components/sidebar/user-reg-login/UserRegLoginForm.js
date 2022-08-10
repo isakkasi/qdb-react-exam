@@ -118,7 +118,9 @@ export const UserRegLoginForm = ({ func, children, onClose }) => {
                 )}
 
                 <div className={styles['form-submit']}>
-                    <div className={styles.error}>{formData.error && <span>Error: {formData.error}</span>}</div>
+                    <div className={styles.error}>
+                        {formData.error && <span>Error: {formData.error}</span>}
+                    </div>
                     <button className={styles['save-btn']} type="submit">
                         {lib[func].ok}
                     </button>

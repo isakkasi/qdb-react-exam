@@ -50,7 +50,7 @@ export const UserSettings = ({ userProfileId }) => {
     };
 
     const changeDataHandler = (e) => {
-        let error;
+        let error = '';
         switch (e.target.name) {
             case 'email':
                 if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)) {
@@ -81,7 +81,18 @@ export const UserSettings = ({ userProfileId }) => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        request.put(`/user/details/${selectedUser}`, userData).then(() => navigate('/settings'));
+        if(userData.error) {
+            return;
+        }
+
+        request.put(`/user/details/${selectedUser}`, userData)
+        .then(() => navigate('/settings'))
+        .catch (err => {
+            setUserData((state) => ({
+                ...state,
+                error: err
+            }))
+        })
     };
 
     // console.log(users.filter(x => x._id === "62eed98324c6575a3a753911")[0].username);

@@ -36,6 +36,7 @@
 }
 
 .form-submit {
+    position: relative;
     background-color: #f1f1f1;
     margin-top: 10px;
     display: flex;
@@ -64,4 +65,11 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     box-sizing: border-box;
+}
+
+.error {
+    position: absolute;
+    color: red;
+    left: 1rem;
+    top: 1rem;
 }
