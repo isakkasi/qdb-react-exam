@@ -42,8 +42,30 @@
     text-align: right;
 }
 
-.details {
-    background-color: antiquewhite;
 
+.container {
+    display: flex;
+    flex-wrap: wrap;    
 }
+
+
+
+.item {
+    background-color: beige;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    width: 10rem;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.item span:first-of-type {
+    font-weight: 500;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
 

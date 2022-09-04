@@ -1,15 +1,12 @@
 .detBtns {
-    /* display: flex; */
-    /* text-align: right; */
-    /* width: 10rem; */
-    /* background-color: red; */
+    display: flex;
 }
 
 .icon {
-    width: 2rem;
+    /* width: 2rem; */
     /* display: flex; */
-    margin: 0 5px;
-    font-size: 1rem;
+    /* margin: 0 5px; */
+    font-size: 0.75rem;
     padding: 0;
     background-color: transparent;
     padding: 8px 10px;

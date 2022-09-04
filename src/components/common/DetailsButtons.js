@@ -56,7 +56,7 @@ export const DetailsButtons = ({ returnResult, data, Form, Details, itemType }) 
 
     return (
         <div className={styles.detBtns}>
-            <button className={`${styles.icon} ${styles.details}`} name="details" onClick={clickHandlerDetails}>
+            <button className={`${styles.icon} ${styles.details}`} name="details" onClick={clickHandlerDetails} disabled = {itemType === 'ata'}>
                 <i className="fa-solid fa-bars"></i>
             </button>
             {roleAccess.create && (

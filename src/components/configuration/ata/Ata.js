@@ -13,11 +13,11 @@ export const Ata = () => {
     const [ata, setAta] = useState([]);
 
     const [formOpen, setFormOpen] = useState(false);
+    
     const [details, setDetails] = useState({ id: null, display: false });
 
     useEffect(() => {
-        configurationServices.getAllAta()
-            .then((result) => setAta(result));
+        configurationServices.getAllAta().then((result) => setAta(result));
     }, []);
 
     const addNew = () => {
@@ -31,53 +31,64 @@ export const Ata = () => {
     const selectHandler = (e, rowId) => {
         setDetails((state) => ({
             id: rowId,
-            display: !state.display,
+            display: true,
+        }));
+    };
+    const unselectHandler = (e, rowId) => {
+        setDetails((state) => ({
+            id: null,
+            display: false,
         }));
     };
 
-    let table = ata.map((x) => {
+    /* let list = ata.sort((a,b) => a.ata.localeCompare(b.ata)).map((x) => {
         return (
             <>
-                <tr key={x._id} onClick={(e) => selectHandler(e, x._id)} className={details.id === x._id && details.display ? styles.active : 'dummy'}>
-                    <td>
-                        <div className={styles.center}> {x.ata} </div>{' '}
-                    </td>
-                    <td>{x.title}</td>
-                </tr>
-
-                {details.id === x._id && details.display && (
-                    <tr className={styles.noBorder} key={x._id + 'd'}>
-                        <td colSpan={6} className={styles.details}>
-                            <div className={styles.right}>
-                                <DetailsButtons
-                                    data={x}
-                                    returnResult={(course, func) => returnResult(setAta, course, func)}
-                                    Form={AddAtaForm}
-                                    itemType="ata"
-                                />
-                            </div>
-                        </td>
-                    </tr>
-                )}
+                <div
+                    key={x._id}
+                    onMouseEnter={(e) => selectHandler(e, x._id)}
+                    onMouseLeave={(e) => unselectHandler(e, x._id)}
+                    className={styles.item}
+                >
+                    <span>{x.ata}</span>
+                    {details.id === x._id && details.display ? (
+                            <DetailsButtons data={x} returnResult={(course, func) => returnResult(setAta, course, func)} Form={AddAtaForm} itemType="ata" />
+                    ) : (<span>{x.title}</span>)}
+                    
+                </div>
             </>
         );
-    });
+    }); */
 
     return (
         <div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>
-                            <div className={styles.center}> ATA</div>
-                        </th>
-
-                        <th>Title</th>
-                    </tr>
-                </thead>
-                <tbody>{table}</tbody>
-            </table>
+            <div className={styles.container}>
+            {ata.sort((a,b) => a.ata.localeCompare(b.ata)).map((x) => 
+            
+                <div
+                    key={x._id}
+                    onMouseEnter={(e) => selectHandler(e, x._id)}
+                    onMouseLeave={(e) => unselectHandler(e, x._id)}
+                    className={styles.item}
+                >
+                    <span>{x.ata}</span>
+                    {details.id === x._id && details.display ? (
+                            <DetailsButtons
+                                data={x}
+                                returnResult={(course, func) => returnResult(setAta, course, func)}
+                                Form={AddAtaForm}
+                                itemType="ata"
+                            />
+                    ) : (<span>{x.title}</span>)}
+                    
+                </div>
+            
+        )}
             <NewItemBtn onClick={addNew}>Add Ata</NewItemBtn>
+    
+            </div>
+
+
             {formOpen && <AddAtaForm onClose={onClose} returnResult={(course, func) => returnResult(setAta, course, func)} func="add" />}
         </div>
     );
