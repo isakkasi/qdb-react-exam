@@ -20,30 +20,33 @@ export const CurrentUser = () => {
 
     return (
         <div className={styles.container}>
-            <Link to="/profile">
-                <Avatar avatar={userDetails?.avatar || '/avatar.png'} />
-            </Link>
             <div className={styles.user}>
-                {auth?.username ? (
-                    <span>
-                        Welcome,{' '}
-                        <strong>
-                            {auth.username} <br />
-                        </strong>
-                    </span>
-                ) : (
-                    <span>
-                        Welcome,{' '}
-                        <strong>
-                            Guest <br />
-                        </strong>
-                    </span>
-                )}
-                <br />
-                <br />
-                <br />
+                <div className={styles.avatar}>
+                    <Link to="/profile">
+                        <Avatar avatar={userDetails?.avatar || '/avatar.png'} />
+                    </Link>
+                </div>
+                <div className={styles.greeting}>
+                    {auth?.username ? (
+                        <span>
+                            Welcome,{' '}
+                            <p>
+                                <strong>{auth.username}</strong>
+                            </p>
+                        </span>
+                    ) : (
+                        <span>
+                            Welcome,{' '}
+                            <p>
+                                <strong>Guest</strong>
+                            </p>
+                        </span>
+                    )}
+                </div>
             </div>
-            <UserMenu />
+            <div className={styles.userMenu}>
+                <UserMenu />
+            </div>
         </div>
     );
 };

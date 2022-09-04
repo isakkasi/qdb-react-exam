@@ -1,95 +1,126 @@
 
-.container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 1rem;
-    margin: 1rem;
-    padding: 1rem;
-
+.section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
-/* .section {
 
-} */
 .title {
-    margin-top: 3rem;
-    padding-left: 2rem;
-    /* background-color: black;
-    color: white; */
+    margin-top: 0;
+    padding-left: 1rem;
     font-weight: bold;
     font-size: 2rem;
-    margin-bottom: 1rem;
-
 }
-.general {
-    /* background-color: bisque; */
+
+.title h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+}
+
+
+.question {
+    padding: 1rem;
+    border: 1px dashed grey;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+.question p:nth-of-type(1) {
+    font-weight: 500;
+}
+
+.answer {
+    padding-left: 1rem;
+}
+
+.question p:nth-of-type(5),
+.question p:nth-of-type(6) {
+    text-align: right;
+}
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: top;
+    
+}
+/* .general {
+    background-color: bisque;
 }
 .stats {
-    /* background-color: pink; */
-}
+    background-color: pink;
+} */
 .comments {
-    grid-area: 4 / 1 / span 1 / span 2;
+    padding-top: 3px;
+    border-top: 1px solid grey;
+    margin: 10px;
 }
 .comments .author {
     font-weight: bold;
 }
 .comments .single {
     /* background-color: aquamarine; */
-    padding: 10px 10px;
-}
-.question {
-    grid-area: 1 / 1 / span 2 / span 2;
-    /* background-color: aquamarine; */
-    padding: 1rem;
-    border: 1px dashed grey;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    margin: 1rem 0;
-}
-.textarea {
-    width: 100%;
+    padding: 3px 10px;
 }
 
-.question > p {
-    line-height: 1.5rem;
+.comments form {
+    margin-top: 10px;
 }
+
+.textarea {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* .question > p {
+    line-height: 1.5rem;
+} */
 
 .table {
     border: 1px solid grey;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100%;
 }
 .table td,
 .table tr {
-    padding: 10px;
+    padding: 3px;
 }
 .table td {
     width: auto;
 }
 
-.answer {
-    padding-left: 1rem;
-}
 .correct {
-    color: red
+    color: red;
+    font-weight: 500;
 }
 .deleteBtn {
-    font-size: 0.75rem;
-    margin-right: 1rem;
-    color: white;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    color: red;
     font-weight: bold;
-    border-radius: 8px;
-    padding:  0 6px;
-    background-color: #ff6060;
+    
     cursor: pointer;
 }
 
 .history {
-    border: 1px solid black;
-    padding: 10px;
+    /* border: 1px solid black; */
+    /* padding: 10px; */
     line-height: 1.5rem;
 
 }
+.history .table {
+    padding: 5px;
+    min-height: 5.1rem;
+}
 
 .create {
-    color: green;
+    color: white;
+    background-color: green;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+
 }
+

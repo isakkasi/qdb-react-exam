@@ -1,25 +1,37 @@
 .sidebar {
-    z-index: 3;
     height: 100%;
-    width: 12rem;
-    margin-top: 0;
-    background-color: #fff;
-    /* position: fixed; */
-    z-index: 1;
-    overflow-x: hidden;
     color: #fff;
     background-color: #111827;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+
+    /* gap: 1rem */
+}
+
+.currentUser {
+    padding-bottom: 10px;
 }
 
 .navLinks {
     width: 100%;
     text-align: left;
     padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    /* grid-row: 2; */
+}
+
+.navLinks h5 {
+    margin-top: 1rem;
+    padding: 0.01em 16px;
+    font-size: 1.5rem;
+
 }
 
 .linkBtn {
     width: 100%;
-    display: block;
+    /* display: block; */
     padding: 8px 16px;
     text-align: left;
     border: none;
@@ -27,7 +39,7 @@
     float: none;
     outline: 0;
     border: none;
-    display: inline-block;
+    /* display: inline-block; */
     /* vertical-align: middle; */
     overflow: hidden;
     text-decoration: none;
@@ -37,16 +49,13 @@
     white-space: nowrap;
 }
 
-.container {
-    padding: 0.01em 16px;
-}
 
-.container:before,
+/* .container:before,
 .container:after {
     content: '';
     display: table;
     clear: both;
-}
+} */
 
 .blue {
     color: #fff;

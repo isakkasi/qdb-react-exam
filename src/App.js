@@ -48,7 +48,7 @@ function App() {
 
     return (
         <AuthContext.Provider value={{ auth, userLogin, userLogout }}>
-            <div className={styles.main}>
+            <div className={styles.container}>
                 <div className={styles.gridHeader}>
                     {/* <h3>Header</h3> */}
                     <Header />
@@ -57,11 +57,11 @@ function App() {
                 {/* <div className={styles.middle}> */}
                 <RoleContext.Provider value={{ roleConfig }}>
                     <BrowserRouter>
-                        <div>
+                        <div className={styles.gridNavbar}>
                             {/* <h3>Sidebar</h3> */}
                             <SideBar />
                         </div>
-                        <div className={styles.container}>
+                        <div className={styles.gridMain}>
                             {/* <h3>Main</h3> */}
                             <Routes>
                                 <Route path="/" element={<Dashboard />} />

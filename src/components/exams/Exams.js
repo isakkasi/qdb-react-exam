@@ -21,7 +21,7 @@ export const Exams = () => {
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <Title icon="fa fa-graduation-cap fa-fw">Exams</Title>
             Planned functionality. Not subject to SoftUni project defense.
             {/* <NewItemBtn onClick={addNew}>Add Exam</NewItemBtn> */}

@@ -1,9 +1,8 @@
 .avatar {
     
-        float: left;
-        width: 100%;
-        width: 33.33333%;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 }
 
 .face {
@@ -16,6 +15,8 @@
 
 }
 .role {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     color: white;
+    text-decoration: none;
+    
 }

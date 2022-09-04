@@ -1,37 +1,24 @@
-.relative {
-    position: relative;
-    min-height: 7rem;
-    margin-top: 16px;
+.container {
+    text-align: center;
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .userMenuBtn {
-    /* background-color: red; */
-    /* padding: 16px 10px 4px; */
-    position: relative;
-    bottom: -20px;
-    /* left: 5px; */
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
     font-size: 0.75rem;
 
-    margin-top: 24px;
-    padding: 4px 8px;
     text-decoration: none;
 
     border: 1px solid white;
     border-radius: 5px;
-    /* display: inline-block; */
-    vertical-align: middle;
-    /* overflow: auto;
-    text-decoration: none;
-    color: inherit;
-    background-color: inherit;
-    text-align: center;
-    cursor: pointer;
-    white-space: nowrap; */
 }
 
 .userMenuBtn:visited {
     color: white;
-}
-.center {
-    text-align: center;
 }

@@ -13,15 +13,16 @@ export const SideBar = () => {
 
     return (
         <nav className={styles.sidebar} id="mySidebar">
-            <br />
-            <CurrentUser />
-            <hr />
-            <div className={styles.container}>
+            <div className={styles.currentUSer}>
+                <br />
+                <CurrentUser />
+                <hr />
+            </div>
+            <div className={styles.navLinks}>
                 <h5>
                     <strong>Menu</strong>
                 </h5>
-            </div>
-            <div className={styles.navLinks}>
+
                 <NavLink to="/" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
                     <i className="fa fa-dashboard fa-fw"></i>&nbsp; Dashboard
                 </NavLink>

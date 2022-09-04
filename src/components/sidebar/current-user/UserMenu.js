@@ -49,8 +49,8 @@ export const UserMenu = () => {
     };
 
     return (
-        <div className={styles.center}>
-            <div className={styles.relative}>
+        <div>
+            <div className={styles.container}>
                 {auth.accessToken ? (
                     <a href="/" className={styles.userMenuBtn} name="logout" onClick={logout}>
                         Logout
