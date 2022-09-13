@@ -48,114 +48,45 @@ export const Courses = () => {
             id: rowId,
             display: !state.display,
         }));
-
-        // console.log(courses);
     };
-
-    let table = courses.map((x) => {
-        return (
-            <>
-                <tr key={x._id} onClick={(e) => selectHandler(e, x._id)} className={details.id === x._id && details.display ? styles.active : 'dummy'}>
-                    <td>
-                        <div className={styles.center}> {x.internalRef} </div>{' '}
-                    </td>
-                    <td> {x.title} </td>
-                    <td>{x.location}</td>
-                    <td>
-                        <div className={styles.center}> {x.students}</div>
-                    </td>
-                    <td>
-                        <div className={styles.center}> {dateParser.toShort(x.start)}</div>
-                    </td>
-                    <td>
-                        <div className={styles.center}> {dateParser.toShort(x.end)}</div>
-                    </td>
-                    {/* <td>{x._id}</td> */}
-                </tr>
-                {details.id === x._id && details.display && (
-                    <tr className={styles.noBorder} key={x._id + 'd'}>
-                        <td colSpan={6} className={styles.details}>
-                            <div className={styles.right}>
-                                <DetailsButtons
-                                    data={x}
-                                    returnResult={(course, func) => returnResult(setCourses, course, func)}
-                                    Form={AddCourseForm}
-                                    itemType="course"
-                                />
-                            </div>
-                        </td>
-                    </tr>
-                )}
-            </>
-        );
-    });
+    const unselectHandler = (e, rowId) => {
+        setDetails((state) => ({
+            id: null,
+            display: false,
+        }));
+    };
 
     return (
         <div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>
-                            <div className={styles.center}> IntId</div>
-                        </th>
-                        <th>Title</th>
-                        <th>Location</th>
-                        <th>
-                            <div className={styles.center}>Students qty</div>
-                        </th>
-                        <th>
-                            <div className={styles.center}>Start</div>
-                        </th>
-                        <th>
-                            <div className={styles.center}> End</div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {table} */}
-                    {courses.map((x) => (
-                        <>
-                            <tr
-                                key={x._id}
-                                onClick={(e) => selectHandler(e, x._id)}
-                                className={details.id === x._id && details.display ? styles.active : ''}
-                            >
-                                <td>
-                                    <div className={styles.center}> {x.internalRef} </div>{' '}
-                                </td>
-                                <td> {x.title} </td>
-                                <td>{x.location}</td>
-                                <td>
-                                    <div className={styles.center}> {x.students}</div>
-                                </td>
-                                <td>
-                                    <div className={styles.center}> {dateParser.toShort(x.start)}</div>
-                                </td>
-                                <td>
-                                    <div className={styles.center}> {dateParser.toShort(x.end)}</div>
-                                </td>
-                                {/* <td>{x._id}</td> */}
-                            </tr>
-                            {details.id === x._id && details.display && (
-                                <tr className={styles.noBorder} key={x._id + 'd'}>
-                                    <td colSpan={6} className={styles.details}>
-                                        <div className={styles.right}>
-                                            <DetailsButtons
-                                                data={x}
-                                                returnResult={(course, func) => returnResult(setCourses, course, func)}
-                                                Form={AddCourseForm}
-                                                itemType="course"
-                                            />
-                                        </div>
-                                    </td>
-                                </tr>
-                            )}
-                        </>
-                    ))}
-                </tbody>
-            </table>
-            {/* {pageLinks(courses.length, perPage).map(x => <button> &nbsp; {x} &nbsp; </button> )} */}
-            <NewItemBtn onClick={addNew}>Add Course</NewItemBtn>
+            <div className={styles.container}>
+                {courses.map((x) => (
+                    <div className={styles.item} key={x._id} onMouseEnter={(e) => selectHandler(e, x._id)} onMouseLeave={(e) => unselectHandler(e, x._id)}>
+                        <div> {x.internalRef}</div>
+                        <div>{x.title}</div>
+                        <div>
+                            <i className="fa-solid fa-map-pin"></i>
+                            {x.location}
+                        </div>
+                        <div>
+                            <i className="fa-solid fa-users"></i>
+                            {x.students}
+                        </div>
+                        {details.id === x._id && details.display ? (
+                            <DetailsButtons
+                                data={x}
+                                returnResult={(course, func) => returnResult(setCourses, course, func)}
+                                Form={AddCourseForm}
+                                itemType="course"
+                            />
+                        ) : (
+                            <div className={styles.dates}>
+                                {dateParser.toShort(x.start)} - {dateParser.toShort(x.end)}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+                <NewItemBtn onClick={addNew}>Add Course</NewItemBtn>
             {formOpen && <AddCourseForm onClose={onClose} returnResult={(course, func) => returnResult(setCourses, course, func)} func="add" />}
         </div>
     );

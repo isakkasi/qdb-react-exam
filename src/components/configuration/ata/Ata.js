@@ -84,9 +84,9 @@ export const Ata = () => {
                 </div>
             
         )}
-            <NewItemBtn onClick={addNew}>Add Ata</NewItemBtn>
     
             </div>
+            <NewItemBtn onClick={addNew}>Add Ata</NewItemBtn>
 
 
             {formOpen && <AddAtaForm onClose={onClose} returnResult={(course, func) => returnResult(setAta, course, func)} func="add" />}

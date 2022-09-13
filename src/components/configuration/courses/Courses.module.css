@@ -22,7 +22,6 @@
 .active {
     border-bottom: 0;
     background-color: antiquewhite;
-
 }
 .center {
     text-align: center;
@@ -44,6 +43,50 @@
 
 .details {
     background-color: antiquewhite;
-
 }
 
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    /* width: 200px; */
+}
+
+.item {
+    font-size: 0.9rem;
+    background-color: beige;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    width: 13rem;
+    min-height: 10rem;
+    height: max-content;
+}
+
+.item > div {
+    padding: 3px 0;
+    text-align: center;
+}
+
+.item > div:nth-of-type(1) {
+    font-size: 1rem;
+    font-weight: 800;
+}
+.item > div:nth-of-type(2) {
+    font-weight: 500;
+}
+/* .item > div:nth-of-type(3) {
+    color: blue;
+} */
+.item > div:nth-of-type(4) {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.item > div > i {
+    padding: 0 8px;
+    font-size: 0.8rem;
+    color: darkblue;
+}
+.item .dates {
+    padding: 16px 0;
+}
