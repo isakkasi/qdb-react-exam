@@ -2,8 +2,7 @@ export const Types = () => {
 
     return (
         <div>
-            Ata table
-
+            ... to be developed in future!
         </div>
     )
 }

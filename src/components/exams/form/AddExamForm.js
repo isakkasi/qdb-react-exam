@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 
-import { AuthContext } from '../../../contexts/AuthContext';
+// import { AuthContext } from '../../../contexts/AuthContext';
 import * as request from '../../../services/utils/requester';
 import stringParser from '../../../utils/stringParser';
 import { FormOverlay } from '../../common/FormOverlay';
@@ -14,7 +14,7 @@ import styles from './AddExamForm.module.css';
 export const AddExamForm = ({ onClose, data, func }) => {
     func = 'add';
 
-    const { auth } = useContext(AuthContext);
+    // const { auth } = useContext(AuthContext);
     const [formData, setFormData] = useState(
         data || {
             ref: '',

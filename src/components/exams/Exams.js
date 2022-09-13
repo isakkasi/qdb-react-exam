@@ -1,20 +1,20 @@
 import { Title } from '../common/Title';
-import appStyles from '../../App.module.css';
+// import appStyles from '../../App.module.css';
 import styles from './Exams.module.css';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
-import { NewItemBtn } from '../common/NewItemBtn';
+// import { useContext } from 'react';
+// import { AuthContext } from '../../contexts/AuthContext';
+// import { NewItemBtn } from '../common/NewItemBtn';
 import { AddExamForm } from './form/AddExamForm';
 
 export const Exams = () => {
-    const { auth } = useContext(AuthContext);
+    // const { auth } = useContext(AuthContext);
 
     const [formOpen, setFormOpen] = useState(false);
 
-    const addNew = () => {
-        setFormOpen(true);
-    };
+    // const addNew = () => {
+    //     setFormOpen(true);
+    // };
 
     const onClose = () => {
         setFormOpen(false);

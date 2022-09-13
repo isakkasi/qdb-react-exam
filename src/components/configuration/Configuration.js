@@ -7,6 +7,9 @@ import { Types } from './types/Types';
 import appStyles from '../../App.module.css';
 
 export const Configuration = () => {
+
+    const displayTypes = false;
+
     return (
         <section className={appStyles.card}>
             <div>
@@ -20,9 +23,9 @@ export const Configuration = () => {
                     <Ata />
                 </Card>
 
-                {/* <Card title="Types">
+                {displayTypes && <Card title="Types">
                     <Types />
-                </Card> */}
+                </Card>}
             </div>
         </section>
     );
