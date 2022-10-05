@@ -13,7 +13,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
-    const {auth} = useContext(AuthContext)
+    const { auth } = useContext(AuthContext);
     const [formData, setFormData] = useState(
         data || {
             question: '',
@@ -27,12 +27,11 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
             error: '',
         }
     );
-    const [ata, setAta] = useState([])
+    const [ata, setAta] = useState([]);
 
     useEffect(() => {
-        configurationServices.getAllAta()
-        .then(result => setAta(result))
-    },[])
+        configurationServices.getAllAta().then((result) => setAta(result));
+    }, []);
 
     const disabled = func === 'details';
 
@@ -42,7 +41,9 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(formData.error !== '') {
+        console.log(formData.error);
+        if (formData.error) {
+            console.log('Validation error');
             return;
         }
         try {
@@ -60,7 +61,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                 if (formData._id) {
                     delete formData._id;
                 }
-                question = await questionServices.create({...formData, author: auth._id});
+                question = await questionServices.create({ ...formData, author: auth._id });
                 returnResult(question, 'add');
             }
             onClose();
@@ -71,12 +72,12 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
 
     const getFormData = (field, value) => {
         let error;
-        if(field === 'question') {
-            let end = value[value.length-1]
+        if (field === 'question') {
+            let end = value[value.length - 1];
             if (end === '.' || end === ':' || end === '?') {
                 error = '';
             } else {
-                error = 'The question shall end with: [.] or [:] or [?]'
+                error = 'The question shall end with: [.] or [:] or [?]';
             }
         }
         setFormData((state) => {
@@ -98,7 +99,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                 <h2 className={styles.centered}>{functionTitle} Course</h2>
 
                 <div className={`${styles.grid} ${styles['grid-column-80']}`}>
-                        <div>
+                    <div>
                         <label htmlFor="ata">
                             ATA
                             <select
@@ -108,19 +109,19 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                                 value={formData.ata._id}
                                 onChange={(e) => getFormData('ata', e.target.value)}
                             >
-                                {[{_id: 0, ata: '', title: 'Select ATA ...'}, ...ata].map(x => (
-                                <option key={x._id} value={x._id}>{x.ata} {x.title}</option>
-
+                                {[{ _id: 0, ata: '', title: 'Select ATA ...' }, ...ata].map((x) => (
+                                    <option key={x._id} value={x._id}>
+                                        {x.ata} {x.title}
+                                    </option>
                                 ))}
                             </select>
                         </label>
-                        </div>
-                        <div>
-
+                    </div>
+                    <div>
                         <TextInput name="level" type="number" getValues={getFormData} inValue={formData.level} disabled={disabled}>
                             Level
                         </TextInput>
-                        </div>
+                    </div>
                 </div>
 
                 <TextInput name="question" getValues={getFormData} inValue={formData.question} disabled={disabled}>
@@ -180,13 +181,11 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                                 />
                             </label>
                         </div>
-
                     </div>
                 </div>
-                
 
                 <div className={styles['form-submit']}>
-                <div className={styles.error}>{formData.error && <span>Error: {formData.error}</span>}</div>
+                    <div className={styles.error}>{formData.error && <span>Error: {formData.error}</span>}</div>
 
                     {!disabled && (
                         <button className={styles['save-btn']} type="submit">
