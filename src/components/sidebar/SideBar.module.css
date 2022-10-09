@@ -1,11 +1,10 @@
 .sidebar {
     height: 100%;
-    color: #fff;
     background-color: #111827;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
-
+    
     /* gap: 1rem */
 }
 
@@ -14,6 +13,7 @@
 }
 
 .navLinks {
+    color: #fff;
     width: 100%;
     text-align: left;
     padding: 8px 16px;

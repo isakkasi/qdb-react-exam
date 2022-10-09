@@ -3,9 +3,9 @@ import styles from './Logo.module.css'
 
 export const Logo = () => {
     return (
-        <div className={styles['img-container']}>
+        <div className={styles.imgContainer}>
             <img
-                src="https://media.istockphoto.com/vectors/thinking-emoticon-question-face-emoji-with-eyeglasses-vector-vector-id1310060658"
+                src="/logo.png"
                 alt="Logo"
                 className={styles.avatar}
             />
