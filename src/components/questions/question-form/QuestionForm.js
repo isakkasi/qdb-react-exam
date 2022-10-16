@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { FormOverlay } from '../../common/FormOverlay';
-import { TextInput } from '../../common/Inputs';
+import { TextArea, TextInput } from '../../common/Inputs';
 import { Logo } from '../../common/Logo';
 
 import * as questionServices from '../../../services/questionServices';
@@ -123,17 +123,16 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                         </TextInput>
                     </div>
                 </div>
-
-                <TextInput name="question" getValues={getFormData} inValue={formData.question} disabled={disabled}>
+                <TextArea name="question" getValues={getFormData} inValue={formData.question} disabled={disabled}>
                     Question
-                </TextInput>
+                </TextArea>
 
                 <div className={styles.answers}>
                     <div className={`${styles.grid} ${styles['grid-column-80']}`}>
                         <div>
-                            <TextInput name="ansA" getValues={getFormData} inValue={formData.ansA} disabled={disabled}>
+                            <TextArea name="ansA" getValues={getFormData} inValue={formData.ansA} disabled={disabled}>
                                 AnsA
-                            </TextInput>
+                            </TextArea>
                         </div>
                         <div>
                             <label htmlFor="correctAns">
@@ -148,9 +147,9 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                             </label>
                         </div>
                         <div>
-                            <TextInput name="ansB" getValues={getFormData} inValue={formData.ansB} disabled={disabled}>
+                            <TextArea name="ansB" getValues={getFormData} inValue={formData.ansB} disabled={disabled}>
                                 AnsB
-                            </TextInput>
+                            </TextArea>
                         </div>
                         <div>
                             <label htmlFor="correctAns">
@@ -165,9 +164,9 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                             </label>
                         </div>
                         <div>
-                            <TextInput name="ansC" getValues={getFormData} inValue={formData.ansC} disabled={disabled}>
+                            <TextArea name="ansC" getValues={getFormData} inValue={formData.ansC} disabled={disabled}>
                                 AnsC
-                            </TextInput>
+                            </TextArea>
                         </div>
                         <div>
                             <label htmlFor="correctAns">

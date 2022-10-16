@@ -16,7 +16,7 @@ export const TextInput = ({ name, children, getValues, type, inValue, disabled }
             <label htmlFor={name} className={styles.textInput}>
                 <b>{children}</b>
             </label>
-            <input type={type || "text"}  name={name} id={name} value={value} onChange={onChangeHandler} disabled={disabled}/>
+            <input type={type || "text"}  name={name} id={name} value={value} onChange={onChangeHandler} disabled={disabled} className={name === 'question' ? styles.question : null}/>
         </div>
     );
 };
@@ -54,4 +54,22 @@ export const SelectInput =({
                 </label>
     )
 }
+
+export const TextArea = ({ name, children, getValues, type, inValue, disabled }) => {
+    const [value, setValue] = useState(inValue || '');
+
+    const onChangeHandler = (e) => {
+        setValue(e.target.value);
+        getValues(name, e.target.value);
+    };
+
+    return (
+        <div className={styles.textArea}>
+            <label htmlFor={name} className={styles.textArea}>
+                <b>{children}</b>
+            </label>
+            <textarea rows={name === 'question' ? 5 : 3} type={type || "text"}  name={name} id={name} value={value} onChange={onChangeHandler} disabled={disabled} />
+        </div>
+    );
+};
 
