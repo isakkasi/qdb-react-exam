@@ -26,6 +26,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
             author: auth._id,
             error: '',
             type: [],
+            cat: '',
         }
     );
     const [ata, setAta] = useState([]);
@@ -98,22 +99,31 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
         console.log(formData);
     };
 
-    let values = [];
-    const getSelectedOptions = (e) => {
+    let selectedTypes = [];
+    const getSelectedOptionsType = (e) => {
         let options = Array.from(e.target.options);
         options.forEach((x) => {
             if (x.selected) {
-                values.push(x.value);
+                selectedTypes.push(x.value);
             }
         });
-        console.log(values);
+        // console.log(selectedTypes);
         setFormData((state) => {
             return {
                 ...state,
-                type: values,
+                type: selectedTypes,
             };
         });
         // console.log(values);
+    };
+    const getSelectedOptionsCat = (e) => {
+        console.log(e.target.value);
+        setFormData((state) => {
+            return {
+                ...state,
+                cat: e.target.value,
+            };
+        });
     };
 
     return (
@@ -156,14 +166,44 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                                 className={styles.select}
                                 // value={formData.type?._id}
                                 value={formData.type}
-                                onChange={(e) => getSelectedOptions(e)}
+                                onChange={(e) => getSelectedOptionsType(e)}
                                 multiple
                             >
-                                {[{ _id: 0, type: '', title: 'Select type ...' }, ...type].map((x) => (
+                                {[{ _id: 0, short: '', title: 'Select type ...' }, ...type].map((x) => (
                                     <option key={x._id} value={x._id}>
-                                        {x.type} {x.title}
+                                        {x.short}
                                     </option>
                                 ))}
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label htmlFor="cat">
+                            Category
+                            <select
+                                htmlFor="cat"
+                                name="cat"
+                                className={styles.select}
+                                // value={formData.type?._id}
+                                value={formData.cat}
+                                onChange={(e) => getSelectedOptionsCat(e)}
+                            >
+                                <option key={0} value="unselected">
+                                    {' '}
+                                    Select cat ...{' '}
+                                </option>
+                                <option key={1} value="B1">
+                                    {' '}
+                                    B1{' '}
+                                </option>
+                                <option key={2} value="B2">
+                                    {' '}
+                                    B2{' '}
+                                </option>
+                                <option key={3} value="B1/B2">
+                                    {' '}
+                                    B1/B2{' '}
+                                </option>
                             </select>
                         </label>
                     </div>

@@ -63,7 +63,7 @@ export const Type = () => {
     return (
         <div>
             <div className={styles.container}>
-            {type.sort((a,b) => a.type.localeCompare(b.type)).map((x) => 
+            {type.sort((a,b) => a.short.localeCompare(b.short)).map((x) => 
             
                 <div
                     key={x._id}
@@ -71,7 +71,7 @@ export const Type = () => {
                     onMouseLeave={(e) => unselectHandler(e, x._id)}
                     className={styles.item}
                 >
-                    <span>{x.ata}</span>
+                    <span>{x.short}</span>
                     {details.id === x._id && details.display ? (
                             <DetailsButtons
                                 data={x}
@@ -79,7 +79,7 @@ export const Type = () => {
                                 Form={AddTypeForm}
                                 itemType="type"
                             />
-                    ) : (<span>{x.title}</span>)}
+                    ) : (<span></span>)}
                     
                 </div>
             

@@ -58,7 +58,7 @@ export const AddTypeForm = ({
 
                 <h2 className={styles.centered}>{functionTitle} Type</h2>
 
-                <TextInput name="type" getValues={getFormData} inValue={formData.type} disabled={disabled}>
+                <TextInput name="short" getValues={getFormData} inValue={formData.short} disabled={disabled}>
                     Type
                 </TextInput>
 
