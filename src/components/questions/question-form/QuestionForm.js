@@ -135,7 +135,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
 
                 <div className={`${styles.grid} ${styles['grid-column-80']}`}>
                     <div>
-                        <label htmlFor="ata">
+                        <label htmlFor="ata" className={styles.label}>
                             ATA
                             <select
                                 htmlFor="ata"
@@ -158,7 +158,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                         </TextInput>
                     </div>
                     <div>
-                        <label htmlFor="type">
+                        <label htmlFor="type" className={styles.label}>
                             Aircraft Type
                             <select
                                 htmlFor="type"
@@ -169,8 +169,8 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                                 onChange={(e) => getSelectedOptionsType(e)}
                                 multiple
                             >
-                                {[{ _id: 0, short: '', title: 'Select type ...' }, ...type].map((x) => (
-                                    <option key={x._id} value={x._id}>
+                                {type.map((x) => (
+                                    <option key={x._id} value={x._id} className={styles.selected}>
                                         {x.short}
                                     </option>
                                 ))}
@@ -178,7 +178,7 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="cat">
+                        <label htmlFor="cat" className={styles.label}>
                             Category
                             <select
                                 htmlFor="cat"
@@ -189,20 +189,16 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                                 onChange={(e) => getSelectedOptionsCat(e)}
                             >
                                 <option key={0} value="unselected">
-                                    {' '}
-                                    Select cat ...{' '}
+                                    Select cat ...
                                 </option>
                                 <option key={1} value="B1">
-                                    {' '}
-                                    B1{' '}
+                                    B1
                                 </option>
                                 <option key={2} value="B2">
-                                    {' '}
-                                    B2{' '}
+                                    B2
                                 </option>
                                 <option key={3} value="B1/B2">
-                                    {' '}
-                                    B1/B2{' '}
+                                    B1/B2
                                 </option>
                             </select>
                         </label>

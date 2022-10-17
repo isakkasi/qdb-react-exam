@@ -13,8 +13,8 @@ export const TextInput = ({ name, children, getValues, type, inValue, disabled }
 
     return (
         <div className={styles.textInput}>
-            <label htmlFor={name} className={styles.textInput}>
-                <b>{children}</b>
+            <label htmlFor={name} className={styles.textInput + ' ' + styles.label}>
+                {children}
             </label>
             <input type={type || "text"}  name={name} id={name} value={value} onChange={onChangeHandler} disabled={disabled} className={name === 'question' ? styles.question : null}/>
         </div>
@@ -36,7 +36,7 @@ export const SelectInput =({
 
 
     return (
-        <label htmlFor={name}>
+        <label htmlFor={name} className={styles.label}>
                     {stringParser.capFirst(name)}
                     <select
                         htmlFor={name}
@@ -65,7 +65,7 @@ export const TextArea = ({ name, children, getValues, type, inValue, disabled })
 
     return (
         <div className={styles.textArea}>
-            <label htmlFor={name} className={styles.textArea}>
+            <label htmlFor={name} className={styles.textArea + ' ' + styles.label}>
                 <b>{children}</b>
             </label>
             <textarea rows={name === 'question' ? 5 : 3} type={type || "text"}  name={name} id={name} value={value} onChange={onChangeHandler} disabled={disabled} />
