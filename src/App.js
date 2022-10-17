@@ -20,11 +20,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import userService from './services/userService';
 import { RoleContext } from './contexts/RoleContext';
-import { DataContext } from './contexts/DataContext';
+// import { DataContext } from './contexts/DataContext';
 import { RoleGuard } from './components/common/guards/RoleGuard';
 import { AuthGuard } from './components/common/guards/AuthGuard';
 
-import { getAllAta, getAllType } from './services/configurationServices.js';
+// import { getAllAta, getAllType } from './services/configurationServices.js';
 
 function App() {
     const [auth, setAuth] = useLocalStorage('auth', {});
