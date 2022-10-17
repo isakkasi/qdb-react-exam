@@ -20,3 +20,14 @@ export const createAta = async (data) => request.post('/ata', data)
 export const editAta = async (data) => request.put(`/ata/${data._id}`, data)
 
 export const deleteAta = async (data) => request.del(`/ata/${data._id}`)
+
+//Type
+export const getAllType = () => request.get('/type')
+
+export const getTypeById = async (id) => request.get(`/type/${id}`)
+
+export const createType = async (data) => request.post('/type', data)
+
+export const editType = async (data) => request.put(`/type/${data._id}`, data)
+
+export const deleteType = async (data) => request.del(`/type/${data._id}`)

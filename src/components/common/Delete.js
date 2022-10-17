@@ -22,6 +22,7 @@ export const Delete = ({
     let action = {
         course: configurationServices.deleteCourse,
         ata: configurationServices.deleteAta,
+        type: configurationServices.deleteType,
         question: questionServices.del
 
     }

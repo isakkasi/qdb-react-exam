@@ -24,6 +24,7 @@ export const DetailsButtons = ({ returnResult, data, Form, Details, itemType }) 
             break;
         case 'course':
         case 'ata':
+        case 'type':
             roleAccess = roleConfig.configuration;
             break;
         default:
@@ -41,6 +42,7 @@ export const DetailsButtons = ({ returnResult, data, Form, Details, itemType }) 
     };
     const clickHandlerEdit = (e) => {
         setEditOpen((state) => !state);
+        console.log(data);
     };
     const clickHandlerDelete = (e) => {
         setDeleteOpen((state) => !state);
@@ -54,9 +56,10 @@ export const DetailsButtons = ({ returnResult, data, Form, Details, itemType }) 
         setDeleteOpen((state) => false);
     };
 
+
     return (
         <div className={styles.detBtns}>
-            <button className={`${styles.icon} ${styles.details}`} name="details" onClick={clickHandlerDetails} disabled = {itemType === 'ata' || itemType === 'course'}>
+            <button className={`${styles.icon} ${styles.details}`} name="details" onClick={clickHandlerDetails} disabled = {itemType === 'ata' || itemType === 'type' || itemType === 'course'}>
                 <i className="fa-solid fa-bars"></i>
             </button>
             {roleAccess.create && (

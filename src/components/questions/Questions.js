@@ -11,7 +11,7 @@ import styles from './Questions.module.css';
 import { Card } from './card/Card';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from 'react';
-import { getAtaById } from '../../services/configurationServices';
+import { getAtaById, getTypeById } from '../../services/configurationServices';
 // import { requester } from '../../services/utils/requester';
 
 export const Questions = () => {
@@ -38,6 +38,20 @@ export const Questions = () => {
                 console.log('The ata is string');
                 const result = await getAtaById(x.ata);
                 x.ata = result
+                setQuestions(state => modQuestions)
+                return x
+            } else {
+                return x;
+            }
+        })
+    }, [questions])
+    
+    useEffect(() => {
+        const modQuestions =  questions.map(x => async (x) => {
+            if(typeof x.type === 'string') {
+                console.log('The type is string');
+                const result = await getTypeById(x.type);
+                x.type = result
                 setQuestions(state => modQuestions)
                 return x
             } else {

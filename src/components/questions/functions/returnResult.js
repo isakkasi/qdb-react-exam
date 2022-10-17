@@ -1,11 +1,11 @@
 export const returnResult = (setState, item, func) => {
     if (func === 'edit') {
-        console.log(func);
+        // console.log(func);
         setState((state) => {
             return state.map((x) => {
                 if (item._id === x._id) {
-                    console.log(x);
-                    console.log(item);
+                    // console.log(x);
+                    // console.log(item);
                     return item;
                 } else {
                     return x;

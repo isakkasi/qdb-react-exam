@@ -25,12 +25,18 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
             ata: '',
             author: auth._id,
             error: '',
+            type: [],
         }
     );
     const [ata, setAta] = useState([]);
+    const [type, setType] = useState([]);
 
     useEffect(() => {
         configurationServices.getAllAta().then((result) => setAta(result));
+    }, []);
+
+    useEffect(() => {
+        configurationServices.getAllType().then((result) => setType(result));
     }, []);
 
     const disabled = func === 'details';
@@ -89,6 +95,25 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                 error,
             };
         });
+        console.log(formData);
+    };
+
+    let values = [];
+    const getSelectedOptions = (e) => {
+        let options = Array.from(e.target.options);
+        options.forEach((x) => {
+            if (x.selected) {
+                values.push(x.value);
+            }
+        });
+        console.log(values);
+        setFormData((state) => {
+            return {
+                ...state,
+                type: values,
+            };
+        });
+        // console.log(values);
     };
 
     return (
@@ -121,6 +146,26 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
                         <TextInput name="level" type="number" getValues={getFormData} inValue={formData.level} disabled={disabled}>
                             Level
                         </TextInput>
+                    </div>
+                    <div>
+                        <label htmlFor="type">
+                            Aircraft Type
+                            <select
+                                htmlFor="type"
+                                name="type"
+                                className={styles.select}
+                                // value={formData.type?._id}
+                                value={formData.type}
+                                onChange={(e) => getSelectedOptions(e)}
+                                multiple
+                            >
+                                {[{ _id: 0, type: '', title: 'Select type ...' }, ...type].map((x) => (
+                                    <option key={x._id} value={x._id}>
+                                        {x.type} {x.title}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
                     </div>
                 </div>
                 <TextArea name="question" getValues={getFormData} inValue={formData.question} disabled={disabled}>

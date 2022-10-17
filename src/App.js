@@ -20,8 +20,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import userService from './services/userService';
 import { RoleContext } from './contexts/RoleContext';
+import { DataContext } from './contexts/DataContext';
 import { RoleGuard } from './components/common/guards/RoleGuard';
 import { AuthGuard } from './components/common/guards/AuthGuard';
+
+import { getAllAta, getAllType } from './services/configurationServices.js';
 
 function App() {
     const [auth, setAuth] = useLocalStorage('auth', {});
@@ -37,6 +40,13 @@ function App() {
             userService.getRoleConfig(auth.role).then((result) => setRoleConfig((state) => result));
         }
     }, [auth.role]);
+
+    // const [dataAtaType, setDataAtaType] = useState([]);
+
+    // useEffect(() => {
+    //     getAllAta.then((result) => setDataAtaType((state) => (state.ata = result)));
+    //     getAllType.then((result) => setDataAtaType((state) => (state.type = result)));
+    // }, []);
 
     const userLogin = (authData) => {
         setAuth(authData);
@@ -63,25 +73,26 @@ function App() {
                         </div>
                         <div className={styles.gridMain}>
                             {/* <h3>Main</h3> */}
-                            <Routes>
-                                <Route path="/" element={<Dashboard />} />
-                                <Route path="/tutorial/" element={<Tutorial />} />
-                                <Route path="/about/" element={<About />} />
-                                <Route element={<AuthGuard />}>
-                                    <Route path="/profile" element={<UserSettings userProfileId={auth._id} />} />
-                                    <Route path="/questions/" element={<Questions />} />
-                                    <Route path="/exams/" element={<Exams />} />
-                                    <Route path="/configuration/" element={<Configuration />} />
-                                    <Route path="/reports/" element={<Reports />} />
+                            {/* <DataContext value={{ dataAtaType }}> */}
+                                <Routes>
+                                    <Route path="/" element={<Dashboard />} />
+                                    <Route path="/tutorial/" element={<Tutorial />} />
+                                    <Route path="/about/" element={<About />} />
+                                    <Route element={<AuthGuard />}>
+                                        <Route path="/profile" element={<UserSettings userProfileId={auth._id} />} />
+                                        <Route path="/questions/" element={<Questions />} />
+                                        <Route path="/exams/" element={<Exams />} />
+                                        <Route path="/configuration/" element={<Configuration />} />
+                                        <Route path="/reports/" element={<Reports />} />
+                                        <Route element={<RoleGuard role="Admin" />}>
+                                            <Route path="/settings/" element={<Settings />} />
+                                        </Route>
 
-                                    <Route element={<RoleGuard role="Admin" />}>
-                                        <Route path="/settings/" element={<Settings />} />
+                                        <Route path="/settings/users" element={<UserSettings />} />
                                     </Route>
-
-                                    <Route path="/settings/users" element={<UserSettings />} />
-                                </Route>
-                                <Route path="/*" element={<NotFound />} />
-                            </Routes>
+                                    <Route path="/*" element={<NotFound />} />
+                                </Routes>
+                            {/* </DataContext> */}
                         </div>
                     </BrowserRouter>
                 </RoleContext.Provider>

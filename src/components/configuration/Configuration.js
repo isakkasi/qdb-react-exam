@@ -5,6 +5,7 @@ import { Ata } from './ata/Ata';
 import { Types } from './types/Types';
 
 import appStyles from '../../App.module.css';
+import { Type } from './type/Type';
 
 export const Configuration = () => {
 
@@ -21,6 +22,10 @@ export const Configuration = () => {
 
                 <Card title="ATA">
                     <Ata />
+                </Card>
+                
+                <Card title="Type">
+                    <Type />
                 </Card>
 
                 {displayTypes && <Card title="Types">
