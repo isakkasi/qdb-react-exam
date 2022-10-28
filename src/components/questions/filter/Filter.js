@@ -5,7 +5,7 @@ import * as confServices from '../../../services/configurationServices';
 
 import styles from './Filter.module.css';
 
-export const Filter = () => {
+export const Filter = ({questions, filterQuestions, qty}) => {
     const [filterData, setFilterData] = useState([[], [], []]);
     const [selectedFilter, setSelectedFilter] = useState({ type: 'any', ata: 'any', level: 'any' });
 
@@ -16,14 +16,21 @@ export const Filter = () => {
         });
     }, []);
 
+    useEffect(() => {
+        filterQuestions(selectedFilter)
+    },[selectedFilter, filterQuestions])
+
     const filterOnChange = (e) => {
-        console.log(e.target.name);
-        console.log(e.target.value);
+        // console.log(e.target.name);
+        // console.log(e.target.value);
         setSelectedFilter((state) => ({
             ...state,
             [e.target.name]: e.target.value,
         }));
+
+        filterQuestions(selectedFilter)
     };
+
 
     return (
         <div className={styles.filter}>
@@ -67,7 +74,7 @@ export const Filter = () => {
                 </select>
             </label>
             <div>
-                <span>Qty: 0</span>
+                <span>Qty: {qty}</span>
             </div>
         </div>
     );
