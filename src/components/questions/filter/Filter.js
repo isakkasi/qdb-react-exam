@@ -5,9 +5,11 @@ import * as confServices from '../../../services/configurationServices';
 
 import styles from './Filter.module.css';
 
-export const Filter = ({questions, filterQuestions, qty}) => {
+export const Filter = ({ questions, filterQuestions, qty }) => {
+    const initialFilter = { type: 'any', ata: 'any', level: 'any' };
+
     const [filterData, setFilterData] = useState([[], [], []]);
-    const [selectedFilter, setSelectedFilter] = useState({ type: 'any', ata: 'any', level: 'any' });
+    const [selectedFilter, setSelectedFilter] = useState(initialFilter);
 
     useEffect(() => {
         Promise.all([confServices.getAllAta(), confServices.getAllType(), [1, 2, 3]]).then((result) => {
@@ -17,8 +19,8 @@ export const Filter = ({questions, filterQuestions, qty}) => {
     }, []);
 
     useEffect(() => {
-        filterQuestions(selectedFilter)
-    },[selectedFilter, filterQuestions])
+        filterQuestions(selectedFilter);
+    }, [selectedFilter, filterQuestions]);
 
     const filterOnChange = (e) => {
         // console.log(e.target.name);
@@ -28,9 +30,12 @@ export const Filter = ({questions, filterQuestions, qty}) => {
             [e.target.name]: e.target.value,
         }));
 
-        filterQuestions(selectedFilter)
+        filterQuestions(selectedFilter);
     };
 
+    const clearBtnClick = () => {
+        setSelectedFilter({ type: 'any', ata: 'any', level: 'any' });
+    };
 
     return (
         <div className={styles.filter}>
@@ -73,6 +78,9 @@ export const Filter = ({questions, filterQuestions, qty}) => {
                     ))}
                 </select>
             </label>
+            <button className={styles.clearButton} onClick={clearBtnClick}>
+                X
+            </button>
             <div>
                 <span>Qty: {qty}</span>
             </div>
