@@ -12,6 +12,7 @@ import { Card } from './card/Card';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from 'react';
 import { getAtaById, getTypeById } from '../../services/configurationServices';
+import { Filter } from './filter/Filter';
 // import { requester } from '../../services/utils/requester';
 
 export const Questions = () => {
@@ -72,6 +73,8 @@ export const Questions = () => {
     return (
         <div className={styles.panel}>
             <Title icon="fa-solid fa-circle-question">Questions</Title>
+
+            <Filter />
 
             {questions.length> 0 ? questions.map((x) => (
                 

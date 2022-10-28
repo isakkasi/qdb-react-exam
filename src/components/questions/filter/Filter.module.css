@@ -1,0 +1,9 @@
+.filter {
+    display: flex;
+    justify-items: center;
+}
+
+.filter label {
+    padding-right: 8px;
+    padding-left: 4px;
+}
