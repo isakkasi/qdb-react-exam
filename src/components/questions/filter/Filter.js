@@ -20,7 +20,7 @@ export const Filter = ({ questions, filterQuestions, qty }) => {
 
     useEffect(() => {
         filterQuestions(selectedFilter);
-    }, [selectedFilter, filterQuestions]);
+    }, [selectedFilter]);
 
     const filterOnChange = (e) => {
         // console.log(e.target.name);
