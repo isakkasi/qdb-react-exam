@@ -7,6 +7,7 @@ import styles from './Filter.module.css';
 
 export const Filter = () => {
     const [filterData, setFilterData] = useState([[], [], []]);
+    const [selectedFilter, setSelectedFilter] = useState({ type: 'any', ata: 'any', level: 'any' });
 
     useEffect(() => {
         Promise.all([confServices.getAllAta(), confServices.getAllType(), [1, 2, 3]]).then((result) => {
@@ -15,16 +16,25 @@ export const Filter = () => {
         });
     }, []);
 
+    const filterOnChange = (e) => {
+        console.log(e.target.name);
+        console.log(e.target.value);
+        setSelectedFilter((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
     return (
         <div className={styles.filter}>
             <label htmlFor="type">
                 Type:
-                <select name="type" id="type">
+                <select name="type" id="type" onChange={filterOnChange} value={selectedFilter.type}>
                     <option key="0" value="any">
                         -- Any type --
                     </option>
                     {filterData[1].map((x) => (
-                        <option key={x._id} value="x._id">
+                        <option key={x._id} value={x._id}>
                             {x.short}
                         </option>
                     ))}
@@ -32,7 +42,7 @@ export const Filter = () => {
             </label>
             <label htmlFor="ata">
                 ATA:
-                <select name="ata" id="ata">
+                <select name="ata" id="ata" onChange={filterOnChange} value={selectedFilter.ata}>
                     <option key="0" value="any">
                         -- Any ATA --
                     </option>
@@ -45,7 +55,7 @@ export const Filter = () => {
             </label>
             <label htmlFor="level">
                 Level:
-                <select name="level" id="level">
+                <select name="level" id="level" onChange={filterOnChange} value={selectedFilter.level}>
                     <option key="0" value="any">
                         -- Any level --
                     </option>
@@ -56,6 +66,9 @@ export const Filter = () => {
                     ))}
                 </select>
             </label>
+            <div>
+                <span>Qty: 0</span>
+            </div>
         </div>
     );
 };
