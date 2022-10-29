@@ -1,3 +1,50 @@
 .container {
     height: 100%;
 }
+
+.courses {
+    margin: 6px;
+    display: flex;
+    flex-wrap: wrap;
+
+
+}
+
+.courseElement {
+    margin: 8px;
+    width: 100%;
+    height: max-content;
+    padding: 8px;
+
+    border: 1px solid grey;
+    border-radius: 1rem;
+    background-color: #ddffdd;
+    box-shadow: 0 0 10px 4px #d0d0d0 ;
+    margin: 1rem;
+    padding: 1rem;
+
+}
+
+.exams {
+    display: flex;
+}
+
+.exam {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 0 4px 1px #d0d0d0 ;
+    border: 1px solid grey;
+    border-radius: 8px;
+}
+
+.green {
+    background-color: greenyellow;
+}
+.yellow {
+    background-color: yellow;
+}
+.red {
+    background-color: red;
+    color: white;
+}

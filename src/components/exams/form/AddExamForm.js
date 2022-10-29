@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 // import { AuthContext } from '../../../contexts/AuthContext';
 import * as request from '../../../services/utils/requester';
+import * as examServices from '../../../services/examServices';
 import stringParser from '../../../utils/stringParser';
 import { FormOverlay } from '../../common/FormOverlay';
 import { SelectInput, TextInput } from '../../common/Inputs';
@@ -11,7 +12,7 @@ import { Logo } from '../../common/Logo';
 
 import styles from './AddExamForm.module.css';
 
-export const AddExamForm = ({ onClose, data, func }) => {
+export const AddExamForm = ({ onClose, data, func, addExam }) => {
     func = 'add';
 
     // const { auth } = useContext(AuthContext);
@@ -31,22 +32,33 @@ export const AddExamForm = ({ onClose, data, func }) => {
             // questionsJSON: '',
         }
     );
-    const [course, setCourse] = useState([])
+
+    let exam = {};
+
+    const [course, setCourse] = useState([]);
+    const [user, setUser] = useState([]);
+
     useEffect(() => {
-        request.get('/course')
-            .then(result => setCourse(state => result))
-    }, [])
-    const [user, setUser] = useState([])
+        request.get('/course').then((result) => {
+            setCourse((state) => result);
+            setFormData(state => {
+                return {...state, ref: result.length + 1}
+            })
+        });
+    }, []);
+
     useEffect(() => {
-        request.get('/user/details')
-            .then(result => setUser(state => result))
-    }, [])
+        request.get('/user/details').then((result) => setUser((state) => result));
+    }, []);
 
     let functionTitle = stringParser.capFirst(func);
 
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            let exam = {};
+            exam = await examServices.create(formData);
+            addExam(exam);
             console.log(formData);
             onClose();
         } catch (error) {
@@ -56,13 +68,14 @@ export const AddExamForm = ({ onClose, data, func }) => {
 
     const getFormData = (field, value) => {
         setFormData((state) => {
-            console.log(state);
+            // console.log(state);
 
             return {
                 ...state,
                 [field]: value,
             };
         });
+        
     };
 
     return (

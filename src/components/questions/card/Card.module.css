@@ -4,10 +4,10 @@
     gap: none;
     border: 1px solid grey;
     border-radius: 1rem;
-    margin: 1rem;
-    padding: 1rem;
     background-color: #ddffdd;
     box-shadow: 0 0 10px 4px #d0d0d0 ;
+    margin: 1rem;
+    padding: 1rem;
 }
 
 .question {
