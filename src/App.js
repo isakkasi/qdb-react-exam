@@ -23,6 +23,7 @@ import { RoleContext } from './contexts/RoleContext';
 // import { DataContext } from './contexts/DataContext';
 import { RoleGuard } from './components/common/guards/RoleGuard';
 import { AuthGuard } from './components/common/guards/AuthGuard';
+import { SingleExam } from './components/exams/single-exam/SingleExam';
 
 // import { getAllAta, getAllType } from './services/configurationServices.js';
 
@@ -74,24 +75,27 @@ function App() {
                         <div className={styles.gridMain}>
                             {/* <h3>Main</h3> */}
                             {/* <DataContext value={{ dataAtaType }}> */}
-                                <Routes>
-                                    <Route path="/" element={<Dashboard />} />
-                                    <Route path="/tutorial/" element={<Tutorial />} />
-                                    <Route path="/about/" element={<About />} />
-                                    <Route element={<AuthGuard />}>
-                                        <Route path="/profile" element={<UserSettings userProfileId={auth._id} />} />
-                                        <Route path="/questions/" element={<Questions />} />
+                            <Routes>
+                                <Route path="/" element={<Dashboard />} />
+                                <Route path="/tutorial/" element={<Tutorial />} />
+                                <Route path="/about/" element={<About />} />
+                                <Route element={<AuthGuard />}>
+                                    <Route path="/profile" element={<UserSettings userProfileId={auth._id} />} />
+                                    <Route path="/questions/" element={<Questions />} />
+                                    <Route path="/exams">
                                         <Route path="/exams/" element={<Exams />} />
-                                        <Route path="/configuration/" element={<Configuration />} />
-                                        <Route path="/reports/" element={<Reports />} />
-                                        <Route element={<RoleGuard role="Admin" />}>
-                                            <Route path="/settings/" element={<Settings />} />
-                                        </Route>
-
-                                        <Route path="/settings/users" element={<UserSettings />} />
+                                        <Route path="/exams:id" element={<SingleExam />} />
                                     </Route>
-                                    <Route path="/*" element={<NotFound />} />
-                                </Routes>
+                                    <Route path="/configuration/" element={<Configuration />} />
+                                    <Route path="/reports/" element={<Reports />} />
+                                    <Route element={<RoleGuard role="Admin" />}>
+                                        <Route path="/settings/" element={<Settings />} />
+                                    </Route>
+
+                                    <Route path="/settings/users" element={<UserSettings />} />
+                                </Route>
+                                <Route path="/*" element={<NotFound />} />
+                            </Routes>
                             {/* </DataContext> */}
                         </div>
                     </BrowserRouter>

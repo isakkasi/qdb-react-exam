@@ -12,12 +12,13 @@ import { useEffect } from 'react';
 
 import * as examServices from '../../services/examServices';
 import * as configurationServices from '../../services/configurationServices';
+import { useNavigate } from 'react-router-dom';
 
 export const Exams = () => {
     const statusStyles = {
-        'Planned': styles.yellow,
-        'Executed': styles.green,
-        'Cancelled': styles.red,
+        Planned: styles.yellow,
+        Executed: styles.green,
+        Cancelled: styles.red,
     };
 
     // const { auth } = useContext(AuthContext);
@@ -25,6 +26,8 @@ export const Exams = () => {
     const [formOpen, setFormOpen] = useState(false);
     const [exams, setExams] = useState([]);
     const [courses, setCourses] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         examServices.getAll().then((result) => {
@@ -52,6 +55,11 @@ export const Exams = () => {
         setExams((state) => [...state, exam]);
     };
 
+    const selectExam = (id) => {
+        console.log(id);
+        navigate('/exams/' + id);
+    };
+
     return (
         <div className={styles.container}>
             <Title icon="fa fa-graduation-cap fa-fw">Exams</Title>
@@ -59,13 +67,13 @@ export const Exams = () => {
             In progress ...
             <div className={styles.courses}>
                 {courses.map((x) => (
-                    <div className={styles.courseElement}>
+                    <div className={styles.courseElement} key={x._id}>
                         {x.internalRef} - {x.title}
                         <div className={styles.exams}>
                             {exams.map((y) => {
                                 if (y.course === x._id) {
                                     return (
-                                        <div className={`${styles.exam} ${statusStyles[y.status]}`} key={y._id}>
+                                        <div className={`${styles.exam} ${statusStyles[y.status]}`} key={y._id} onClick={() => selectExam(y._id)}>
                                             {y.ref} - Phase: {y.phase}
                                         </div>
                                     );

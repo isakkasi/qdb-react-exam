@@ -23,7 +23,7 @@ export const SideBar = () => {
                     <strong>Menu</strong>
                 </h5>
 
-                <NavLink to="/" className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+                <NavLink to="/" className={({ isActive }) => (isActive ? activeClass : inactiveClass)} end>
                     <i className="fa fa-dashboard fa-fw"></i>&nbsp; Dashboard
                 </NavLink>
 

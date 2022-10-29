@@ -36,6 +36,7 @@
     box-shadow: 0 0 4px 1px #d0d0d0 ;
     border: 1px solid grey;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .green {

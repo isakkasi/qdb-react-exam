@@ -1,13 +1,9 @@
-export const SingleExam = ({
-    route,
-    id
-}) => {
+import { useParams } from 'react-router-dom';
 
-    console.log(route);
+export const SingleExam = () => {
+    let {id} = useParams();
+
     console.log(id);
 
-
-    return (
-        <h1>One Exam with id: {route}</h1>
-    )
-}
+    return <h1>One Exam with id: {id}</h1>;
+};
