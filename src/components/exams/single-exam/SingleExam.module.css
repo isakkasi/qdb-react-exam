@@ -32,3 +32,57 @@
 .selectedAta {
     background-color: red;
 }
+
+.defineAta {
+    margin-top: 16px;
+    font-size: 1rem;
+    margin: auto;
+    width: 80%;
+}
+
+.defineAtaHeader {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+    column-gap: 32px;
+    align-items: center;
+    /* width: 80%; */
+    /* margin: auto; */
+}
+
+/* .defineAtaHeader span {
+    
+} */
+
+.defineAtaRow {
+    padding: 4px;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+    column-gap: 32px;
+    align-items: left;
+    /* width: 80%; */
+    /* margin: auto; */
+    background-color: lightcyan;
+    margin-top: 4px;
+    border-radius: 8px;
+}
+
+.defineAtaRow input {
+    width: 4rem;
+    border: 1px solid grey;
+    padding: 8px;
+    text-align: center;
+}
+
+.total {
+    text-align: right;
+    margin: 16px 56px 8px 8px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.generateBtn {
+    background-color: #BB6464;
+    color: white;
+}

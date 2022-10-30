@@ -8,8 +8,8 @@ export const Header = (props) => {
                 Plane Care Academy
             </div>
             <div className={styles.rates}>
-                <img className={styles.flag} src="/us2.png" alt="USD" />
-                <Rates />
+                {/* <img className={styles.flag} src="/us2.png" alt="USD" /> */}
+                {/* <Rates /> */}
             </div>
         </div>
     );

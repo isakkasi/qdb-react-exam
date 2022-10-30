@@ -1,0 +1,24 @@
+.ataInput {
+    width: 3rem;
+    border: 1px solid grey;
+    padding: 8px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+
+.l1 {
+    background-color: #BCE29E;
+}
+
+.l2 {
+    background-color: #E5EBB2;
+}
+
+.l3 {
+    background-color: #F8C4B4;
+}
+
+.zero {
+    background-color: #C3DBD9;
+}
