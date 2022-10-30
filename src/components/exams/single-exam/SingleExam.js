@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import * as examServices from '../../../services/examServices';
 import userService from '../../../services/userService';
+import * as configurationServices from '../../../services/configurationServices';
 
 import styles from './SingleExam.module.css';
 
@@ -13,7 +14,8 @@ export const SingleExam = () => {
     const [exam, setExam] = useState({});
     const [examiner, setExaminer] = useState({ username: 'not loaded' });
     const [invigilator, setInvigilator] = useState({ username: 'not loaded' });
-    const [ata, setAta] = useState([])
+    const [ata, setAta] = useState([]);
+    const [selectedAta, setSelectedAta] = useState([]);
 
     useEffect(() => {
         examServices.getById(id).then((res) => setExam((state) => res));
@@ -38,6 +40,21 @@ export const SingleExam = () => {
         }
     }, [exam.examiner, exam.invigilator, exam]);
 
+    useEffect(() => {
+        configurationServices.getAllAta().then((res) => setAta((state) => res));
+    }, []);
+
+    const selectAta = (ataId) => {
+        setSelectedAta((state) => {
+            let index = state.indexOf(ataId);
+            if (index < 0) {
+                return [...state, ataId];
+            } else {
+                return state.filter((x) => x !== ataId);
+            }
+        });
+        console.log(selectedAta);
+    };
 
     return (
         <div>
@@ -55,6 +72,20 @@ export const SingleExam = () => {
             </div>
             <div className={styles.settings}>
                 <p>Select ATA:</p>
+                <div className={styles.ataList}>
+                    {ata
+                        .sort((a, b) => a.ata.localeCompare(b.ata))
+                        .map((x) => (
+                            <div
+                                key={x._id}
+                                className={`${styles.ata} ${selectedAta.indexOf(x._id) > -1 ? styles.selectedAta : null}`}
+                                onClick={() => selectAta(x._id)}
+                            >
+                                {x.ata}
+                            </div>
+                        ))}
+                </div>
+                <span>{selectedAta.join('-----------')}</span>
             </div>
         </div>
     );

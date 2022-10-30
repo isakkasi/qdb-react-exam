@@ -14,3 +14,21 @@
 .headerDetails {
     font-size: 1rem;
 }
+
+.ataList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ata {
+    margin: 4px;
+    padding: 4px 8px;
+    background-color: green;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.selectedAta {
+    background-color: red;
+}
