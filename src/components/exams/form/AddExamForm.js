@@ -33,7 +33,7 @@ export const AddExamForm = ({ onClose, data, func, addExam }) => {
         }
     );
 
-    let exam = {};
+    // let exam = {};
 
     const [course, setCourse] = useState([]);
     const [user, setUser] = useState([]);

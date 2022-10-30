@@ -1,6 +1,7 @@
 import { baseUrl } from '../config/api';
 import * as request from './utils/requester';
 
+
 const userCreate = async (data) => {
     // console.log(data);
     const url = `${baseUrl}/user/register`;
@@ -64,6 +65,9 @@ const getUserDetails = async (userId) => {
     }
 };
 
-const userService = { userCreate, userLogin, userLogout, getRoleConfig, getUserDetails };
+const getAll = async () => request.get('/user/list')
+
+
+const userService = { userCreate, userLogin, userLogout, getRoleConfig, getUserDetails, getAll };
 
 export default userService;

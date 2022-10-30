@@ -56,7 +56,7 @@ export const Exams = () => {
     };
 
     const selectExam = (id) => {
-        console.log(id);
+        // console.log(id);
         navigate('/exams/' + id);
     };
 

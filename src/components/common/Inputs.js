@@ -30,7 +30,7 @@ export const SelectInput =({
     const [value, setValue] = useState(inValue || '');
 
     const onChangeHandler = (e) => {
-        setValue(e.target.value);
+        setValue(state => e.target.value);
         getValues(name, e.target.value);
     };
 
@@ -46,7 +46,7 @@ export const SelectInput =({
                         onChange={onChangeHandler}
                     >
                         {[{ _id: 0, [name]: '', title: `Select ${name} ...` }, ...options].map((x) => (
-                            <option key={x._id} value={x._id}>
+                            <option key={x._id} value={name === 'examiner' || name === 'invigilator' ? x.userId :  x._id}>
                                 {x.name || x.title || x.fullName}
                             </option>
                         ))}
