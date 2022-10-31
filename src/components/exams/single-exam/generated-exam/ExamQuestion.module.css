@@ -1,0 +1,14 @@
+.general {
+    margin: 8px;
+}
+
+.question {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.answer {
+    margin-left: 16px;
+
+    font-size: 1rem;
+}

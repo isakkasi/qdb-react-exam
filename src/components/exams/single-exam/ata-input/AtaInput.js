@@ -12,6 +12,8 @@ export const AtaInput = ({
     const [formName, setFormName] = useState(name);
     const [formValue, setFormValue] = useState(value);
 
+    let style = `${styles.ataInput} ${formValue === 0 ? styles.zero : ''} ${styles[name]}`
+
     const change = (e) => {
         setFormName((state) => e.target.name);
         setFormValue((state) => e.target.value);
@@ -19,7 +21,7 @@ export const AtaInput = ({
     };
 
     return <input
-        className={`${styles.ataInput} ${formValue === 0 ? styles.zero : ''} ${styles[name]}`}
+        className={style}
         type="number"
         name={formName}
         min={min}

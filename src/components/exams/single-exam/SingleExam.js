@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import * as examServices from '../../../services/examServices';
+import * as questionServices from '../../../services/questionServices'
 import userService from '../../../services/userService';
 import * as configurationServices from '../../../services/configurationServices';
 
 import styles from './SingleExam.module.css';
 import { AtaInput } from './ata-input/AtaInput';
+import { GeneratedExam } from './generated-exam/GeneratedExam';
 
 export const SingleExam = () => {
     let { id } = useParams();
@@ -17,6 +19,7 @@ export const SingleExam = () => {
     const [invigilator, setInvigilator] = useState({ username: 'not loaded' });
     const [ata, setAta] = useState([]);
     const [selectedAta, setSelectedAta] = useState([]);
+    const [allQuestions, setAllQuestions] = useState([])
 
     useEffect(() => {
         examServices.getById(id).then((res) => setExam((state) => res));
@@ -45,11 +48,30 @@ export const SingleExam = () => {
         configurationServices.getAllAta().then((res) => setAta((state) => res));
     }, []);
 
+    useEffect(() => {
+        questionServices.getAll().then(res => setAllQuestions(state => res))
+    },[])
+
     const selectAta = (ataId) => {
         setSelectedAta((state) => {
+            let availQuestions = allQuestions.filter(x => x.ata._id === ataId)
+            // console.log(allQuestions);
+            let availQuestionsByLevel = {
+                al1: availQuestions.filter(a => a.level === 1).length,
+                al2: availQuestions.filter(a => a.level === 2).length,
+                al3: availQuestions.filter(a => a.level === 3).length,
+            }
             let index = state.findIndex((a) => a.id === ataId);
             if (index < 0) {
-                return [...state, { id: ataId, l1: 0, l2: 0, l3: 0 }];
+                let ataEl = ata.filter(a => a._id === ataId)[0]
+                return [...state, {
+                    id: ataId,
+                    title: `${ataEl.ata} ${ataEl.title}`,
+                    l1: 0,
+                    l2: 0,
+                    l3: 0,
+                    avail: [availQuestionsByLevel.al1, availQuestionsByLevel.al2, availQuestionsByLevel.al3],
+                }];
             } else {
                 return state.filter((x) => x.id !== ataId);
             }
@@ -65,9 +87,9 @@ export const SingleExam = () => {
         setSelectedAta((state) => {
             let arr = state.slice();
             let index = arr.findIndex((x) => x.id === ataId);
-            console.log(index);
+            // console.log(index);
             arr[index][name] = Number(value);
-            console.log(arr);
+            // console.log(arr);
             return arr;
         });
         // console.log(ataId, name, value);
@@ -115,11 +137,11 @@ export const SingleExam = () => {
                         {selectedAta.map((x) => (
                             <div key={x.id} className={styles.defineAtaRow}>
                                 <span>
-                                    {ataFilter(x.id).ata} - {ataFilter(x.id).title}
+                                    {ataFilter(x.id).ata} - {ataFilter(x.id).title} {'[' + x.avail.join('-') + ']'}
                                 </span>
-                                <AtaInput name="l1" ataId={x.id} value={x.l1} onChangeHandler={changeAtaSettings} />
-                                <AtaInput name="l2" ataId={x.id} value={x.l2} onChangeHandler={changeAtaSettings} />
-                                <AtaInput name="l3" ataId={x.id} value={x.l3} onChangeHandler={changeAtaSettings} />
+                                <AtaInput name="l1" ataId={x.id} value={x.l1} min={0} max={x.avail[0]} onChangeHandler={changeAtaSettings} />
+                                <AtaInput name="l2" ataId={x.id} value={x.l2} min={0} max={x.avail[1]} onChangeHandler={changeAtaSettings} />
+                                <AtaInput name="l3" ataId={x.id} value={x.l3} min={0} max={x.avail[2]} onChangeHandler={changeAtaSettings} />
                                 <span>{x.l1 + x.l2 + x.l3}</span>
                                 {/* <AtaInput name="qty" ataId={x.id} value={x.qty} onChangeHandler={changeAtaSettings} /> */}
                                 {/* <AtaInput name="level" ataId={x.id} max={3} min={1} value={x.level} onChangeHandler={changeAtaSettings} /> */}
@@ -132,6 +154,7 @@ export const SingleExam = () => {
                     </div>
                 </div>
             </div>
+            <GeneratedExam selectedAta={selectedAta} allQuestions={allQuestions}/>
         </div>
     );
 };
