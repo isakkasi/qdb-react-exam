@@ -80,9 +80,26 @@
     margin: 16px 56px 8px 8px;
     font-size: 1rem;
     font-weight: 700;
+    min-height: 3rem;
 }
 
 .generateBtn {
     background-color: #BB6464;
     color: white;
+}
+
+.totalQError {
+    padding: 0;
+    margin: 0;
+    /* color: red; */
+}
+
+.totalQError:nth-of-type(2) {
+    color: red;
+    text-align: center;
+    /* background-color: white; */
+}
+
+.totalQError span {
+    color: red;
 }

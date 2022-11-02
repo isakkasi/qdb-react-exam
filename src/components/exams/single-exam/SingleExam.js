@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import * as examServices from '../../../services/examServices';
-import * as questionServices from '../../../services/questionServices'
+import * as questionServices from '../../../services/questionServices';
 import userService from '../../../services/userService';
 import * as configurationServices from '../../../services/configurationServices';
 
@@ -19,7 +19,8 @@ export const SingleExam = () => {
     const [invigilator, setInvigilator] = useState({ username: 'not loaded' });
     const [ata, setAta] = useState([]);
     const [selectedAta, setSelectedAta] = useState([]);
-    const [allQuestions, setAllQuestions] = useState([])
+    const [allQuestions, setAllQuestions] = useState([]);
+    const [totalQuestions, setTotalQuestions] = useState(0);
 
     useEffect(() => {
         examServices.getById(id).then((res) => setExam((state) => res));
@@ -49,29 +50,32 @@ export const SingleExam = () => {
     }, []);
 
     useEffect(() => {
-        questionServices.getAll().then(res => setAllQuestions(state => res))
-    },[])
+        questionServices.getAll().then((res) => setAllQuestions((state) => res));
+    }, []);
 
     const selectAta = (ataId) => {
         setSelectedAta((state) => {
-            let availQuestions = allQuestions.filter(x => x.ata._id === ataId)
+            let availQuestions = allQuestions.filter((x) => x.ata._id === ataId);
             // console.log(allQuestions);
             let availQuestionsByLevel = {
-                al1: availQuestions.filter(a => a.level === 1).length,
-                al2: availQuestions.filter(a => a.level === 2).length,
-                al3: availQuestions.filter(a => a.level === 3).length,
-            }
+                al1: availQuestions.filter((a) => a.level === 1).length,
+                al2: availQuestions.filter((a) => a.level === 2).length,
+                al3: availQuestions.filter((a) => a.level === 3).length,
+            };
             let index = state.findIndex((a) => a.id === ataId);
             if (index < 0) {
-                let ataEl = ata.filter(a => a._id === ataId)[0]
-                return [...state, {
-                    id: ataId,
-                    title: `${ataEl.ata} ${ataEl.title}`,
-                    l1: 0,
-                    l2: 0,
-                    l3: 0,
-                    avail: [availQuestionsByLevel.al1, availQuestionsByLevel.al2, availQuestionsByLevel.al3],
-                }];
+                let ataEl = ata.filter((a) => a._id === ataId)[0];
+                return [
+                    ...state,
+                    {
+                        id: ataId,
+                        title: `${ataEl.ata} ${ataEl.title}`,
+                        l1: 0,
+                        l2: 0,
+                        l3: 0,
+                        avail: [availQuestionsByLevel.al1, availQuestionsByLevel.al2, availQuestionsByLevel.al3],
+                    },
+                ];
             } else {
                 return state.filter((x) => x.id !== ataId);
             }
@@ -89,11 +93,16 @@ export const SingleExam = () => {
             let index = arr.findIndex((x) => x.id === ataId);
             // console.log(index);
             arr[index][name] = Number(value);
+            calculateAllQuestions();
             // console.log(arr);
             return arr;
         });
         // console.log(ataId, name, value);
         // console.log(selectedAta);
+    };
+
+    const calculateAllQuestions = () => {
+        setTotalQuestions((state) => selectedAta.map((x) => x.l1 + x.l2 + x.l3).reduce((s, a) => s + a, 0));
     };
 
     return (
@@ -149,12 +158,13 @@ export const SingleExam = () => {
                         ))}
                     </div>
                     <div className={styles.total}>
-                        <span>Total questions: {selectedAta.map((x) => x.l1 + x.l2 + x.l3).reduce((s, a) => s + a, 0)}</span>
-                        <button className={styles.generateBtn}>Generate</button>
+                        <div className={totalQuestions % 4 === 0 ? null : styles.totalQError}>Total questions: <span>{totalQuestions}</span></div>
+                        <div className={styles.totalQError}>{totalQuestions % 4 === 0 ? '' : `Add  ${4 - totalQuestions % 4} more questions to be divisible by four.`}</div>
+                        {/* <button className={styles.generateBtn}>Generate</button> */}
                     </div>
                 </div>
             </div>
-            <GeneratedExam selectedAta={selectedAta} allQuestions={allQuestions}/>
+            <GeneratedExam selectedAta={selectedAta} allQuestions={allQuestions} />
         </div>
     );
 };
