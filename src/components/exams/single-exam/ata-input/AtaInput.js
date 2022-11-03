@@ -7,7 +7,7 @@ export const AtaInput = ({
     ataId,
     min,
     max,
-    onChangeHandler
+    onChangeHandler,
 }) => {
     const [formName, setFormName] = useState(name);
     const [formValue, setFormValue] = useState(value);
@@ -20,7 +20,7 @@ export const AtaInput = ({
         onChangeHandler(ataId, e.target.name, e.target.value);
     };
 
-    return <input
+    return <label htmlFor="formName" ><input
         className={style}
         type="number"
         name={formName}
@@ -28,5 +28,5 @@ export const AtaInput = ({
         max={max}
         value={formValue}
         onChange={change}
-    />;
+    /><span className={styles.availableQuestions}>{max}</span></label>;
 };

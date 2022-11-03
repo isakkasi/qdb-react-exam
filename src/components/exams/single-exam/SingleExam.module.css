@@ -88,12 +88,6 @@
     color: white;
 }
 
-.totalQError {
-    padding: 0;
-    margin: 0;
-    /* color: red; */
-}
-
 .totalQError:nth-of-type(2) {
     color: red;
     text-align: center;
@@ -103,3 +97,4 @@
 .totalQError span {
     color: red;
 }
+

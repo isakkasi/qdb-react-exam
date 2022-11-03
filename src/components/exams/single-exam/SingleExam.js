@@ -143,23 +143,29 @@ export const SingleExam = () => {
                         <span>Total</span>
                     </div>
                     <div className={styles.defineAtaBody}>
-                        {selectedAta.map((x) => (
-                            <div key={x.id} className={styles.defineAtaRow}>
-                                <span>
-                                    {ataFilter(x.id).ata} - {ataFilter(x.id).title} {'[' + x.avail.join('-') + ']'}
-                                </span>
-                                <AtaInput name="l1" ataId={x.id} value={x.l1} min={0} max={x.avail[0]} onChangeHandler={changeAtaSettings} />
-                                <AtaInput name="l2" ataId={x.id} value={x.l2} min={0} max={x.avail[1]} onChangeHandler={changeAtaSettings} />
-                                <AtaInput name="l3" ataId={x.id} value={x.l3} min={0} max={x.avail[2]} onChangeHandler={changeAtaSettings} />
-                                <span>{x.l1 + x.l2 + x.l3}</span>
-                                {/* <AtaInput name="qty" ataId={x.id} value={x.qty} onChangeHandler={changeAtaSettings} /> */}
-                                {/* <AtaInput name="level" ataId={x.id} max={3} min={1} value={x.level} onChangeHandler={changeAtaSettings} /> */}
-                            </div>
-                        ))}
+                        {selectedAta
+                            .sort((a, b) => ataFilter(a.id).ata.localeCompare(ataFilter(b.id).ata))
+                            .map((x) => (
+                                <div key={x.id} className={styles.defineAtaRow}>
+                                    <span>
+                                        {ataFilter(x.id).ata} - {ataFilter(x.id).title} {'[' + x.avail.join('-') + ']'}
+                                    </span>
+                                    <AtaInput name="l1" ataId={x.id} value={x.l1} min={0} max={x.avail[0]} onChangeHandler={changeAtaSettings}/>
+                                    <AtaInput name="l2" ataId={x.id} value={x.l2} min={0} max={x.avail[1]} onChangeHandler={changeAtaSettings}/>
+                                    <AtaInput name="l3" ataId={x.id} value={x.l3} min={0} max={x.avail[2]} onChangeHandler={changeAtaSettings}/>
+                                    <span>{x.l1 + x.l2 + x.l3}</span>
+                                    {/* <AtaInput name="qty" ataId={x.id} value={x.qty} onChangeHandler={changeAtaSettings} /> */}
+                                    {/* <AtaInput name="level" ataId={x.id} max={3} min={1} value={x.level} onChangeHandler={changeAtaSettings} /> */}
+                                </div>
+                            ))}
                     </div>
                     <div className={styles.total}>
-                        <div className={totalQuestions % 4 === 0 ? null : styles.totalQError}>Total questions: <span>{totalQuestions}</span></div>
-                        <div className={styles.totalQError}>{totalQuestions % 4 === 0 ? '' : `Add  ${4 - totalQuestions % 4} more questions to be divisible by four.`}</div>
+                        <div className={totalQuestions % 4 === 0 ? null : styles.totalQError}>
+                            Total questions: <span>{totalQuestions}</span>
+                        </div>
+                        <div className={styles.totalQError}>
+                            {totalQuestions % 4 === 0 ? '' : `Add  ${4 - (totalQuestions % 4)} more questions to be divisible by four.`}
+                        </div>
                         {/* <button className={styles.generateBtn}>Generate</button> */}
                     </div>
                 </div>

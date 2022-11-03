@@ -1,10 +1,23 @@
 .ataInput {
-    width: 3rem;
+    /* width: 5rem; */
     border: 1px solid grey;
-    padding: 8px;
+    /* padding: 8px 4px; */
     text-align: center;
     border-radius: 4px;
+    height: 3px;
 }
+
+.ataInput::-webkit-outer-spin-button,
+.ataInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.ataInput[type=number] {
+  -moz-appearance: textfield;
+}
+
 
 
 .l1 {
@@ -22,3 +35,10 @@
 .zero {
     background-color: #C3DBD9;
 }
+
+.availableQuestions {
+    text-align: center;
+    padding-left: 4px;
+    color: lightgrey;
+}
+
