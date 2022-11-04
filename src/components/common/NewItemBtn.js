@@ -1,22 +1,21 @@
-import styles from './NewItemBtn.module.css'
+import { Link } from 'react-router-dom';
+import styles from './NewItemBtn.module.css';
 
-export const NewItemBtn = ({
-    children,
-    onClick,
-}) => {
-    
-
-    const addHandler = () => {
-        onClick();
-    }
+export const NewItemBtn = ({ children, onClick }) => {
+    // const addHandler = () => {
+    //     onClick();
+    // };
 
     return (
         <div className={styles.right}>
-
-        <button className={styles.addBtn} onClick={addHandler}>
-            {/* <strong>+</strong> */}
-            <strong>{children}</strong>
-        </button>
+            <Link to={'/questions/new'} className={styles.addBtn}>
+                {children}
+            </Link>
         </div>
-    )
-}
+    );
+};
+
+// <button className={styles.addBtn} onClick={addHandler}>
+//     {/* <strong>+</strong> */}
+//     <strong>{children}</strong>
+// </button>

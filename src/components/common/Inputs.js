@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
 import stringParser from '../../utils/stringParser';
 
@@ -5,6 +6,10 @@ import styles from './Inputs.module.css'
 
 export const TextInput = ({ name, children, getValues, type, inValue, disabled }) => {
     const [value, setValue] = useState(inValue || '');
+
+    useEffect(() => {
+        setValue(state => inValue)
+    },[inValue])
 
     const onChangeHandler = (e) => {
         setValue(e.target.value);
@@ -28,6 +33,10 @@ export const SelectInput =({
     getValues
 })=>{
     const [value, setValue] = useState(inValue || '');
+
+    useEffect(() => {
+        setValue(state => inValue)
+    },[inValue])
 
     const onChangeHandler = (e) => {
         setValue(state => e.target.value);
@@ -57,6 +66,10 @@ export const SelectInput =({
 
 export const TextArea = ({ name, children, getValues, type, inValue, disabled }) => {
     const [value, setValue] = useState(inValue || '');
+
+    useEffect(() => {
+        setValue(state => inValue)
+    },[inValue])
 
     const onChangeHandler = (e) => {
         setValue(e.target.value);
