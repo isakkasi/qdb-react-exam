@@ -17,7 +17,8 @@ input[type='password'] {
     box-sizing: border-box;
 } */
 
-button {
+.cancel-btn,
+.save-btn {
     /* background-color: #04aa6d; */
     border-radius: 8px;
     /* color: white; */
@@ -28,7 +29,8 @@ button {
     width: 100%;
 }
 
-button:hover {
+.cancel-btn:hover,
+.save-btn:hover {
     opacity: 0.9;
     box-shadow: 1px 2px 8px black;
 }

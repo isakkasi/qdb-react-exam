@@ -2,15 +2,6 @@
     font-size: 1rem;
 }
 
-
-/* body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-form {
-    border: 3px solid #f1f1f1;
-    padding: 8px;
-} */
-
 .textInput input[type='text'],
 .textInput input[type='date'],
 .textInput input[type='number'],
@@ -25,22 +16,6 @@ form {
     border-radius: 8px;
     box-sizing: border-box;
 }
-
-/* button { */
-    /* background-color: #04aa6d; */
-    /* border-radius: 8px; */
-    /* color: white; */
-    /* padding: 14px 20px; */
-    /* margin: 8px 0; */
-    /* border: none; */
-    /* cursor: pointer; */
-    /* width: 100%; */
-/* } */
-
-/* button:hover {
-    opacity: 0.9;
-    box-shadow: 1px 2px 8px black;
-} */
 
 .cancel-btn {
     background-color: #f44336;
@@ -69,10 +44,6 @@ form {
     justify-content: flex-end;
     font-size: 1rem;
 }
-
-
-
-
 
 .container {
     padding: 16px;
