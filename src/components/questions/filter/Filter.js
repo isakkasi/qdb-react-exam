@@ -45,7 +45,7 @@ export const Filter = ({ questions, filterQuestions, qty }) => {
                     <option key="0" value="any">
                         -- Any type --
                     </option>
-                    {filterData[1].map((x) => (
+                    {filterData[1].sort((a,b) => a.short.localeCompare(b.short)).map((x) => (
                         <option key={x._id} value={x._id}>
                             {x.short}
                         </option>

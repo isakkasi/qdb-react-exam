@@ -73,9 +73,11 @@ export const Questions = () => {
     };
 
     const filterQuestions = (selectedFilter) => {
+        console.log(questions[0]);
         setFilteredQuestions((state) => {
             return questions.filter((x) => {
                 return (
+                    (x.type.includes(selectedFilter.type)  || selectedFilter.type === 'any') &&
                     (x.ata._id === selectedFilter.ata || selectedFilter.ata === 'any') &&
                     (x.level === Number(selectedFilter.level) || selectedFilter.level === 'any')
                 );
@@ -89,8 +91,9 @@ export const Questions = () => {
 
             <Filter questions={questions} filterQuestions={filterQuestions} qty={filteredQuestions.length} />
 
+            <NewItemBtn onClick={addNew}>Add Question</NewItemBtn>
             {filteredQuestions.length > 0 ? (
-                filteredQuestions.map((x) => (
+                filteredQuestions.sort((a,b) => a.ata.ata.localeCompare(b.ata.ata)).map((x) => (
                     <Card
                         key={x._id}
                         question={x}
@@ -102,7 +105,6 @@ export const Questions = () => {
             ) : (
                 <h2>No questions loaded</h2>
             )}
-            <NewItemBtn onClick={addNew}>Add Question</NewItemBtn>
             {formOpen && <AddQuestionForm onClose={onClose} returnResult={(question, func) => returnResult(setQuestions, question, func)} func="add" />}
         </div>
     );
