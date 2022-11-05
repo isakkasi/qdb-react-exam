@@ -1,3 +1,9 @@
+.form {
+    width: 90%;
+    margin: auto;
+    margin-top: 32px;
+}
+
 .grid {
     display: grid;
     /* grid-template-rows: auto auto; */
@@ -8,21 +14,54 @@
 
 .grid-column-80 {
     grid-template-columns: 80% 20%;
-
 }
 .grid-column-60 {
     grid-template-columns: 60% 40%;
-    
+}
+.grid-column-3 {
+    grid-template-columns: 40% 20% 40%;
+
 }
 
-.cancel-btn {
-    background-color: #f44336;
-    width: 5em;
+.cancelBtn,
+.saveBtn,
+.saveBtnClose,
+.addSimilarBtn {
+    text-align: center;
+    margin-left: 8px;
+    margin-top: 16px;
+    width: 8em;
     height: 3em;
     margin-right: 20px;
-    padding: 5px;
-    color: white;
+    padding: 12px 8px;
     opacity: 0.7;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cancelBtn {
+    background-color: #f44336;
+    color: white;
+}
+.saveBtn {
+    background-color: #51C27B;
+    color: white;
+}
+.saveBtnClose {
+    background-color: #FD841F;
+    color: white;
+}
+
+.cancelBtn:hover,
+.saveBtn:hover,
+.saveBtnClose:hover,
+.addSimilarBtn:hover {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+    color: white;
+    font-weight: 700;
+    opacity: 0.9;
 }
 
 .save-btn {
@@ -82,11 +121,17 @@
 }
 
 .selected {
-    color: #767676
+    color: #767676;
 }
 
 .label {
     font-size: 0.9rem;
     padding-left: 8px;
     font-weight: 700;
+}
+
+.validationError {
+    text-align: right;
+    font-size: 0.75rem;
+    color: red;
 }

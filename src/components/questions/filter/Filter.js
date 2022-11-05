@@ -11,9 +11,9 @@ export const Filter = ({ questions, filterQuestions, qty }) => {
     const initialFilter = { type: 'any', ata: 'any', level: 'any' };
 
     const {data} = useContext(DataContext)
-    console.log(data);
+    // console.log(data);
 
-    const [filterData, setFilterData] = useState([[], [], []]);
+    const [filterData, setFilterData] = useState([data.ata || [], data.type || [], [1, 2, 3]]);
     const [selectedFilter, setSelectedFilter] = useState(initialFilter);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export const Filter = ({ questions, filterQuestions, qty }) => {
 
     useEffect(() => {
         filterQuestions(selectedFilter);
-    }, [selectedFilter, filterQuestions]);
+    }, [selectedFilter]);
 
     const filterOnChange = (e) => {
         // console.log(e.target.name);

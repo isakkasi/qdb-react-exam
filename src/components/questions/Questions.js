@@ -17,15 +17,14 @@ import { DataContext } from '../../contexts/DataContext';
 // import { requester } from '../../services/utils/requester';
 
 export const Questions = () => {
-    const [questions, setQuestions] = useState([]);
-
+    
     const { auth } = useContext(AuthContext);
     const {data} = useContext(DataContext)
     // console.log(data);
-
-    const [formOpen, setFormOpen] = useState(false);
-
+    
+    const [questions, setQuestions] = useState([]);
     const [filteredQuestions, setFilteredQuestions] = useState(questions || []);
+    const [formOpen, setFormOpen] = useState(false);
 
     useEffect(() => {
         if (auth.accessToken) {
@@ -50,31 +49,31 @@ export const Questions = () => {
         });
     }, [questions]);
 
-    useEffect(() => {
-        const modQuestions = questions.map((x) => async (x) => {
-            if (typeof x.type === 'string') {
-                console.log('The type is string');
-                const result = await getTypeById(x.type);
-                x.type = result;
-                setQuestions((state) => modQuestions);
-                return x;
-            } else {
-                return x;
-            }
-        });
-    }, [questions]);
+    // useEffect(() => {
+    //     const modQuestions = questions.map((x) => async (x) => {
+    //         if (typeof x.type === 'string') {
+    //             console.log('The type is string');
+    //             const result = await getTypeById(x.type);
+    //             x.type = result;
+    //             setQuestions((state) => modQuestions);
+    //             return x;
+    //         } else {
+    //             return x;
+    //         }
+    //     });
+    // }, [questions]);
 
     useEffect(() => {
         setFilteredQuestions((state) => questions);
     }, [questions]);
 
-    const addNew = () => {
-        setFormOpen(true);
-    };
+    // const addNew = () => {
+    //     setFormOpen(true);
+    // };
 
-    const onClose = () => {
-        setFormOpen(false);
-    };
+    // const onClose = () => {
+    //     setFormOpen(false);
+    // };
 
     const filterQuestions = (selectedFilter) => {
         // console.log(questions[0]);
@@ -95,7 +94,7 @@ export const Questions = () => {
 
             <Filter questions={questions} filterQuestions={filterQuestions} qty={filteredQuestions.length} />
 
-            <NewItemBtn onClick={addNew}>Add Question</NewItemBtn>
+            <NewItemBtn >Add Question</NewItemBtn>
             {filteredQuestions.length > 0 ? (
                 filteredQuestions.sort((a,b) => a.ata.ata.localeCompare(b.ata.ata)).map((x) => (
                     <Card
@@ -109,7 +108,7 @@ export const Questions = () => {
             ) : (
                 <h2>No questions loaded</h2>
             )}
-            {formOpen && <AddQuestionForm onClose={onClose} returnResult={(question, func) => returnResult(setQuestions, question, func)} func="add" />}
+            {/* {formOpen && <AddQuestionForm onClose={onClose} returnResult={(question, func) => returnResult(setQuestions, question, func)} func="add" />} */}
         </div>
     );
 };

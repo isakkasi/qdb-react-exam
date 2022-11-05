@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { FormOverlay } from '../../common/FormOverlay';
+// import { FormOverlay } from '../../common/FormOverlay';
 import { TextArea, TextInput } from '../../common/Inputs';
 import { Logo } from '../../common/Logo';
 
@@ -11,93 +11,90 @@ import styles from './QuestionForm.module.css';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { DataContext } from '../../../contexts/DataContext';
 
-export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
+export const AddQuestionForm = ({ func }) => {
+    const navigate = useNavigate();
     const { auth } = useContext(AuthContext);
-    const [formData, setFormData] = useState(
-        data || {
-            question: '',
-            ansA: '',
-            ansB: '',
-            ansC: '',
-            correctAns: '',
-            level: '',
-            ata: '',
-            author: auth._id,
-            error: '',
-            type: [],
-            cat: '',
-        }
-    );
+    const { data, setData } = useContext(DataContext);
+
     const [ata, setAta] = useState([]);
     const [type, setType] = useState([]);
+    const [disabledSave, setDisabledSave] = useState(false);
+    const [error, setError] = useState({ ata: '', level: '', type: '', q: '', a: '', b: '', c: '', correct: '', qError: '' });
+
+    let { id } = useParams();
+
+    const [formData, setFormData] = useState({});
 
     useEffect(() => {
-        configurationServices.getAllAta().then((result) => setAta(result));
-    }, []);
+        setAta((state) => data.ata || []);
+    }, [data]);
 
     useEffect(() => {
-        configurationServices.getAllType().then((result) => setType(result));
-    }, []);
+        setType((state) => data.type || []);
+    }, [data]);
 
-    const disabled = func === 'details';
-
-    // console.log(formData);
-
-    let functionTitle = func.charAt(0).toUpperCase() + func.slice(1);
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        console.log(formData.error);
-        if (formData.error) {
-            console.log('Validation error');
-            return;
-        }
-        try {
-            // Parse to number for proper database storage
+    useEffect(() => {
+        if (func !== 'new' && id) {
+            questionServices.getById(id).then((res) => setFormData((state) => res));
+        } else {
             setFormData((state) => ({
-                ...state,
-                level: Number(state.level),
+                question: '',
+                ansA: '',
+                ansB: '',
+                ansC: '',
+                correctAns: '',
+                level: '',
+                ata: '',
+                author: auth._id,
+                error: '',
+                type: [],
             }));
-            let question;
-            if (func === 'edit') {
-                question = await questionServices.edit(formData);
-                // returnResult({ ...formData, _id: data._id }, 'edit');
-                returnResult({ ...question, _id: data._id }, 'edit');
-            } else if (func === 'add' || func === 'addSimilar') {
-                if (formData._id) {
-                    delete formData._id;
-                }
-                question = await questionServices.create({ ...formData, author: auth._id });
-                returnResult(question, 'add');
-            }
-            onClose();
-        } catch (error) {
-            throw new Error(error);
         }
-    };
+    }, [id, func, auth._id]);
+
+    useEffect(() => {
+        setDisabledSave((state) => Object.values(error).filter((a) => a !== null).length > 0);
+    }, [error]);
+
+    useEffect(() => {
+        let qError = '';
+        let end;
+        if (formData.question) {
+            end = formData.question[formData.question.length - 1];
+        }
+        if (end === '.' || end === ':' || end === '?') {
+            qError = '';
+        } else {
+            qError = 'The question shall end with: [.] or [:] or [?]';
+        }
+        setError((state) => ({
+            ...state,
+            ata: formData.ata === '0' || formData.ata === '' ? 'Select ata' : null,
+            level: Number(formData.level) > 3 || Number(formData.level) < 1 ? 'Select correct level' : null,
+            type: formData.type?.length === 0 ? 'Select at least one type' : null,
+            q: formData.question?.length === 0 ? 'Enter the question' : null,
+            a: formData.ansA?.length === 0 ? 'Enter the answer' : null,
+            b: formData.ansB?.length === 0 ? 'Enter the answer' : null,
+            c: formData.ansC?.length === 0 ? 'Enter the answer' : null,
+            correct: formData.correctAns === '' ? 'Select the correct answer' : null,
+            qError: !!qError ? qError : null,
+        }));
+    }, [formData]);
+
+    const disabled = false;
 
     const getFormData = (field, value) => {
-        let error;
-        if (field === 'question') {
-            let end = value[value.length - 1];
-            if (end === '.' || end === ':' || end === '?') {
-                error = '';
-            } else {
-                error = 'The question shall end with: [.] or [:] or [?]';
-            }
-        }
         setFormData((state) => {
-            // console.log(state);
-
             return {
                 ...state,
                 [field]: value,
-                error,
             };
         });
-        console.log(formData);
     };
+    // console.log(error);
 
     let selectedTypes = [];
     const getSelectedOptionsType = (e) => {
@@ -116,167 +113,197 @@ export const AddQuestionForm = ({ onClose, returnResult, data, func }) => {
         });
         // console.log(values);
     };
-    const getSelectedOptionsCat = (e) => {
-        console.log(e.target.value);
-        setFormData((state) => {
-            return {
+
+    const saveQuestion = async () => {
+        console.log('Button clicked');
+        setFormData((state) => ({
+            ...state,
+            level: Number(state.level),
+        }));
+        let question;
+        try {
+            // Parse to number for proper database storage
+            if (func === 'edit') {
+                question = await questionServices.edit(formData);
+                // returnResult({ ...formData, _id: data._id }, 'edit');
+                // returnResult({ ...question, _id: data._id }, 'edit');
+                setData((state) => ({
+                    ...state,
+                    questions: [...data.questions.map((x) => (x._id === question._id ? question : x))],
+                }));
+                // navigate('/questions');
+            } else if (func === 'new' || func === 'similar') {
+                if (formData._id) {
+                    delete formData._id;
+                }
+                question = await questionServices.create({ ...formData, author: auth._id });
+                setFormData(state => ({
+                    ...state,
+                    question: '',
+                    ansA: '',
+                    ansB: '',
+                    ansC: '',
+                    correctAns: '',
+                }))
+                setData((state) => ({
+                    ...state,
+                    questions: [...data.questions, question],
+                }));
+            }
+            // onClose();
+        } catch (error) {
+            setError(state => ({
                 ...state,
-                cat: e.target.value,
-            };
-        });
+                dbError: error,
+            }))
+            throw new Error(error);
+        }
     };
 
+    const saveQuestionAndClose = () => { 
+        saveQuestion();
+        navigate('/questions');
+        
+    }
+
     return (
-        <FormOverlay onClose={onClose}>
-            <form onSubmit={submitHandler}>
-                <Logo />
+        <div className={styles.form}>
+            <Logo />
 
-                <h2 className={styles.centered}>{functionTitle} Course</h2>
+            <h2 className={styles.centered}>{func[0].toUpperCase() + func.slice(1)} question</h2>
 
-                <div className={`${styles.grid} ${styles['grid-column-80']}`}>
-                    <div>
-                        <label htmlFor="ata" className={styles.label}>
-                            ATA
-                            <select
-                                htmlFor="ata"
-                                name="ata"
-                                className={styles.select}
-                                value={formData.ata._id}
-                                onChange={(e) => getFormData('ata', e.target.value)}
-                            >
-                                {[{ _id: 0, ata: '', title: 'Select ATA ...' }, ...ata].map((x) => (
+            <div className={`${styles.grid} ${styles['grid-column-3']}`}>
+                <div>
+                    <label htmlFor="ata" className={styles.label}>
+                        ATA
+                        <select
+                            htmlFor="ata"
+                            name="ata"
+                            className={styles.select}
+                            value={formData.ata?._id}
+                            onChange={(e) => getFormData('ata', e.target.value)}
+                        >
+                            {[{ _id: 0, ata: '', title: 'Select ATA ...' }, ...ata]
+                                .sort((a, b) => a.ata.localeCompare(b.ata))
+                                .map((x) => (
                                     <option key={x._id} value={x._id}>
                                         {x.ata} {x.title}
                                     </option>
                                 ))}
-                            </select>
-                        </label>
-                    </div>
-                    <div>
-                        <TextInput name="level" type="number" getValues={getFormData} inValue={formData.level} disabled={disabled}>
-                            Level
-                        </TextInput>
-                    </div>
-                    <div>
-                        <label htmlFor="type" className={styles.label}>
-                            Aircraft Type
-                            <select
-                                htmlFor="type"
-                                name="type"
-                                className={styles.select}
-                                // value={formData.type?._id}
-                                value={formData.type}
-                                onChange={(e) => getSelectedOptionsType(e)}
-                                multiple
-                            >
-                                {type.map((x) => (
-                                    <option key={x._id} value={x._id} className={styles.selected}>
-                                        {x.short}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
-                    <div>
-                        <label htmlFor="cat" className={styles.label}>
-                            Category
-                            <select
-                                htmlFor="cat"
-                                name="cat"
-                                className={styles.select}
-                                // value={formData.type?._id}
-                                value={formData.cat}
-                                onChange={(e) => getSelectedOptionsCat(e)}
-                            >
-                                <option key={0} value="unselected">
-                                    Select cat ...
-                                </option>
-                                <option key={1} value="B1">
-                                    B1
-                                </option>
-                                <option key={2} value="B2">
-                                    B2
-                                </option>
-                                <option key={3} value="B1/B2">
-                                    B1/B2
-                                </option>
-                            </select>
-                        </label>
-                    </div>
+                        </select>
+                    </label>
+                    <p className={styles.validationError}>{error.ata}</p>
                 </div>
-                <TextArea name="question" getValues={getFormData} inValue={formData.question} disabled={disabled}>
-                    Question
-                </TextArea>
-
-                <div className={styles.answers}>
-                    <div className={`${styles.grid} ${styles['grid-column-80']}`}>
-                        <div>
-                            <TextArea name="ansA" getValues={getFormData} inValue={formData.ansA} disabled={disabled}>
-                                AnsA
-                            </TextArea>
-                        </div>
-                        <div>
-                            <label htmlFor="correctAns">
-                                <input
-                                    className={styles.inputRadio}
-                                    type="radio"
-                                    name="correctAns"
-                                    checked={formData.correctAns === 'ansA'}
-                                    value={formData.correctAns}
-                                    onChange={(e) => getFormData('correctAns', 'ansA')}
-                                />
-                            </label>
-                        </div>
-                        <div>
-                            <TextArea name="ansB" getValues={getFormData} inValue={formData.ansB} disabled={disabled}>
-                                AnsB
-                            </TextArea>
-                        </div>
-                        <div>
-                            <label htmlFor="correctAns">
-                                <input
-                                    className={styles.inputRadio}
-                                    type="radio"
-                                    name="correctAns"
-                                    checked={formData.correctAns === 'ansB'}
-                                    value={formData.correctAns}
-                                    onChange={(e) => getFormData('correctAns', 'ansB')}
-                                />
-                            </label>
-                        </div>
-                        <div>
-                            <TextArea name="ansC" getValues={getFormData} inValue={formData.ansC} disabled={disabled}>
-                                AnsC
-                            </TextArea>
-                        </div>
-                        <div>
-                            <label htmlFor="correctAns">
-                                <input
-                                    className={styles.inputRadio}
-                                    type="radio"
-                                    name="correctAns"
-                                    checked={formData.correctAns === 'ansC'}
-                                    value={formData.correctAns}
-                                    onChange={(e) => getFormData('correctAns', 'ansC')}
-                                />
-                            </label>
-                        </div>
-                    </div>
+                <div>
+                    <TextInput name="level" type="number" getValues={getFormData} inValue={formData.level} disabled={disabled} minMax={[1, 3]}>
+                        Level
+                    </TextInput>
+                    <p className={styles.validationError}>{error.level}</p>
                 </div>
+                <div>
+                    <label htmlFor="type" className={styles.label}>
+                        Aircraft Type
+                        <select
+                            htmlFor="type"
+                            name="type"
+                            className={styles.select}
+                            // value={formData.type?._id}
+                            value={formData.type}
+                            onChange={(e) => getSelectedOptionsType(e)}
+                            multiple
+                        >
+                            {type.map((x) => (
+                                <option key={x._id} value={x._id} className={styles.selected}>
+                                    {x.short}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                    <p className={styles.validationError}>{error.type}</p>
+                </div>
+            </div>
+            <TextArea name="question" getValues={getFormData} inValue={formData.question} disabled={disabled}>
+                Question
+            </TextArea>
+            <p className={styles.validationError}>{[error.q, error.qError].filter((e) => !!e).join('; ')}</p>
 
-                <div className={styles['form-submit']}>
-                    <div className={styles.error}>{formData.error && <span>Error: {formData.error}</span>}</div>
+            <div className={styles.answers}>
+                <div className={`${styles.grid} ${styles['grid-column-80']}`}>
+                    <div>
+                        <TextArea name="ansA" getValues={getFormData} inValue={formData.ansA} disabled={disabled}>
+                            AnsA
+                        </TextArea>
+                        <p className={styles.validationError}>{error.a}</p>
+                    </div>
+                    <div>
+                        <label htmlFor="correctAns">
+                            <input
+                                className={styles.inputRadio}
+                                type="radio"
+                                name="correctAns"
+                                checked={formData.correctAns === 'ansA'}
+                                value={formData.correctAns}
+                                onChange={(e) => getFormData('correctAns', 'ansA')}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <TextArea name="ansB" getValues={getFormData} inValue={formData.ansB} disabled={disabled}>
+                            AnsB
+                        </TextArea>
+                        <p className={styles.validationError}>{error.b}</p>
+                    </div>
+                    <div>
+                        <label htmlFor="correctAns">
+                            <input
+                                className={styles.inputRadio}
+                                type="radio"
+                                name="correctAns"
+                                checked={formData.correctAns === 'ansB'}
+                                value={formData.correctAns}
+                                onChange={(e) => getFormData('correctAns', 'ansB')}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <TextArea name="ansC" getValues={getFormData} inValue={formData.ansC} disabled={disabled}>
+                            AnsC
+                        </TextArea>
+                        <p className={styles.validationError}>{error.c}</p>
+                    </div>
+                    <div>
+                        <label htmlFor="correctAns">
+                            <input
+                                className={styles.inputRadio}
+                                type="radio"
+                                name="correctAns"
+                                checked={formData.correctAns === 'ansC'}
+                                value={formData.correctAns}
+                                onChange={(e) => getFormData('correctAns', 'ansC')}
+                            />
+                        </label>
+                    </div>
+                    <p className={styles.validationError}>{error.correct}</p>
+                </div>
+            </div>
 
-                    {!disabled && (
-                        <button className={styles['save-btn']} type="submit">
-                            {functionTitle}
-                        </button>
-                    )}
-                    <button className={styles['cancel-btn']} type="button" onClick={onClose}>
-                        Cancel
+            <div className={styles['form-submit']}>
+                <div className={styles.error}>{error.dbError && <span>Error: {error.dbError}</span>}</div>
+
+                {!disabledSave && (
+                    <button to="/questions" className={styles.saveBtn} onClick={saveQuestion}>
+                        {func[0].toUpperCase() + func.slice(1) + ' and stay'}
                     </button>
-                </div>
-            </form>
-        </FormOverlay>
+                )}
+                {!disabledSave && (
+                    <button to="/questions" className={styles.saveBtnClose} onClick={saveQuestionAndClose}>
+                        {func[0].toUpperCase() + func.slice(1) + ' and close'}
+                    </button>
+                )}
+                <Link to="/questions" className={styles.cancelBtn}>
+                    Cancel
+                </Link>
+            </div>
+        </div>
     );
 };
