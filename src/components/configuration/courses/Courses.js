@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { AddCourseForm } from './AddCourseForm';
 import { NewItemBtn } from '../../common/NewItemBtn';
@@ -9,6 +9,7 @@ import { returnResult } from '../functions/returnResult';
 
 import styles from './Courses.module.css';
 import dateParser from '../../../utils/dateParser';
+import { DataContext } from '../../../contexts/DataContext';
 
 export const Courses = () => {
     const [courses, setCourses] = useState([]);
@@ -17,12 +18,15 @@ export const Courses = () => {
     const [details, setDetails] = useState({ id: null, display: false });
     // const [pagination, setPagination] = useState({count: 0, page: 1})
 
+    const {data} = useContext(DataContext)
+
     // const perPage = 10;
 
     useEffect(() => {
-        configurationServices.getAllCourses().then((result) => setCourses(result));
+       setCourses(state => data.course || []);
+        // configurationServices.getAllCourses().then((result) => setCourses(result));
         // setPagination(state => ({...state, count: courses.length}))
-    }, []);
+    }, [data]);
 
     const addNew = () => {
         setFormOpen(true);

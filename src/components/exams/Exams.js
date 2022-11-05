@@ -1,7 +1,7 @@
 import { Title } from '../common/Title';
 // import appStyles from '../../App.module.css';
 import styles from './Exams.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 // import { useContext } from 'react';
 // import { AuthContext } from '../../contexts/AuthContext';
 // import { NewItemBtn } from '../common/NewItemBtn';
@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import * as examServices from '../../services/examServices';
 import * as configurationServices from '../../services/configurationServices';
 import { useNavigate } from 'react-router-dom';
+import { DataContext } from '../../contexts/DataContext';
 
 export const Exams = () => {
     const statusStyles = {
@@ -27,6 +28,9 @@ export const Exams = () => {
     const [exams, setExams] = useState([]);
     const [courses, setCourses] = useState([]);
 
+    const {data} = useContext(DataContext)
+    
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,10 +38,8 @@ export const Exams = () => {
             // console.log(result);
             setExams((state) => result);
         });
-        configurationServices.getAllCourses().then((result) => {
-            setCourses((state) => result);
-        });
-    }, []);
+        setCourses(state => data.course || [])
+    }, [data]);
 
     // const addNew = () => {
     //     setFormOpen(true);

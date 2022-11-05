@@ -8,6 +8,8 @@ import * as configurationServices from '../../../services/configurationServices'
 import { returnResult } from '../functions/returnResult';
 
 import styles from './Type.module.css';
+import { useContext } from 'react';
+import { DataContext } from '../../../contexts/DataContext';
 
 export const Type = () => {
     const [type, setType] = useState([]);
@@ -16,9 +18,11 @@ export const Type = () => {
     
     const [details, setDetails] = useState({ id: null, display: false });
 
+    const {data} = useContext(DataContext)
+
     useEffect(() => {
-        configurationServices.getAllType().then((result) => setType(result));
-    }, []);
+        setType(state => data.type || []);
+    }, [data]);
 
     const addNew = () => {
         setFormOpen((state) => !state);

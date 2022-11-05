@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
+import { DataContext } from '../../../contexts/DataContext';
 
 import * as confServices from '../../../services/configurationServices';
 
@@ -16,14 +18,11 @@ export const Filter = (
 
     const [filterData, setFilterData] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState(initialFilter);
+    const { data } = useContext(DataContext);
 
     useEffect(() => {
-        confServices.getAllCourses()
-        .then((result) => {
-            // console.log(result);
-            setFilterData((state) => result);
-        });
-    }, []);
+        setFilterData((state) => data.course || []);
+    }, [data]);
 
     // useEffect(() => {
     //     filterQuestions(selectedFilter);

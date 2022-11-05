@@ -8,6 +8,8 @@ import * as configurationServices from '../../../services/configurationServices'
 import { returnResult } from '../functions/returnResult';
 
 import styles from './Ata.module.css';
+import { useContext } from 'react';
+import { DataContext } from '../../../contexts/DataContext';
 
 export const Ata = () => {
     const [ata, setAta] = useState([]);
@@ -16,9 +18,12 @@ export const Ata = () => {
     
     const [details, setDetails] = useState({ id: null, display: false });
 
+    const {data} = useContext(DataContext)
+
     useEffect(() => {
-        configurationServices.getAllAta().then((result) => setAta(result));
-    }, []);
+        setAta(state => data.ata || [])
+        // configurationServices.getAllAta().then((result) => setAta(result));
+    }, [data]);
 
     const addNew = () => {
         setFormOpen((state) => !state);

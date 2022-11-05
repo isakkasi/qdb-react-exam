@@ -10,6 +10,8 @@ import * as configurationServices from '../../../services/configurationServices'
 import styles from './SingleExam.module.css';
 import { AtaInput } from './ata-input/AtaInput';
 import { GeneratedExam } from './generated-exam/GeneratedExam';
+import { useContext } from 'react';
+import { DataContext } from '../../../contexts/DataContext';
 
 export const SingleExam = () => {
     let { id } = useParams();
@@ -21,6 +23,8 @@ export const SingleExam = () => {
     const [selectedAta, setSelectedAta] = useState([]);
     const [allQuestions, setAllQuestions] = useState([]);
     const [totalQuestions, setTotalQuestions] = useState(0);
+
+    const {data} = useContext(DataContext)
 
     useEffect(() => {
         examServices.getById(id).then((res) => setExam((state) => res));
@@ -46,12 +50,12 @@ export const SingleExam = () => {
     }, [exam.examiner, exam.invigilator, exam]);
 
     useEffect(() => {
-        configurationServices.getAllAta().then((res) => setAta((state) => res));
-    }, []);
+       setAta((state) => data.ata || []);
+    }, [data]);
 
     useEffect(() => {
-        questionServices.getAll().then((res) => setAllQuestions((state) => res));
-    }, []);
+        setAllQuestions((state) => data.questions || []);
+    }, [data]);
 
     const selectAta = (ataId) => {
         setSelectedAta((state) => {

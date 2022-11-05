@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { DataContext } from '../../../contexts/DataContext';
 
 import * as confServices from '../../../services/configurationServices';
 
@@ -8,19 +10,25 @@ import styles from './Filter.module.css';
 export const Filter = ({ questions, filterQuestions, qty }) => {
     const initialFilter = { type: 'any', ata: 'any', level: 'any' };
 
+    const {data} = useContext(DataContext)
+    console.log(data);
+
     const [filterData, setFilterData] = useState([[], [], []]);
     const [selectedFilter, setSelectedFilter] = useState(initialFilter);
 
     useEffect(() => {
-        Promise.all([confServices.getAllAta(), confServices.getAllType(), [1, 2, 3]]).then((result) => {
-            // console.log(result);
-            setFilterData((state) => result);
-        });
-    }, []);
+        
+            setFilterData((state) => ([data.ata || [], data.type || [], [1, 2, 3]]));
+        
+        // Promise.all([confServices.getAllAta(), confServices.getAllType(), [1, 2, 3]]).then((result) => {
+        //     // console.log(result);
+        //     setFilterData((state) => result);
+        // });
+    }, [data]);
 
     useEffect(() => {
         filterQuestions(selectedFilter);
-    }, [selectedFilter]);
+    }, [selectedFilter, filterQuestions]);
 
     const filterOnChange = (e) => {
         // console.log(e.target.name);

@@ -4,7 +4,7 @@ import { AddQuestionForm } from './question-form/QuestionForm';
 import { NewItemBtn } from '../common/NewItemBtn';
 import { Title } from '../common/Title';
 
-import * as questionServices from '../../services/questionServices';
+// import * as questionServices from '../../services/questionServices';
 import { returnResult } from './functions/returnResult';
 
 import styles from './Questions.module.css';
@@ -13,12 +13,15 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from 'react';
 import { getAtaById, getTypeById } from '../../services/configurationServices';
 import { Filter } from './filter/Filter';
+import { DataContext } from '../../contexts/DataContext';
 // import { requester } from '../../services/utils/requester';
 
 export const Questions = () => {
     const [questions, setQuestions] = useState([]);
 
     const { auth } = useContext(AuthContext);
+    const {data} = useContext(DataContext)
+    // console.log(data);
 
     const [formOpen, setFormOpen] = useState(false);
 
@@ -26,11 +29,12 @@ export const Questions = () => {
 
     useEffect(() => {
         if (auth.accessToken) {
-            questionServices.getAll().then((result) => setQuestions(result));
+            // questionServices.getAll().then((result) => setQuestions(result));
+            setQuestions(data.questions || []);
         } else {
             setQuestions([]);
         }
-    }, [auth]);
+    }, [auth, data.questions]);
 
     useEffect(() => {
         const modQuestions = questions.map((x) => async (x) => {
@@ -73,7 +77,7 @@ export const Questions = () => {
     };
 
     const filterQuestions = (selectedFilter) => {
-        console.log(questions[0]);
+        // console.log(questions[0]);
         setFilteredQuestions((state) => {
             return questions.filter((x) => {
                 return (
